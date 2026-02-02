@@ -1,0 +1,4 @@
+Sprint 1 – Meeting Minutes
+
+Friday 30 January: 17:30 -> 19:30 
+  In 2 hours, we did the project plan and initialized the web app (frontend & backend)
