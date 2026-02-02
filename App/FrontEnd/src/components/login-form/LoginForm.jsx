@@ -1,4 +1,5 @@
 import "./LoginForm.css"
+import { useState } from "react";
 
 function LoginForm(){
     const [firstname, setFirstName] = useState("");
@@ -59,3 +60,4 @@ function LoginForm(){
         </div>
     )
 }
+export default LoginForm
