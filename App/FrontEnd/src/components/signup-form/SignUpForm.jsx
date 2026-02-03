@@ -1,9 +1,19 @@
-import "./LoginForm.css"
+import "./SignUpForm.css"
 import { useState } from "react";
 
-function LoginForm() {
+function SignUpForm() {
+    const [firstname, setFirstName] = useState("");
+    const [lastname, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    function handleFirstName(e) {
+        setFirstName(e.target.value);
+    }
+
+    function handleLastName(e) {
+        setLastName(e.target.value);
+    }
 
     function handleEmail(e) {
         setEmail(e.target.value);
@@ -15,11 +25,13 @@ function LoginForm() {
 
     async function handleSubmit(e) {
         const data = {
+            "firstname":firstname,
+            "lastname":lastname,
             "email":email,
             "password":password
         }
 
-        const response = await fetch("http://localhost:3000/login", {
+        const response = await fetch("http://localhost:3000/signup", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -40,7 +52,23 @@ function LoginForm() {
 
     return (
         <div>
-            <h1> Login Form </h1>
+            <h1> Sign Up Form </h1>
+            <label> First Name:
+                <input
+                    type="text"
+                    value={firstname}
+                    onChange={handleFirstName}
+                />
+            </label>
+
+            <label> Last Name:
+                <input
+                    type="text"
+                    value={lastname}
+                    onChange={handleLastName}
+                />
+            </label>
+
             <label> Email:
                 <input
                     type="text"
@@ -57,8 +85,8 @@ function LoginForm() {
                 />
             </label>
 
-            <button type="button" onclick={handleSubmit}>Login</button>
+            <button type="button" onclick={handleSubmit}>Sign Up</button>
         </div>
     )
 }
-export default LoginForm
+export default SignUpForm
