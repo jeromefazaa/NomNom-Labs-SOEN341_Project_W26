@@ -1,21 +1,28 @@
-import LoginForm from "../login-form/LoginForm";
-import SignUpForm from "../signup-form/SignUpForm";
-import "./Entry.css"
+import { useNavigate } from "react-router-dom";
+import "./Entry.css";
 
-function Entry(){
-    function handleLoginClick(){
-        //handle login click
-    }
+function Entry() {
+  const navigate = useNavigate();
 
-    function handleSignupClick(){
-        //handle signup click
-    }
+  function handleLoginClick() {
+    navigate("/login");
+  }
 
-    return (
+  function handleSignupClick() {
+    navigate("/signup");
+  }
+
+  return (
     <div>
-        <button type="button" onclick={handleLoginClick}>Login</button>
+      <button type="button" onClick={handleLoginClick}>
+        Login
+      </button>
 
-        <button type="button" onclick={handleSignupClick}>Sign UP</button>
-
-    </div>)
+      <button type="button" onClick={handleSignupClick}>
+        Sign Up
+      </button>
+    </div>
+  );
 }
+
+export default Entry;

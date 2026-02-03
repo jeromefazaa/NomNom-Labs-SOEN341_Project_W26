@@ -1,64 +1,77 @@
-import "./LoginForm.css"
+import "./LoginForm.css";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function LoginForm() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    function handleEmail(e) {
-        setEmail(e.target.value);
+  function handleEmail(e) {
+    setEmail(e.target.value);
+  }
+
+  function handlePassword(e) {
+    setPassword(e.target.value);
+  }
+
+  const navigate = useNavigate();
+
+  async function handleSubmit(e) {
+    e?.preventDefault();
+    const data = {
+      email: email,
+      password: password,
+    };
+
+    try {
+      const response = await fetch("http://localhost:3000/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.status === 200) {
+        navigate("/success");
+        return;
+      }
+
+      let msg = "Request failed.";
+      try {
+        const body = await response.json();
+        if (body && body.message) msg = body.message;
+      } catch (e) {
+
+      }
+
+      navigate("/error", { state: { message: msg } });
+    } catch (err) {
+      navigate("/error", {
+        state: { message: err?.message || "Network error" },
+      });
     }
+  }
 
-    function handlePassword(e) {
-        setPassword(e.target.value);
-    }
+  return (
+    <div>
+      <h1> Login Form </h1>
+      <label>
+        {" "}
+        Email:
+        <input type="email" value={email} onChange={handleEmail} />
+      </label>
 
-    async function handleSubmit(e) {
-        const data = {
-            "email":email,
-            "password":password
-        }
+      <label>
+        {" "}
+        Password:
+        <input type="password" value={password} onChange={handlePassword} />
+      </label>
 
-        const response = await fetch("http://localhost:3000/login", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-
-        const status = response.status
-        if (status === 200) {
-            //reroute to main page, success
-        }
-        else if (status === 400){
-            //reroute to error page, fail
-        }
-
-
-        }
-
-    return (
-        <div>
-            <h1> Login Form </h1>
-            <label> Email:
-                <input
-                    type="text"
-                    value={email}
-                    onChange={handleEmail}
-                />
-            </label>
-
-            <label> Password:
-                <input
-                    type="text"
-                    value={password}
-                    onChange={handlePassword}
-                />
-            </label>
-
-            <button type="button" onclick={handleSubmit}>Login</button>
-        </div>
-    )
+      <button type="button" onClick={handleSubmit}>
+        Login
+      </button>
+    </div>
+  );
 }
-export default LoginForm
+export default LoginForm;
