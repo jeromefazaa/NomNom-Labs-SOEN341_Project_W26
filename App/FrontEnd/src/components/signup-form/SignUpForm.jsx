@@ -1,6 +1,6 @@
 import "./SignUpForm.css"
 import { useState } from "react";
-
+import { validatePassword} from "../helper-functions/PasswordValidation";
 function SignUpForm() {
     const [firstname, setFirstName] = useState("");
     const [lastname, setLastName] = useState("");
@@ -24,6 +24,13 @@ function SignUpForm() {
     }
 
     async function handleSubmit(e) {
+        const {message, valid} = validatePassword(password)
+
+        if(!valid){
+            document.getElementById("error-message").innerHTML= message
+            
+        }
+
         const data = {
             "firstname":firstname,
             "lastname":lastname,
@@ -84,6 +91,8 @@ function SignUpForm() {
                     onChange={handlePassword}
                 />
             </label>
+
+            <p id="error-message"></p>
 
             <button type="button" onclick={handleSubmit}>Sign Up</button>
         </div>
