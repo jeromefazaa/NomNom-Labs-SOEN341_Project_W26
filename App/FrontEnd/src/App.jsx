@@ -7,7 +7,7 @@ function App() {
 
   return (
     <div>
-    <SignUpForm></SignUpForm>   
+    <SignUpForm></SignUpForm>   // recipe manager
     </div>
   )
 }
