@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(cors());
 
 // Load data from data.json
-const dataPath = path.join(__dirname, '../../../Data/data.json');
+const dataPath = path.join(__dirname, '../../Data/data.json');
 let userData = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
 
 const PORT = process.env.PORT || 3000;
