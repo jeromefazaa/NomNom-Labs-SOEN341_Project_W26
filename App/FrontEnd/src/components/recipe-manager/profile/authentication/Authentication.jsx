@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import "./Entry.css";
+import "./Authentication.css";
 
-function Entry() {
+function Authentication() {
   const navigate = useNavigate();
 
   function handleLoginClick() {
@@ -25,4 +25,4 @@ function Entry() {
   );
 }
 
-export default Entry;
+export default Authentication;
