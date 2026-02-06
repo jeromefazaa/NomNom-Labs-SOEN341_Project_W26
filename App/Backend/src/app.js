@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(cors());
 
 // Load data from data.json
-const dataPath = path.join(__dirname, '../../../Data/data.json');
+const dataPath = path.join(__dirname, '../../Data/data.json');
 let userData = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
 
 const PORT = process.env.PORT || 3000;
@@ -16,6 +16,7 @@ const PORT = process.env.PORT || 3000;
 
 app.post('/signup', (req, res) => {
      const { firstName, lastName, email, password } = req.body;
+     console.log(`${firstName}, ${lastName}, ${email}, ${password}`);
      const id = `${firstName.toLowerCase()}_${lastName.toLowerCase()}_${email.toLowerCase()}_${password.toLowerCase()}`;
      if (userData[id]) {
         //

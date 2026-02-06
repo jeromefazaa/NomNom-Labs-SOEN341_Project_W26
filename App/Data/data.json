@@ -1,9 +1,14 @@
 {
-    "jerome_fazaa_jeromefazaa123@gmail.com_1234": {
-        "first": "jerome",
-        "last": "fazaa",
-        "email":"jeromefazaa123@gmail.com",
-        "password": "1234"
-    }
-
+  "jerome_fazaa_jeromefazaa123@gmail.com_1234": {
+    "first": "jerome",
+    "last": "fazaa",
+    "email": "jeromefazaa123@gmail.com",
+    "password": "1234"
+  },
+  "test_test_test@gmail.com_test1234": {
+    "firstName": "TEst",
+    "lastName": "Test",
+    "email": "test@gmail.com",
+    "password": "Test1234"
+  }
 }
