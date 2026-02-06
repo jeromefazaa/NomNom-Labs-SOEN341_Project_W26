@@ -16,6 +16,7 @@ const PORT = process.env.PORT || 3000;
 
 app.post('/signup', (req, res) => {
      const { firstName, lastName, email, password } = req.body;
+     console.log(`${firstName}, ${lastName}, ${email}, ${password}`);
      const id = `${firstName.toLowerCase()}_${lastName.toLowerCase()}_${email.toLowerCase()}_${password.toLowerCase()}`;
      if (userData[id]) {
         //

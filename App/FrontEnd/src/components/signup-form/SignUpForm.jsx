@@ -36,8 +36,8 @@ function SignUpForm() {
     }
 
     const data = {
-      firstname: firstname,
-      lastname: lastname,
+      firstName: firstname,
+      lastName: lastname,
       email: email,
       password: password,
     };
