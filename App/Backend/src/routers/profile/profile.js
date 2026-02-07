@@ -1,12 +1,12 @@
-const db = require('./database');
+const express = require('express');
+const db = require('../../database');
 
+const router = express.Router();
 
-
-
-app.post('/profile', (req, res) => {
+router.post('/', (req, res) => {
     try {
         const { email, firstName, lastName, dietPref, allergies } = req.body;
-        const data = db.read();
+        const data = db.read('users');
         
         if (!data) {
             return res.status(500).json({ error: 'Failed to read database' });
@@ -34,17 +34,18 @@ app.post('/profile', (req, res) => {
             });
         }
         
-        if (db.write(data)) {
+        if (db.write('users', data)) {
             res.status(200).json({ message: 'Profile updated successfully' });
         } else {
             res.status(500).json({ error: 'Failed to save profile' });
         }
 
     } catch (error) {
-
         res.status(500).json({ error: 'Error updating profile' });
     }
 });
+
+module.exports = router;
 
 
 
