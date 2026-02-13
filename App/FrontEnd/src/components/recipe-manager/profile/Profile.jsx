@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import './Profile.css'
-import authentication from './components/recipe-manager/profile/authentication/Authentication.jsx'
-import userManagement from './components/recipe-manager/profile/user-management/User-Management.jsx'
+import Authentication from './authentication/Authentication.jsx'
+import UserManagement from './user-management/UserManagement.jsx'
 
 function Profile(){
     return (
         <div>
-        <authentication></authentication>
-        <userManagement></userManagement>
+        <Authentication></Authentication>
+        <UserManagement></UserManagement>
         </div>
     )
 }

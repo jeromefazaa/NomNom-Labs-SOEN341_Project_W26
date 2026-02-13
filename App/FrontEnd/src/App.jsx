@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import './App.css'
-import recipeManager from './components/recipe-manager/RecipeManager.jsx';
+import RecipeManager from './components/recipe-manager/RecipeManager.jsx';
 
 function App() {
 
   return (
     <div>
-    <recipeManager></recipeManager>
+    <RecipeManager></RecipeManager>
     </div>
   )
 }
