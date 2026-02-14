@@ -5,6 +5,7 @@ const { read, write } = require('../../database');
 router.post('/signup', (req, res) => {
      const { firstName, lastName, email, password } = req.body;
      const id = email.toLowerCase();
+     // userData: { [email: string]: { firstName, lastName, email, password } } | null
      const userData = read('users');
      if (userData[id]) {
          res.status(400).json({ message: 'User Already Exists' });
@@ -17,6 +18,7 @@ router.post('/signup', (req, res) => {
 
 router.post('/login', (req, res) => {
     const { email, password } = req.body;
+    // userData: { [email: string]: { firstName, lastName, email, password } } | null
     const userData = read('users');
     const user = Object.values(userData).find(
 
