@@ -18,6 +18,7 @@ function Authentication() {
     setDialog(null);
   }
 
+  if(isLoggedIn == false) { // do isloggedout logic
   return (
     <div>
       <button type="button" onClick={handleLoginClick}>
@@ -44,6 +45,7 @@ function Authentication() {
       )}
     </div>
   );
+}
 }
 
 export default Authentication;

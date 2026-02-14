@@ -1,6 +1,8 @@
 import "./LoginForm.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux'
+import { login } from '../../../../redux/slices/appStateSlice'
 
 function LoginForm({ onSuccess }) {
   const [email, setEmail] = useState("");
@@ -15,6 +17,7 @@ function LoginForm({ onSuccess }) {
   }
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   async function handleSubmit(e) {
     e?.preventDefault();
@@ -33,6 +36,8 @@ function LoginForm({ onSuccess }) {
       });
 
       if (response.status === 200) {
+        // update global app state to mark user as logged in
+        try { dispatch(login()) } catch (e) {}
         if (typeof onSuccess === "function") onSuccess();
         navigate("/success");
         return;
