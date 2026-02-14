@@ -2,7 +2,7 @@ import "./LoginForm.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function LoginForm() {
+function LoginForm({ onSuccess }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -42,9 +42,7 @@ function LoginForm() {
       try {
         const body = await response.json();
         if (body && body.message) msg = body.message;
-      } catch (e) {
-
-      }
+      } catch (e) {}
 
       navigate("/error", { state: { message: msg } });
     } catch (err) {

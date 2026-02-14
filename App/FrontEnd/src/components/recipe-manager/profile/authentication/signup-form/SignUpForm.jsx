@@ -2,7 +2,7 @@ import "./SignUpForm.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { validatePassword } from "../../../../helper-functions/PasswordValidation";
-function SignUpForm() {
+function SignUpForm({ onSuccess }) {
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
   const [email, setEmail] = useState("");

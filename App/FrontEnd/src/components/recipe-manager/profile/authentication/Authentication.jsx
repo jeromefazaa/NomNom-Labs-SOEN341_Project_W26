@@ -1,15 +1,21 @@
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import "./Authentication.css";
+import LoginForm from "./login-form/LoginForm";
+import SignUpForm from "./signup-form/SignUpForm";
 
 function Authentication() {
-  const navigate = useNavigate();
+  const [dialog, setDialog] = useState(null); 
 
   function handleLoginClick() {
-    navigate("/login");
+    setDialog("login");
   }
 
   function handleSignupClick() {
-    navigate("/signup");
+    setDialog("signup");
+  }
+
+  function closeDialog() {
+    setDialog(null);
   }
 
   return (
@@ -21,6 +27,21 @@ function Authentication() {
       <button type="button" onClick={handleSignupClick}>
         Sign Up
       </button>
+
+      {dialog && (
+        <div className="auth-modal-overlay" onClick={closeDialog}>
+          <div className="auth-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="auth-modal-close" onClick={closeDialog}>
+              ×
+            </button>
+            {dialog === "login" ? (
+              <LoginForm onSuccess={closeDialog} />
+            ) : (
+              <SignUpForm onSuccess={closeDialog} />
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
