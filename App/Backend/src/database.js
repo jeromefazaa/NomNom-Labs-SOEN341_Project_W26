@@ -8,7 +8,7 @@ const USERS_PATH = path.join(__dirname, '../../Data/users.json');
 // read data from JSON db
 function read(file) {
     try {
-        const data = null;
+        let data = null;
         switch (file) {
             case 'users':
                 data = fs.readFileSync(USERS_PATH, 'utf8');

@@ -13,6 +13,10 @@ const profileRouter = require('./routers/profile/profile');
 app.use('/auth', authRouter);
 app.use('/profile', profileRouter);
 
+app.get('/', (req, res) => {
+    res.json({ message: 'NomNom Labs API Server is running' });
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
