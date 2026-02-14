@@ -1,11 +1,10 @@
-import { useState } from 'react'
 import './UserManagement.css'
 import LogoutButton from './logout-button/LogoutButton.jsx'
 import ManageProfileButton from './profile-management/ManageProfileButton.jsx'
-function UserManagement(){
+function UserManagement({ onLogout, isLoggedIn }) {
     return (
         <div>
-            <LogoutButton></LogoutButton>
+            {isLoggedIn && <LogoutButton onLogout={onLogout}></LogoutButton>}
             <ManageProfileButton></ManageProfileButton>
         </div>
     )

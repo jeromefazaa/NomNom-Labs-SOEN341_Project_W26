@@ -33,6 +33,7 @@ function LoginForm() {
       });
 
       if (response.status === 200) {
+        localStorage.setItem("isLoggedIn", "true");
         navigate("/success");
         return;
       }
