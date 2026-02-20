@@ -10,5 +10,11 @@
     "lastName": "Test",
     "email": "test@gmail.com",
     "password": "Test1234"
+  },
+  "test@gmail.com": {
+    "firstName": "jerome2",
+    "lastName": "this-is-my-family-name",
+    "email": "test@gmail.com",
+    "password": "jerome-was-here"
   }
 }

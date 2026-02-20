@@ -4,12 +4,14 @@ import Authentication from './authentication/Authentication.jsx'
 import UserManagement from './user-management/UserManagement.jsx'
 
 function Profile({ open, onClose }) {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true'
+
     return (
         <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
             <DialogTitle>Profile</DialogTitle>
             <DialogContent>
                 <Authentication />
-                <UserManagement />
+                <UserManagement onLogout={onClose} isLoggedIn={isLoggedIn} />
             </DialogContent>
         </Dialog>
     )
