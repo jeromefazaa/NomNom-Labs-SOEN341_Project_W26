@@ -1,8 +1,12 @@
 import "./LoginForm.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux'
+import { login } from "../../../../../redux/slices/appStateSlice";
 
 function LoginForm({ onSuccess }) {
+
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -33,8 +37,7 @@ function LoginForm({ onSuccess }) {
       });
 
       if (response.status === 200) {
-        localStorage.setItem("isLoggedIn", "true");
-        navigate("/success");
+        dispatch(login());
         return;
       }
 
