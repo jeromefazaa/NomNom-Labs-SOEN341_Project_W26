@@ -1,8 +1,10 @@
 import "./SignUpForm.css";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { validatePassword } from "../../../../helper-functions/PasswordValidation";
+import { useDispatch } from "react-redux";
+import { login } from "../../../../../redux/slices/appStateSlice";
 function SignUpForm({ onSuccess }) {
+  const dispatch = useDispatch();
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -24,7 +26,6 @@ function SignUpForm({ onSuccess }) {
     setPassword(e.target.value);
   }
 
-  const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e?.preventDefault();
@@ -42,35 +43,24 @@ function SignUpForm({ onSuccess }) {
       password: password,
     };
 
-    try {
-      const response = await fetch("http://localhost:3000/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (response.status === 200) {
-        localStorage.setItem("isLoggedIn", "true");
-        navigate("/success");
-        return;
-      }
-
-      let msg = "Request failed.";
-      try {
-        const body = await response.json();
-        if (body && body.message) msg = body.message;
-      } catch (e) {
-        // ignore
-      }
-
-      navigate("/error", { state: { message: msg } });
-    } catch (err) {
-      navigate("/error", {
-        state: { message: err?.message || "Network error" },
-      });
+    const response = await fetch("http://localhost:3000/auth/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    if (response.status === 200) {
+      dispatch(login())
+      return;
     }
+    else if (response.status === 400) {
+      //Todo:  User (email) already exists
+    }
+    else {
+      //Server error
+    }
+
   }
 
   return (

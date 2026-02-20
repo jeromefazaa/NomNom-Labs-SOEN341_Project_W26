@@ -27,33 +27,26 @@ function LoginForm({ onSuccess }) {
       password: password,
     };
 
-    try {
-      const response = await fetch("http://localhost:3000/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+    const response = await fetch("http://localhost:3000/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    if (response.status === 200) {
+      dispatch(login());
+      return;
+    }
+    else if (response.status === 400) {
+      //Todo: Invalid user name or password
+    }
+    else {
+      //Todo: Server error 
 
-      if (response.status === 200) {
-        dispatch(login());
-        return;
-      }
-
-      let msg = "Request failed.";
-      try {
-        const body = await response.json();
-        if (body && body.message) msg = body.message;
-      } catch (e) {}
-
-      navigate("/error", { state: { message: msg } });
-    } catch (err) {
-      navigate("/error", {
-        state: { message: err?.message || "Network error" },
-      });
     }
   }
+
 
   return (
     <div>

@@ -2,7 +2,6 @@ import { useState } from "react";
 import "./Authentication.css";
 import LoginForm from "./login-form/LoginForm";
 import SignUpForm from "./signup-form/SignUpForm";
-
 function Authentication() {
   const [dialog, setDialog] = useState(null); 
 
