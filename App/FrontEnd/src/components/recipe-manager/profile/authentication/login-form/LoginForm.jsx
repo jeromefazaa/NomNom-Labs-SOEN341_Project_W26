@@ -1,11 +1,9 @@
 import "./LoginForm.css";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from 'react-redux'
+import { useDispatch } from "react-redux";
 import { login } from "../../../../../redux/slices/appStateSlice";
 
 function LoginForm({ onSuccess }) {
-
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,10 +16,9 @@ function LoginForm({ onSuccess }) {
     setPassword(e.target.value);
   }
 
-  const navigate = useNavigate();
-
   async function handleSubmit(e) {
     e?.preventDefault();
+
     const data = {
       email: email,
       password: password,
@@ -34,31 +31,32 @@ function LoginForm({ onSuccess }) {
       },
       body: JSON.stringify(data),
     });
+
     if (response.status === 200) {
       dispatch(login());
-      return;
-    }
-    else if (response.status === 400) {
-      //Todo: Invalid user name or password
-    }
-    else {
-      //Todo: Server error 
 
+      if (onSuccess) {
+        onSuccess(); // closes popup
+      }
+
+      return;
+    } else if (response.status === 400) {
+      alert("Invalid email or password.");
+    } else {
+      alert("Server error. Please try again.");
     }
   }
-
 
   return (
     <div>
       <h1> Login Form </h1>
+
       <label>
-        {" "}
         Email:
         <input type="email" value={email} onChange={handleEmail} />
       </label>
 
       <label>
-        {" "}
         Password:
         <input type="password" value={password} onChange={handlePassword} />
       </label>

@@ -1,10 +1,8 @@
 import "./SignUpForm.css";
 import { useState } from "react";
 import { validatePassword } from "../../../../helper-functions/PasswordValidation";
-import { useDispatch } from "react-redux";
-import { login } from "../../../../../redux/slices/appStateSlice";
+
 function SignUpForm({ onSuccess }) {
-  const dispatch = useDispatch();
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -26,9 +24,9 @@ function SignUpForm({ onSuccess }) {
     setPassword(e.target.value);
   }
 
-
   async function handleSubmit(e) {
     e?.preventDefault();
+
     const { message, valid } = validatePassword(password);
 
     if (!valid) {
@@ -50,42 +48,39 @@ function SignUpForm({ onSuccess }) {
       },
       body: JSON.stringify(data),
     });
-    if (response.status === 200) {
-      dispatch(login())
-      return;
-    }
-    else if (response.status === 400) {
-      //Todo:  User (email) already exists
-    }
-    else {
-      //Server error
-    }
 
+    if (response.status === 200) {
+      if (onSuccess) {
+        onSuccess(); // switch to login
+      }
+      return;
+    } else if (response.status === 400) {
+      alert("User already exists.");
+    } else {
+      alert("Server error. Please try again.");
+    }
   }
 
   return (
     <div>
       <h1> Sign Up Form </h1>
+
       <label>
-        {" "}
         First Name:
         <input type="text" value={firstname} onChange={handleFirstName} />
       </label>
 
       <label>
-        {" "}
         Last Name:
         <input type="text" value={lastname} onChange={handleLastName} />
       </label>
 
       <label>
-        {" "}
         Email:
         <input type="text" value={email} onChange={handleEmail} />
       </label>
 
       <label>
-        {" "}
         Password:
         <input type="password" value={password} onChange={handlePassword} />
       </label>
@@ -98,4 +93,5 @@ function SignUpForm({ onSuccess }) {
     </div>
   );
 }
+
 export default SignUpForm;

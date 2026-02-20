@@ -2,8 +2,9 @@ import { useState } from "react";
 import "./Authentication.css";
 import LoginForm from "./login-form/LoginForm";
 import SignUpForm from "./signup-form/SignUpForm";
-function Authentication() {
-  const [dialog, setDialog] = useState(null); 
+
+function Authentication({ onAuthSuccess }) {
+  const [dialog, setDialog] = useState(null);
 
   function handleLoginClick() {
     setDialog("login");
@@ -33,10 +34,20 @@ function Authentication() {
             <button className="auth-modal-close" onClick={closeDialog}>
               ×
             </button>
+
             {dialog === "login" ? (
-              <LoginForm onSuccess={closeDialog} />
+              <LoginForm
+                onSuccess={() => {
+                  closeDialog();       // close small modal
+                  if (onAuthSuccess) onAuthSuccess(); // close Profile dialog
+                }}
+              />
             ) : (
-              <SignUpForm onSuccess={closeDialog} />
+              <SignUpForm
+                onSuccess={() => {
+                  setDialog("login");  // show login after signup
+                }}
+              />
             )}
           </div>
         </div>
