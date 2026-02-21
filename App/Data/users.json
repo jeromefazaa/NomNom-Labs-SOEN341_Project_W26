@@ -17,11 +17,11 @@
     "email": "test@gmail.com",
     "password": "jerome-was-here"
   },
-  "marcsam@gmail.com": {
-    "firstName": "Marc",
+  "marksam@gmail.com": {
+    "firstName": "Mark",
     "lastName": "Samuel",
-    "email": "marcsam@gmail.com",
-    "password": "Marc123456"
+    "email": "marksam@gmail.com",
+    "password": "Mark123456"
   },
   "kevin@test.com": {
     "firstName": "kevin",

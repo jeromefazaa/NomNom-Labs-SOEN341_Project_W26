@@ -5,10 +5,8 @@ const initialState = {
     password: '',
     firstName: '',
     lastName: '',
-    recipes: [],
     allergies: [],
     dietaryPreferences: [],
-    isAuthenticated: false,
 };
 
 const currentUserSlice = createSlice({
@@ -16,17 +14,11 @@ const currentUserSlice = createSlice({
     initialState,
     reducers: {
         setUser: (state, action) => {
-            return { ...state, ...action.payload, isAuthenticated: true };
+            return 
         },
         updateUserField: (state, action) => {
             const { field, value } = action.payload;
             state[field] = value;
-        },
-        addRecipe: (state, action) => {
-            state.recipes.push(action.payload);
-        },
-        removeRecipe: (state, action) => {
-            state.recipes = state.recipes.filter(recipe => recipe.id !== action.payload);
         },
         addAllergy: (state, action) => {
             if (!state.allergies.includes(action.payload)) {
