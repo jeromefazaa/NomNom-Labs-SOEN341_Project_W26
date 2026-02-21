@@ -50,13 +50,14 @@ function ManageProfile(){
             dietPreferences: dietPreferences,
             allergies: allergies,
         };
+        
     }
     
     return(
         <form>
             <label>Email:
                 <input
-                    type = "text"
+                    type = "email"
                     name = "Email"
                     onChange = {handleEmail}
                     disabled = {!isEditing}
@@ -65,7 +66,7 @@ function ManageProfile(){
 
             <label>Password:
                 <input 
-                    type="text" 
+                    type="password" 
                     name = "Password"
                     onChange = {handlePassword}
                     disabled = {!isEditing}
