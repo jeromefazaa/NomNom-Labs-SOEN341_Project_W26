@@ -22,5 +22,11 @@
     "lastName": "Samuel",
     "email": "marcsam@gmail.com",
     "password": "Marc123456"
+  },
+  "kevin@test.com": {
+    "firstName": "kevin",
+    "lastName": "test",
+    "email": "kevin@test.com",
+    "password": "Kevin12345"
   }
 }
