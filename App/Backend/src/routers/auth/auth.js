@@ -27,13 +27,7 @@ router.post('/login', (req, res) => {
     if (!user) {
         return res.status(400)
     }
-    res.status(200).send(JSON.stringify({
-        user: {
-            firstName: user.firstName,
-            lastName: user.lastName,
-            email: user.email
-        }
-    }));
+    res.status(200);
 });
 
 module.exports = router;
