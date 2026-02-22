@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import LoginForm from '../../components/recipe-manager/profile/authentication/login-form/LoginForm';
 
 const initialState = {
     email: '',
@@ -13,9 +14,24 @@ const currentUserSlice = createSlice({
     name: 'currentUser',
     initialState,
     reducers: {
-        setUser: (state, action) => {
-            return 
+        setEmail: (state, action) => {
+            state.email = action.payload;
         },
+        setFirstName: (state, action) => {
+            state.firstName = action.payload;
+        },
+        setLastName: (state, action) => {
+            state.lastName = action.payload;
+        },
+        setAllergies: (state, action) => {
+            state.allergies = action.payload;
+        },
+        setDietaryPreferences: (state, action) => {
+            state.dietaryPreferences = action.payload;
+        },
+
+
+
         updateUserField: (state, action) => {
             const { field, value } = action.payload;
             state[field] = value;

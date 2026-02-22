@@ -33,8 +33,10 @@ function LoginForm({ onSuccess }) {
     });
 
     if (response.status === 200) {
+      const userData = await response.json();
+      const email = userData.email;
       dispatch(login());
-
+      dispatch(setEmail(email)); // Store email in Redux
       if (onSuccess) {
         onSuccess(); // closes popup
       }
