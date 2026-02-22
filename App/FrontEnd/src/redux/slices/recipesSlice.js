@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { use } from "react";
 
 const singleRecipe = {
     title: "",
@@ -22,7 +23,26 @@ export const saveRecipes = createAsyncThunk(
     'recipes/saveRecipes',
     async (userId, thunkAPI) => {
         try {
-            // Add your async logic here
+            data = {};
+            state = thunkAPI.getState();
+            state.recipes.recipesArray.array.forEach(element => {
+                element.userId = userId;
+                data[`${userId}_${element.title}`] = element;
+            });
+            const response = await fetch(`http://localhost:3000/recipes/${userId}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+            if (response.status === 200) {
+                return
+            }
+            else {
+                return thunkAPI.rejectWithValue(error.message);
+            }
+
         } catch (error) {
             return thunkAPI.rejectWithValue(error.message);
         }

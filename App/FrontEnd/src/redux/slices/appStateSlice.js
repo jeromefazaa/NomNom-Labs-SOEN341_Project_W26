@@ -17,7 +17,6 @@ export const loginUser = createAsyncThunk(
       const data = await response.json();
       const user = data.user;
       const recipes = data.recipes
-      console.log(`setting current user to ${user.email}`)
       thunkAPI.dispatch(setCurrentUser(user));
       if (isArray(recipes)) {
         thunkAPI.dispatch(setRecipes(recipes))
