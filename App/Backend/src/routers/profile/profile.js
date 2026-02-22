@@ -45,10 +45,9 @@ router.post('/', (req, res) => {
 router.get('/:email', (req, res) => {
     try {
         const id = req.params.email.toLowerCase();
-        // userData: { [email: string]: { firstName, lastName, email, password, dietPref?, allergies? } } | null
         const userData = db.read('users');
         const recipes  = db.read('recipes');
-        const userRecipes = Object.values(recipes).filter(recipe => recipes.userId === id);
+        const userRecipes = Object.values(recipes).filter(recipes => recipes.userId === id);
         if (!userData) {
             return res.status(500).json({ error: 'Failed to read database' });
         }
@@ -57,7 +56,7 @@ router.get('/:email', (req, res) => {
             return res.status(404).json({ error: 'User not found' });
         }
 
-        res.status(200).json({user: userData[id], userRecipes: userRecipes});
+        res.status(200).json({user: userData[id], userRecipes: userRecipes? userRecipes: []});
 
     } catch (error) {
         res.status(500).json({ error: 'Error retrieving profile' });

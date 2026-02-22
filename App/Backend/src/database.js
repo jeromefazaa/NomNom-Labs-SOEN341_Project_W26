@@ -4,6 +4,8 @@ const fs = require('fs');
 const path = require('path');
 
 const USERS_PATH = path.join(__dirname, '../../Data/users.json');
+const RECIPES_PATH = path.join(__dirname, '../../Data/recipes.json');
+
 
 // read data from JSON db
 function read(file) {
@@ -13,6 +15,10 @@ function read(file) {
             case 'users':
                 data = fs.readFileSync(USERS_PATH, 'utf8');
                 break;
+            case 'recipes':
+                data = fs.readFileSync(RECIPES_PATH, 'utf8');
+                break;
+
             default:
                 console.error('Unknown file type:', file);
                 break;
@@ -35,7 +41,10 @@ function write(file, data) {
             case 'users':
                 fs.writeFileSync(USERS_PATH, JSON.stringify(data, null, 2), 'utf8');
                 return true;
-            
+            case 'recipes':
+                fs.writeFileSync(RECIPES_PATH, JSON.stringify(data, null, 2), 'utf8');
+                return true;
+
         }
 
     } catch (error) {

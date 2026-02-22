@@ -3,10 +3,10 @@ import RecipeCard from './recipes/recipe-card/RecipeCard.jsx';
 import RecipeForm from './recipes/recipe-form/RecipeForm.jsx';
 import { useSelector, useDispatch } from 'react-redux';
 import './MainPage.css';
-import { addRecipe, deleteRecipe, editRecipes } from '../../../redux/slices/recipesSlice.js';
+import { addRecipe, deleteRecipe, editRecipe } from '../../../redux/slices/recipesSlice.js';
 
 function MainPage() {
-  const recipes = useSelector(state => state.recipes);
+  const recipes = useSelector(state => state.recipes.recipesArray);
   const dispatch = useDispatch();
   const [isFormOpen, setIsFormOpen] = useState(false);
 
@@ -37,7 +37,7 @@ function MainPage() {
   const handleSaveRecipe = (recipeData) => {
     // updates only the selected recipe in edit mode
     if (formMode === 'edit' && editingRecipeIndex !== null) {
-      dispatch(editRecipes(recipeData))
+      dispatch(editRecipe(recipeData))
       return;
     }
     dispatch(addRecipe(recipeData))
@@ -45,7 +45,7 @@ function MainPage() {
 
   // removes a recipe card from the local list
   const handleDeleteRecipe = (indexToDelete) => {
-   dispatch(deleteRecipe(recipes[indexToDelete].title))
+    dispatch(deleteRecipe(recipes[indexToDelete].title))
   };
 
   // supplies the selected recipe to prefill the form fields

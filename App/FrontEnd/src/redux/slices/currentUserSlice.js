@@ -13,50 +13,60 @@ const currentUserSlice = createSlice({
     name: 'currentUser',
     initialState,
     reducers: {
+        setCurrentUser: (state, action) => {
+            return action.payload;
+        },
         setEmail: (state, action) => {
-            state.email = action.payload
+            state.email = action.payload;
         },
         setPassword: (state, action) => {
-            state.password = action.payload
+            state.password = action.payload;
         },
         setFirstName: (state, action) => {
-            state.firstName = action.payload
+            state.firstName = action.payload;
         },
         setLastName: (state, action) => {
-            state.lastName = action.payload
+            state.lastName = action.payload;
         },
         setAllergies: (state, action) => {
-            state.allergies = action.payload
+            state.allergies = action.payload;
         },
         addAllergy: (state, action) => {
-            state.allergies = [...state.allergies, ...action.payload]
+            state.allergies.push(...action.payload); // Mutate directly
         },
         removeAllergy: (state, action) => {
-            state.allergies = [...state.allergies.filter(allergy => !(allergy in action.payload))]
+            return {
+                ...state,
+                allergies: state.allergies.filter(allergy => !action.payload.includes(allergy))
+            };
         },
         setDietaryPref: (state, action) => {
-            state.dietaryPreferences = action.payload
+            state.dietaryPreferences = action.payload;
         },
         addDietaryPref: (state, action) => {
-            state.dietaryPreferences = [...state.dietaryPreferences, ...action.payload]
+            state.dietaryPreferences.push(...action.payload); // Mutate directly
         },
         removeDietaryPref: (state, action) => {
-            state.dietaryPreferences = [...state.dietaryPreferences.filter(dietPref => !(dietPref in action.payload))]
+            return {
+                ...state,
+                dietaryPreferences: state.dietaryPreferences.filter(dietPref => !action.payload.includes(dietPref))
+            };
         }
     },
 });
 
 export const {
-   setEmail,
-   setPassword,
-   setLastName,
-   setFirstName,
-   setAllergies,
-   addAllergy,
-   removeAllergy,
-   setDietaryPref,
-   addDietaryPref,
-   removeDietaryPref
+    setCurrentUser,
+    setEmail,
+    setPassword,
+    setLastName,
+    setFirstName,
+    setAllergies,
+    addAllergy,
+    removeAllergy,
+    setDietaryPref,
+    addDietaryPref,
+    removeDietaryPref
 } = currentUserSlice.actions;
 
 export default currentUserSlice.reducer;

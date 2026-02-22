@@ -1,7 +1,7 @@
 import "./LoginForm.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { login } from "../../../../../redux/slices/appStateSlice";
+import { loginUser } from "../../../../../redux/slices/appStateSlice";
 
 function LoginForm({ onSuccess }) {
   const dispatch = useDispatch();
@@ -31,10 +31,10 @@ function LoginForm({ onSuccess }) {
       },
       body: JSON.stringify(data),
     });
-
+    const returnedData = await response.json();
+    const userId = returnedData.email;
     if (response.status === 200) {
-      dispatch(login());
-
+      dispatch(loginUser(userId));
       if (onSuccess) {
         onSuccess(); // closes popup
       }

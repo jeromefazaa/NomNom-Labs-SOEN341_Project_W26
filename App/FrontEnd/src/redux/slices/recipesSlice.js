@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const singleRecipe = {
     title: "",
@@ -8,51 +8,73 @@ const singleRecipe = {
     cost: 0,
     ingredients: [],
     steps: [],
-
 }
-const initialState = []
+
+const initialState = {
+    recipesArray: [],
+    hasErrors: false,
+    isLoading: false,
+    unsaved: 0
+}
+
+// Async thunk - add your logic here
+export const saveRecipes = createAsyncThunk(
+    'recipes/saveRecipes',
+    async (userId, thunkAPI) => {
+        try {
+            // Add your async logic here
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.message);
+        }
+    }
+);
 
 const recipesSlice = createSlice({
     name: "recipes",
     initialState,
     reducers: {
         addRecipe: (state, action) => {
-            const newRecipe = {
-                title: action.payload.title,
-                difficulty: action.payload.difficulty,
-                prepTime: action.payload.prepTime,
-                diet: action.payload.diet,
-                cost: action.payload.cost,
-                ingredients: action.payload.ingredients,
-                steps: action.payload.steps,
-
-            }
-           return [...state, newRecipe]
+            state.recipesArray.push(action.payload);
+            state.unsaved = state.unsaved + 1
         },
-        editRecipes: (state, action) => {
-            const editedRecipe = {
-                difficulty: action.payload.difficulty,
-                prepTime: action.payload.prepTime,
-                diet: action.payload.diet,
-                cost: action.payload.cost,
-                ingredients: action.payload.ingredients,
-                steps: action.payload.steps,
-
-            }
-           return [...state.map(recipe => {
-                if (recipe.title === action.payload.title) {
-                    return {
-                        title: recipe.title,
-                        ...editedRecipe
-                    }
+        editRecipe: (state, action) => {
+            const index = state.recipesArray.findIndex(recipe => recipe.title === action.payload.title);
+            if (index !== -1) {
+                if (!state.recipesArray[index].isEdited) {
+                    state.unsaved = state.unsaved + 1
                 }
-                else return recipe
-            })]
+                state.recipesArray[index] = {
+                    ...state.recipesArray[index],
+                    ...action.payload,
+                    isEdited: true
+                };
+            }
         },
         deleteRecipe: (state, action) => {
-           return [...state.filter(recipe => recipe.title !== action.payload)]
+            state.unsaved = state.unsaved + 1;
+            state.recipesArray = state.recipesArray.filter(recipe => recipe.title !== action.payload);
+        },
+        setRecipes: (state, action) => {
+            state.recipesArray = action.payload;
         }
     },
+    extraReducers: (builder) => {
+        builder
+            .addCase(saveRecipes.pending, (state) => {
+                state.isLoading = true;
+                state.hasErrors = false;
+            })
+            .addCase(saveRecipes.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.hasErrors = false;
+                state.unsaved = 0;
+            })
+            .addCase(saveRecipes.rejected, (state, action) => {
+                state.hasErrors = true;
+                state.isLoading = false;
+            });
+    }
 });
-export const { addRecipe, editRecipes, deleteRecipe } = recipesSlice.actions;
+
+export const { addRecipe, editRecipe, deleteRecipe, setRecipes } = recipesSlice.actions;
 export default recipesSlice.reducer;
