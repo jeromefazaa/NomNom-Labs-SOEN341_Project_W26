@@ -1,0 +1,76 @@
+.main-page {
+  padding: 0.75rem 0;
+}
+
+.recipes-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.recipes-heading {
+  margin: 0;
+  font-size: 1.9rem;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  color: #1f2937;
+}
+
+.addRecipe {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.55rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #000000;
+  background: linear-gradient(90deg, #007bff, rgb(64, 70, 231));
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
+  transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s ease;
+}
+
+.addRecipe:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(239, 68, 68, 0.3);
+  filter: saturate(1.08);
+}
+
+.addRecipe:active {
+  transform: translateY(0);
+}
+
+.addRecipe:focus-visible {
+  outline: 3px solid #fdba74;
+  outline-offset: 2px;
+}
+
+.recipes-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.recipe-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding-top: 0.6rem;
+}
+
+.recipe-list-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.recipe-list-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.recipe-list-row .MuiTextField-root {
+  flex: 1;
+}
