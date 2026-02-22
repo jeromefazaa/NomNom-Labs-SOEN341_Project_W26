@@ -1,12 +1,15 @@
 import { useState } from 'react';
-import RecipeCard from '../recipes/RecipeCard.jsx';
-import RecipeForm from './RecipeForm.jsx';
+import RecipeCard from './recipes/recipe-card/RecipeCard.jsx';
+import RecipeForm from './recipes/recipe-form/RecipeForm.jsx';
+import { useSelector, useDispatch } from 'react-redux';
 import './MainPage.css';
+import { addRecipe, deleteRecipe, editRecipes } from '../../../redux/slices/recipesSlice.js';
 
 function MainPage() {
-  const [recipes, setRecipes] = useState([]);
+  const recipes = useSelector(state => state.recipes);
+  const dispatch = useDispatch();
   const [isFormOpen, setIsFormOpen] = useState(false);
-  
+
   // indicates whether the form is creating or updating a recipe
   const [formMode, setFormMode] = useState('add');
   const [editingRecipeIndex, setEditingRecipeIndex] = useState(null);
@@ -34,25 +37,19 @@ function MainPage() {
   const handleSaveRecipe = (recipeData) => {
     // updates only the selected recipe in edit mode
     if (formMode === 'edit' && editingRecipeIndex !== null) {
-      setRecipes((prevRecipes) =>
-        prevRecipes.map((recipe, index) => (
-          index === editingRecipeIndex ? recipeData : recipe
-        ))
-      );
+      dispatch(editRecipes(recipeData))
       return;
     }
-
-    setRecipes((prevRecipes) => [recipeData, ...prevRecipes]);
+    dispatch(addRecipe(recipeData))
   };
 
   // removes a recipe card from the local list
   const handleDeleteRecipe = (indexToDelete) => {
-    setRecipes((prevRecipes) => prevRecipes.filter((_, index) => index !== indexToDelete));
+   dispatch(deleteRecipe(recipes[indexToDelete].title))
   };
 
   // supplies the selected recipe to prefill the form fields
-  const recipeBeingEdited =
-    formMode === 'edit' && editingRecipeIndex !== null ? recipes[editingRecipeIndex] : null;
+  const recipeBeingEdited = formMode === 'edit' && editingRecipeIndex !== null ? recipes[editingRecipeIndex] : null;
 
   return (
     <div className="main-page">

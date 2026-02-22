@@ -17,6 +17,5 @@ const appStateSlice = createSlice({
   },
 });
 
-export const { setLoading, setError, clearError, setLoggedIn, login, logout } =
-  appStateSlice.actions;
+export const { login, logout } = appStateSlice.actions;
 export default appStateSlice.reducer;

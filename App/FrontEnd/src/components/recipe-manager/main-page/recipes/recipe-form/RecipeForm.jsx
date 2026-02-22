@@ -12,13 +12,13 @@ const getDefaultFormData = () => ({
 });
 
 const createFormData = (recipe) => ({
-  title: recipe ?. title ?? '',
+  title: recipe?.title ?? '',
   difficulty: recipe?.difficulty ?? 'Beginner',
   prepTime: recipe?.prepTime?.toString() ?? '',
   diet: recipe?.diet ?? 'None',
   cost: recipe?.cost?.toString() ?? '',
-  ingredients: Array.isArray(recipe?.ingredients) && recipe.ingredients.length > 0? recipe.ingredients: [''],
-  steps: Array.isArray(recipe?.steps) && recipe.steps.length > 0? recipe.steps: ['']
+  ingredients: Array.isArray(recipe?.ingredients) && recipe.ingredients.length > 0 ? recipe.ingredients : [''],
+  steps: Array.isArray(recipe?.steps) && recipe.steps.length > 0 ? recipe.steps : ['']
 });
 
 function RecipeForm({ open, onClose, onSave, initialData, isEditMode }) {
@@ -78,9 +78,7 @@ function RecipeForm({ open, onClose, onSave, initialData, isEditMode }) {
     event.preventDefault();
 
     // keep the original title
-    const resolvedTitle = isEditMode
-      ? (initialData?.title ?? formData.title).trim()
-      : formData.title.trim();
+    const resolvedTitle = isEditMode ? (initialData.title).trim() : formData.title.trim();
 
     if (!resolvedTitle) {
       return;
@@ -226,7 +224,7 @@ function RecipeForm({ open, onClose, onSave, initialData, isEditMode }) {
           </div>
 
         </DialogContent>
-        
+
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
           <Button type="submit" variant="contained">

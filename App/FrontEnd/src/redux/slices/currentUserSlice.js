@@ -13,45 +13,50 @@ const currentUserSlice = createSlice({
     name: 'currentUser',
     initialState,
     reducers: {
-        setUser: (state, action) => {
-            return 
+        setEmail: (state, action) => {
+            state.email = action.payload
         },
-        updateUserField: (state, action) => {
-            const { field, value } = action.payload;
-            state[field] = value;
+        setPassword: (state, action) => {
+            state.password = action.payload
+        },
+        setFirstName: (state, action) => {
+            state.firstName = action.payload
+        },
+        setLastName: (state, action) => {
+            state.lastName = action.payload
+        },
+        setAllergies: (state, action) => {
+            state.allergies = action.payload
         },
         addAllergy: (state, action) => {
-            if (!state.allergies.includes(action.payload)) {
-                state.allergies.push(action.payload);
-            }
+            state.allergies = [...state.allergies, ...action.payload]
         },
         removeAllergy: (state, action) => {
-            state.allergies = state.allergies.filter(allergy => allergy !== action.payload);
+            state.allergies = [...state.allergies.filter(allergy => !(allergy in action.payload))]
         },
-        addDietaryPreference: (state, action) => {
-            if (!state.dietaryPreferences.includes(action.payload)) {
-                state.dietaryPreferences.push(action.payload);
-            }
+        setDietaryPref: (state, action) => {
+            state.dietaryPreferences = action.payload
         },
-        removeDietaryPreference: (state, action) => {
-            state.dietaryPreferences = state.dietaryPreferences.filter(pref => pref !== action.payload);
+        addDietaryPref: (state, action) => {
+            state.dietaryPreferences = [...state.dietaryPreferences, ...action.payload]
         },
-        logout: (state) => {
-            return initialState;
-        },
+        removeDietaryPref: (state, action) => {
+            state.dietaryPreferences = [...state.dietaryPreferences.filter(dietPref => !(dietPref in action.payload))]
+        }
     },
 });
 
 export const {
-    setUser,
-    updateUserField,
-    addRecipe,
-    removeRecipe,
-    addAllergy,
-    removeAllergy,
-    addDietaryPreference,
-    removeDietaryPreference,
-    logout,
+   setEmail,
+   setPassword,
+   setLastName,
+   setFirstName,
+   setAllergies,
+   addAllergy,
+   removeAllergy,
+   setDietaryPref,
+   addDietaryPref,
+   removeDietaryPref
 } = currentUserSlice.actions;
 
 export default currentUserSlice.reducer;

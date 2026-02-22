@@ -3,19 +3,7 @@
     "first": "jerome",
     "last": "fazaa",
     "email": "jeromefazaa123@gmail.com",
-    "password": "1234"
-  },
-  "test_test_test@gmail.com_test1234": {
-    "firstName": "TEst",
-    "lastName": "Test",
-    "email": "test@gmail.com",
-    "password": "Test1234"
-  },
-  "test@gmail.com": {
-    "firstName": "jerome2",
-    "lastName": "this-is-my-family-name",
-    "email": "test@gmail.com",
-    "password": "jerome-was-here"
+    "password": "Jerome123"
   },
   "marksam@gmail.com": {
     "firstName": "Mark",

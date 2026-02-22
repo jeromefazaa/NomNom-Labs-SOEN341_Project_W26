@@ -3,7 +3,7 @@ const db = require('../../database');
 
 const router = express.Router();
 
-
+//edit an already existing profile
 router.post('/', (req, res) => {
     try {
         const { email, firstName, lastName, dietPref, allergies } = req.body;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
 import './RecipeCard.css';
-import RecipeDetail from './RecipeDetails';
+import RecipeDetail from './recipe-details/RecipeDetails';
 
 function RecipeCard({ recipe, onEdit, onDelete }) {
 
@@ -28,31 +28,31 @@ function RecipeCard({ recipe, onEdit, onDelete }) {
 
   const handleDeleteConfirm = () => {
     // backend deletion logic here
-    
+
     onDelete();
     setConfirmDeleteOpen(false);
   };
 
   return (
     <>
-    <div className="recipe-card">
-      {/* displays basic recipe attributes */}
+      <div className="recipe-card">
+        {/* displays basic recipe attributes */}
 
-      <h3 className="recipeTitle">{recipe.title}</h3>
-      <p><strong>Preparation Time:</strong> {recipe.prepTime}m</p>
-      <p><strong>Difficulty:</strong> {recipe.difficulty}</p>
-      <p><strong>Diet:</strong> {recipe.diet}  </p> 
-      <p><strong>Cost:</strong> {recipe.cost}$</p>
-      
-      <div className="recipeInteractions">
+        <h3 className="recipeTitle">{recipe.title}</h3>
+        <p><strong>Preparation Time:</strong> {recipe.prepTime}m</p>
+        <p><strong>Difficulty:</strong> {recipe.difficulty}</p>
+        <p><strong>Diet:</strong> {recipe.diet}  </p>
+        <p><strong>Cost:</strong> {recipe.cost}$</p>
+
+        <div className="recipeInteractions">
           <button className="btnView" onClick={handleCardClick}>Details</button>
           <button className="btnEdit" onClick={onEdit}>Edit</button>
           <button className="btnDelete" onClick={handleDeleteClick}>Delete</button>
+        </div>
       </div>
-    </div>
 
-     {/* displays recipe instructions and ingredients in a modal */}
-     <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
+      {/* displays recipe instructions and ingredients in a modal */}
+      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
         <DialogTitle>{recipe.title} ({recipe.prepTime} minutes)</DialogTitle>
         <DialogContent>
           <RecipeDetail recipe={recipe} />

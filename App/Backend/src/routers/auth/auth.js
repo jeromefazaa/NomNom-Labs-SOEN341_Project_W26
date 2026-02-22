@@ -6,7 +6,6 @@ const { read, write } = require('../../database');
 router.post('/signup', (req, res) => {
     const { firstName, lastName, email, password } = req.body;
     const id = email.toLowerCase();
-    // userData: { [email: string]: { firstName, lastName, email, password } } | null
     const userData = read('users')
     if (userData[id]) {
         res.status(400)
@@ -27,7 +26,7 @@ router.post('/login', (req, res) => {
     if (!user) {
         return res.status(400)
     }
-    res.status(200);
+    res.status(200).json({email:email});
 });
 
 module.exports = router;
