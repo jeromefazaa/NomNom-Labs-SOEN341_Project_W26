@@ -99,3 +99,12 @@
 .profile-icon:hover svg {
   transform: scale(1.08);
 }
+
+.user-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}

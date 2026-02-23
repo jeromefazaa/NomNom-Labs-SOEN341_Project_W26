@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import './ManageProfile.css'
 import { saveCurrentUser } from '../../../../../redux/slices/currentUserSlice';
 
 

@@ -1,4 +1,4 @@
-import './UserManagement.css'
+
 import ManageProfileButton from './profile-management/ManageProfileButton.jsx'
 import { useDispatch } from "react-redux";
 import { logout } from '../../../../redux/slices/appStateSlice.js';
@@ -34,18 +34,19 @@ function UserManagement({ onLogout, isLoggedIn }) {
     }
 
     return (
-        <div>
-            <button type="button" onClick={handleLogout}>
-                Logout
-            </button>
+        <div className="auth">
+    <div className="user-actions">
+      <button type="button" className="btn btn-secondary" onClick={handleLogout}>
+        Logout
+      </button>
 
-            <button>
-                My Profile
-            </button>
+      <button type="button" className="btn btn-primary">
+        My Profile
+      </button>
 
-
-            <ManageProfileButton></ManageProfileButton>
-        </div>
+      <ManageProfileButton />
+    </div>
+  </div>
     )
 }
 
