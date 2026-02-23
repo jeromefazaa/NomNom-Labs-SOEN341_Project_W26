@@ -1,12 +1,13 @@
 import './UserManagement.css'
-import ManageProfileButton from './profile-management/ManageProfileButton.jsx'
+import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { logout } from '../../../../redux/slices/appStateSlice.js';
-import { setCurrentUser } from '../../../../redux/slices/currentUserSlice.js';
-import { setRecipes } from '../../../../redux/slices/recipesSlice.js';
+import { logout } from "../../../../redux/slices/appStateSlice";
+import { useNavigate } from 'react-router-dom';
+import ManageProfile from './profile-management/ManageProfile';
 
 function UserManagement({ onLogout, isLoggedIn }) {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     function handleLogout(e) {
         e?.preventDefault();
@@ -33,18 +34,29 @@ function UserManagement({ onLogout, isLoggedIn }) {
         }
     }
 
+    function handleMyProfile(e){
+        e?.preventDefault();
+
+        navigate("/ManageProfile");
+
+    }
+
     return (
         <div>
             <button type="button" onClick={handleLogout}>
                 Logout
             </button>
 
-            <button>
+            <button type="button" onClick={handleMyProfile}>
                 My Profile
             </button>
+<<<<<<< Updated upstream
 
 
             <ManageProfileButton></ManageProfileButton>
+=======
+            
+>>>>>>> Stashed changes
         </div>
     )
 }

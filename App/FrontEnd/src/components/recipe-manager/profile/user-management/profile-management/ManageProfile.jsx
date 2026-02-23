@@ -50,8 +50,10 @@ function ManageProfile() {
         dispatch(saveCurrentUser(data))
 
     }
+    
+    
 
-    return (
+    return(
         <form>
             <label>Email:
                 <input
