@@ -17,6 +17,9 @@ function ManageProfile({ open, onClose }) {
     const handleEditing = () => {
         setIsEditing(edit => !edit);
     }
+    const handleCancel = () => {
+        setIsEditing(edit => !edit);
+    }
     function handlePassword(e) {
         setPassword(e.target.value);
     }
@@ -63,6 +66,7 @@ function ManageProfile({ open, onClose }) {
                             type="email"
                             name="Email"
                             disabled={true}
+                            value={email}
                         />
                     </label>
 
@@ -72,6 +76,7 @@ function ManageProfile({ open, onClose }) {
                             name="Password"
                             onChange={handlePassword}
                             disabled={!isEditing}
+                            value={password}
                         />
                     </label>
 
@@ -81,6 +86,7 @@ function ManageProfile({ open, onClose }) {
                             name="firstName"
                             onChange={handleFirstName}
                             disabled={!isEditing}
+                            value={firstName}
                         />
                     </label>
 
@@ -90,6 +96,7 @@ function ManageProfile({ open, onClose }) {
                             name="lastName"
                             onChange={handleLastName}
                             disabled={!isEditing}
+                            value={lastName}
                         />
                     </label>
 
@@ -99,6 +106,7 @@ function ManageProfile({ open, onClose }) {
                             name="dietPreferences"
                             onChange={handleDietPreferences}
                             disabled={!isEditing}
+                            value={dietPreferences}
                         />
                     </label>
 
@@ -108,6 +116,7 @@ function ManageProfile({ open, onClose }) {
                             name="allergies"
                             onChange={handleAllergies}
                             disabled={!isEditing}
+                            value={allergies}
                         />
                     </label>
 
@@ -121,6 +130,12 @@ function ManageProfile({ open, onClose }) {
                     >
                         {isEditing ? "Save" : "Edit"}
                     </button>
+                    {isEditing && <button
+                        type="button"
+                        onClick={handleCancel}
+                    >
+                        Cancel
+                    </button>}
                 </form>
             </DialogContent>
         </Dialog>
