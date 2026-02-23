@@ -62,35 +62,45 @@ function SignUpForm({ onSuccess }) {
   }
 
   return (
-    <div>
-      <h1> Sign Up Form </h1>
+    <div className="auth-form">
+    <h1 className="auth-title">Sign Up Form</h1>
 
-      <label>
+    <div className="form-group">
+      <label className="form-label">
         First Name:
-        <input type="text" value={firstname} onChange={handleFirstName} />
+        <input className="input" type="text" value={firstname} onChange={handleFirstName}/>
       </label>
+    </div>
 
-      <label>
+    <div className="form-group">
+      <label className="form-label">
         Last Name:
-        <input type="text" value={lastname} onChange={handleLastName} />
+        <input className="input" type="text" value={lastname} onChange={handleLastName}/>
       </label>
+    </div>
 
-      <label>
+    <div className="form-group">
+      <label className="form-label">
         Email:
-        <input type="text" value={email} onChange={handleEmail} />
+        <input className="input" type="text" value={email} onChange={handleEmail}/>
       </label>
+    </div>
 
-      <label>
+    <div className="form-group">
+      <label className="form-label">
         Password:
-        <input type="password" value={password} onChange={handlePassword} />
+        <input className="input" type="password" value={password} onChange={handlePassword}/>
       </label>
+    </div>
 
-      <p id="error-message"></p>
+    <p id="error-message" className="form-error"></p>
 
-      <button type="button" onClick={handleSubmit}>
+    <div className="form-actions">
+      <button type="button" className="btn btn-primary" onClick={handleSubmit}>
         Sign Up
       </button>
     </div>
+  </div>
   );
 }
 

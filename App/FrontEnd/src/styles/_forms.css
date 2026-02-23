@@ -22,3 +22,40 @@ label {
   margin-bottom: 6px;
   display: block;
 }
+
+/* Auth forms layout */
+.auth-form {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-top: 10px;
+}
+
+.form-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Make the input look nicer + spacing from label text */
+.form-label .input {
+  margin-top: 8px;
+}
+
+.auth-title {
+  font-size: 44px;
+  font-weight: 800;
+  margin: 16px 0 10px;
+  color: #111827;
+}
+
+.form-error {
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #b91c1c;
+}
