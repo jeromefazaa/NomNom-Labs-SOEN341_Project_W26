@@ -2,12 +2,20 @@ import './UserManagement.css'
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../../../redux/slices/appStateSlice";
-import { useNavigate } from 'react-router-dom';
 import ManageProfile from './profile-management/ManageProfile';
 
 function UserManagement({ onLogout, isLoggedIn }) {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+
+    const [myProfileOpen, setMyProfileOpen] = useState(false);
+
+    function handleMyProfileClick() {
+        setMyProfileOpen(true);
+    }
+
+    function handleMyProfileClose() {
+        setMyProfileOpen(false);
+    }
 
     function handleLogout(e) {
         e?.preventDefault();
@@ -34,29 +42,18 @@ function UserManagement({ onLogout, isLoggedIn }) {
         }
     }
 
-    function handleMyProfile(e){
-        e?.preventDefault();
-
-        navigate("/ManageProfile");
-
-    }
-
     return (
         <div>
             <button type="button" onClick={handleLogout}>
                 Logout
             </button>
 
-            <button type="button" onClick={handleMyProfile}>
+            <button type="button" onClick={handleMyProfileClick}>
                 My Profile
             </button>
-<<<<<<< Updated upstream
 
+            <ManageProfile open={myProfileOpen} onClose={handleMyProfileClose}></ManageProfile>
 
-            <ManageProfileButton></ManageProfileButton>
-=======
-            
->>>>>>> Stashed changes
         </div>
     )
 }

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './ManageProfile.css'
 import { saveCurrentUser } from '../../../../../redux/slices/currentUserSlice';
+import { Dialog, DialogTitle, DialogContent } from '@mui/material'
 
 
 function ManageProfile() {
@@ -54,7 +55,10 @@ function ManageProfile() {
     
 
     return(
-        <form>
+        <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
+            <DialogTitle>Profile</DialogTitle>
+            <DialogContent>
+            <form>
             <label>Email:
                 <input
                     type="email"
@@ -118,7 +122,11 @@ function ManageProfile() {
             >
                 {isEditing ? "Save" : "Edit"}
             </button>
-        </form>
+            </form>
+            </DialogContent>
+            </Dialog>
+
+        
     )
 }
 
