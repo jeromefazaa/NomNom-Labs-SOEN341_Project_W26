@@ -38,6 +38,7 @@ const appStateSlice = createSlice({
   initialState,
   reducers: {
     logout: (state) => {
+      
       state.isLoggedIn = false;
       state.hasErrors = false;
     },

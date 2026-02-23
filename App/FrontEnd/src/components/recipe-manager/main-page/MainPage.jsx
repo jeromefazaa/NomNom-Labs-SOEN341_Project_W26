@@ -6,7 +6,7 @@ import './MainPage.css';
 import { addRecipe, deleteRecipe, editRecipe } from '../../../redux/slices/recipesSlice.js';
 
 function MainPage() {
-  const recipes = useSelector(state => state.recipes.recipesArray);
+  const recipes = useSelector(state => state.recipes.recipesArray) ?? [];
   const dispatch = useDispatch();
   const [isFormOpen, setIsFormOpen] = useState(false);
 
@@ -54,25 +54,25 @@ function MainPage() {
   return (
     <div className="main-page">
       <div className="dashboard-panel">
-      <div className="dashboard-header">
-        <h2 className="dashboard-title">My Recipes</h2>
+        <div className="dashboard-header">
+          <h2 className="dashboard-title">My Recipes</h2>
 
-      <div className="dashboard-actions">
-        <button className="btn btn-primary addRecipe" onClick={addRecipeClick}>
-          Add Recipe
-        </button>
-      </div>
-    </div>
-      <div className="recipes-grid">
-        {recipes.map((recipe, index) => (
-          <RecipeCard
-            key={`${recipe.title}-${index}`}
-            recipe={recipe}
-            onEdit={() => handleEditRecipe(index)}
-            onDelete={() => handleDeleteRecipe(index)}
-          />
-        ))}
-      </div>
+          <div className="dashboard-actions">
+            <button className="btn btn-primary addRecipe" onClick={addRecipeClick}>
+              Add Recipe
+            </button>
+          </div>
+        </div>
+        <div className="recipes-grid">
+          {recipes && recipes.length > 0 && recipes.map((recipe, index) => (
+            <RecipeCard
+              key={`${recipe.title}-${index}`}
+              recipe={recipe}
+              onEdit={() => handleEditRecipe(index)}
+              onDelete={() => handleDeleteRecipe(index)}
+            />
+          ))}
+        </div>
       </div>
 
       <RecipeForm
