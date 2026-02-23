@@ -1,9 +1,11 @@
 import './UserManagement.css'
 import ManageProfileButton from './profile-management/ManageProfileButton.jsx'
 import { useDispatch } from "react-redux";
+
 import { logout } from '../../../../redux/slices/appStateSlice.js';
 import { setCurrentUser } from '../../../../redux/slices/currentUserSlice.js';
 import { setRecipes } from '../../../../redux/slices/recipesSlice.js';
+
 
 function UserManagement({ onLogout, isLoggedIn }) {
     const dispatch = useDispatch();
