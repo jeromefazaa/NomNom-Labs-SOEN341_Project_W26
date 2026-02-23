@@ -1,6 +1,8 @@
 import './UserManagement.css'
 import LogoutButton from './logout-button/LogoutButton.jsx'
 import ManageProfileButton from './profile-management/ManageProfileButton.jsx'
+import { logout } from "App/FrontEnd/"
+
 function UserManagement({ onLogout, isLoggedIn }) {
     return (
         <div>
@@ -12,7 +14,7 @@ function UserManagement({ onLogout, isLoggedIn }) {
                 My Profile
             </button>
             
-            {isLoggedIn && <LogoutButton onLogout={onLogout}></LogoutButton>}
+            
             <ManageProfileButton></ManageProfileButton>
         </div>
     )
