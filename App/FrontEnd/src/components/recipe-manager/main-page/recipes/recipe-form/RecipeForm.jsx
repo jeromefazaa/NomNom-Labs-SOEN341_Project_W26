@@ -138,8 +138,8 @@ function RecipeForm({ open, onClose, onSave, initialData, isEditMode }) {
             type="number"
             value={formData.prepTime}
             onChange={handleInputChange}
-            fullWidth
-            inputProps={{ min: 0 }}
+            onWheel={(e) => e.target.blur()}
+            inputProps={{ min: 0, step: 1 }}
           />
 
           <TextField
@@ -163,8 +163,8 @@ function RecipeForm({ open, onClose, onSave, initialData, isEditMode }) {
             type="number"
             value={formData.cost}
             onChange={handleInputChange}
-            fullWidth
-            inputProps={{ min: 0 }}
+            onWheel={(e) => e.target.blur()}
+            inputProps={{ min: 0, step: 1 }}
           />
 
           <div className="recipe-list-section">

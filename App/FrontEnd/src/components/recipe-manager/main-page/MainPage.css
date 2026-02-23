@@ -75,3 +75,60 @@
 .recipe-list-row .MuiTextField-root {
   flex: 1;
 }
+
+.filters-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.filter-control {
+  min-width: 170px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 0.45rem 0.6rem;
+  font-size: 0.92rem;
+  background: #fff;
+  color: #111827;
+}
+
+.filter-control:focus {
+  outline: 2px solid #93c5fd;
+  outline-offset: 1px;
+}
+
+.clear-filters {
+  border: 0;
+  border-radius: 8px;
+  padding: 0.45rem 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: #e5e7eb;
+  color: #111827;
+  cursor: pointer;
+}
+
+.clear-filters:hover {
+  background: #d1d5db;
+}
+
+.search-row {
+  margin-bottom: 0.75rem;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 200px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 0.5rem 0.65rem;
+  font-size: 0.95rem;
+}
+
+.search-input:focus {
+  outline: 2px solid #93c5fd;
+  outline-offset: 1px;
+}
+

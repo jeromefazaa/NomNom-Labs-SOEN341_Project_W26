@@ -1,12 +1,26 @@
 
+
 import ManageProfileButton from './profile-management/ManageProfileButton.jsx'
+import { useState } from "react";
 import { useDispatch } from "react-redux";
+import ManageProfile from './profile-management/ManageProfile.jsx';
 import { logout } from '../../../../redux/slices/appStateSlice.js';
 import { setCurrentUser } from '../../../../redux/slices/currentUserSlice.js';
 import { setRecipes } from '../../../../redux/slices/recipesSlice.js';
 
+
 function UserManagement({ onLogout, isLoggedIn }) {
     const dispatch = useDispatch();
+
+    const [myProfileOpen, setMyProfileOpen] = useState(false);
+
+    function handleMyProfileClick() {
+        setMyProfileOpen(true);
+    }
+
+    function handleMyProfileClose() {
+        setMyProfileOpen(false);
+    }
 
     function handleLogout(e) {
         e?.preventDefault();
@@ -40,13 +54,14 @@ function UserManagement({ onLogout, isLoggedIn }) {
         Logout
       </button>
 
-      <button type="button" className="btn btn-primary">
+      <button type="button" className="btn btn-primary" onClick={handleMyProfileClick}>
         My Profile
       </button>
 
-      <ManageProfileButton />
+      <ManageProfile open={myProfileOpen} onClose={handleMyProfileClose}></ManageProfile>
     </div>
   </div>
+            
     )
 }
 
