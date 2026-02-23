@@ -104,7 +104,7 @@ function RecipeForm({ open, onClose, onSave, initialData, isEditMode }) {
   };
 
   return (
-    <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
+    <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm" className="recipe-dialog">
       <DialogTitle>{isEditMode ? 'Edit Recipe' : 'Add Recipe'}</DialogTitle>
       <form onSubmit={handleSubmitRecipe}>
         <DialogContent className="recipe-form">
@@ -190,7 +190,7 @@ function RecipeForm({ open, onClose, onSave, initialData, isEditMode }) {
                 </Button>
               </div>
             ))}
-            <Button type="button" variant="text" onClick={() => handleAddListItem('ingredients')}>
+            <Button type="button" variant="text" onClick={() => handleAddListItem('ingredients')} className="mui-add">
               Add Ingredient
             </Button>
           </div>
@@ -218,7 +218,7 @@ function RecipeForm({ open, onClose, onSave, initialData, isEditMode }) {
                 </Button>
               </div>
             ))}
-            <Button type="button" variant="text" onClick={() => handleAddListItem('steps')}>
+            <Button type="button" variant="text" onClick={() => handleAddListItem('steps')} className="mui-add">
               Add Step
             </Button>
           </div>
@@ -226,8 +226,8 @@ function RecipeForm({ open, onClose, onSave, initialData, isEditMode }) {
         </DialogContent>
 
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button type="submit" variant="contained">
+          <Button onClick={handleClose} className="mui-cancel">Cancel</Button>
+          <Button type="submit" variant="contained" className="mui-primary">
             {isEditMode ? 'Save Changes' : 'Save Recipe'}
           </Button>
         </DialogActions>

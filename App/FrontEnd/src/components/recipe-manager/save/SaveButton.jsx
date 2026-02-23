@@ -1,5 +1,5 @@
 import { saveRecipes } from '../../../redux/slices/recipesSlice';
-import './SaveButton.css'
+//import './SaveButton.css'
 import { useDispatch, useSelector } from 'react-redux';
 
 function SaveButton() {
@@ -10,10 +10,17 @@ function SaveButton() {
     dispatch(saveRecipes());
   }
   return (
-    <button className="save-button" onClick={saveChanges} disabled={!isLoggedIn}>
+  <div className="save-wrapper">
+    <button
+      type="button"
+      className="btn btn-primary"
+      onClick={saveChanges}
+      disabled={!isLoggedIn}
+    >
       Save Changes
     </button>
-  )
+  </div>
+)
 }
 
 

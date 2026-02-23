@@ -24,8 +24,8 @@
   padding: 0.55rem 1rem;
   font-size: 0.95rem;
   font-weight: 700;
-  color: #000000;
-  background: linear-gradient(90deg, #007bff, rgb(64, 70, 231));
+  color: #ffffff;
+  background: #4f46e5;
   cursor: pointer;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
   transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s ease;

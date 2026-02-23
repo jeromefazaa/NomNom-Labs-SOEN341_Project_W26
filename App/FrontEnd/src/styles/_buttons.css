@@ -28,7 +28,23 @@
 }
 
 .btn-secondary {
-  background: white;
+  background: #ffffff;
+  color: #4f46e5;
+  border: 1.5px solid #4f46e5;
+  border-radius: 10px;
+  padding: 6px 14px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: #4f46e5;
+  color: #ffffff;
+  box-shadow: 0 6px 14px rgba(79, 70, 229, 0.35);
+}
+
+.btn-secondary:active {
+  transform: scale(0.97);
 }
 
 .auth-back {
@@ -46,4 +62,19 @@
 
 .auth-back:hover {
   background: #f3f4f6;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-danger {
+  background: #dc2626;
+  color: white;
+  border: none;
+}
+
+.btn-danger:hover {
+  background: #b91c1c;
 }

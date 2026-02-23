@@ -57,87 +57,153 @@ function ManageProfile({ open, onClose }) {
 
 
     return (
-        <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
-            <DialogTitle>Profile</DialogTitle>
-            <DialogContent>
-                <form>
-                    <label>Email:
-                        <input
-                            type="email"
-                            name="Email"
-                            disabled={true}
-                            value={email}
-                        />
-                    </label>
+        <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth className="profile-dialog">
+        <DialogTitle>Profile</DialogTitle>
+        <DialogContent>
+        <form className="auth-form profile-form">
+            <div className="form-group">
+            <label className="form-label">
+                Email
+            <input
+                className="input"
+                type="email"
+                name="Email"
+                disabled={true}
+                value={email}
+                />
+            </label>
+            </div>
 
-                    <label>Password:
-                        <input
-                            type="password"
-                            name="Password"
-                            onChange={handlePassword}
-                            disabled={!isEditing}
-                            value={password}
-                        />
-                    </label>
+            <div className="form-group">
+            <label className="form-label">
+                Password
+                <input
+                className="input"
+                type="password"
+                name="Password"
+                onChange={handlePassword}
+                disabled={!isEditing}
+                value={password}
+                />
+            </label>
+            </div>
 
-                    <label>First Name:
-                        <input
-                            type="text"
-                            name="firstName"
-                            onChange={handleFirstName}
-                            disabled={!isEditing}
-                            value={firstName}
-                        />
-                    </label>
+            <div className="form-group">
+            <label className="form-label">
+                First Name
+                <input
+                className="input"
+                type="text"
+                name="firstName"
+                onChange={handleFirstName}
+                disabled={!isEditing}
+                value={firstName}
+                />
+            </label>
+            </div>
 
-                    <label>Last Name:
-                        <input
-                            type="text"
-                            name="lastName"
-                            onChange={handleLastName}
-                            disabled={!isEditing}
-                            value={lastName}
-                        />
-                    </label>
+            <div className="form-group">
+            <label className="form-label">
+                Last Name
+                <input
+                className="input"
+                type="text"
+                name="lastName"
+                onChange={handleLastName}
+                disabled={!isEditing}
+                value={lastName}
+                />
+            </label>
+            </div>
 
-                    <label>Diet preferences:
-                        <input
-                            type="text"
-                            name="dietPreferences"
-                            onChange={handleDietPreferences}
-                            disabled={!isEditing}
-                            value={dietPreferences}
-                        />
-                    </label>
+            {/* Diet Preferences (Ingredients-style row) */}
+            <div className="form-group">
+            <div className="profile-section-title">Diet Preferences</div>
 
-                    <label>Allergies:
-                        <input
-                            type="text"
-                            name="allergies"
-                            onChange={handleAllergies}
-                            disabled={!isEditing}
-                            value={allergies}
-                        />
-                    </label>
+            <div className="inline-row">
+                <input
+                className="input"
+                type="text"
+                name="dietPreferences"
+                onChange={handleDietPreferences}
+                disabled={!isEditing}
+                value={dietPreferences}
+                placeholder="e.g., Vegetarian, Keto..."
+                />
 
+                <button
+                type="button"
+                className="btn btn-secondary inline-remove"
+                disabled={!isEditing || !allergies}
+                onClick={() => setDietPreferences("")}
+                >
+                Remove
+                </button>
+            </div>
 
-                    {/* When clicking button, Edit -> Save -> Edit 
-                When clicking Save, missing saving and fetching information
-            */}
-                    <button
-                        type="button"
-                        onClick={isEditing ? handleSubmit : handleEditing}
-                    >
-                        {isEditing ? "Save" : "Edit"}
-                    </button>
-                    {isEditing && <button
-                        type="button"
-                        onClick={handleCancel}
-                    >
-                        Cancel
-                    </button>}
-                </form>
-            </DialogContent>
+            <button
+                type="button"
+                className="inline-add"
+                disabled={!isEditing}
+                onClick={() => {}}
+            >
+                ADD DIET PREFERENCE
+            </button>
+            </div>
+
+            {/* Allergies (Ingredients-style row) */}
+            <div className="form-group">
+            <div className="profile-section-title">Allergies</div>
+
+            <div className="inline-row">
+                <input
+                className="input"
+                type="text"
+                name="allergies"
+                onChange={handleAllergies}
+                disabled={!isEditing}
+                value={allergies}
+                placeholder="e.g., Peanuts, Gluten..."
+                />
+
+                <button
+                type="button"
+                className="btn btn-secondary inline-remove"
+                disabled={!isEditing || !allergies}
+                onClick={() => setAllergies("")}
+                >
+                Remove
+                </button>
+            </div>
+
+            <button
+                type="button"
+                className="inline-add"
+                disabled={!isEditing}
+                onClick={() => {}}
+            >
+                ADD ALLERGY
+            </button>
+            </div>
+
+            {/* Actions */}
+            <div className="form-actions profile-actions">
+            <button
+                type="button"
+                className={`btn ${isEditing ? "btn-primary" : "btn-secondary"}`}
+                onClick={isEditing ? handleSubmit : handleEditing}
+            >
+                {isEditing ? "Save" : "Edit"}
+            </button>
+
+            {isEditing && (
+                <button type="button" className="btn btn-secondary" onClick={handleCancel}>
+                Cancel
+                </button>
+            )}
+            </div>
+        </form>
+        </DialogContent>
         </Dialog>
 
 

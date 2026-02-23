@@ -45,9 +45,9 @@ function RecipeCard({ recipe, onEdit, onDelete }) {
         <p><strong>Cost:</strong> {recipe.cost}$</p>
 
         <div className="recipeInteractions">
-          <button className="btnView" onClick={handleCardClick}>Details</button>
-          <button className="btnEdit" onClick={onEdit}>Edit</button>
-          <button className="btnDelete" onClick={handleDeleteClick}>Delete</button>
+          <button className="btn btn-secondary" onClick={handleCardClick}>Details</button>
+          <button className="btn btn-secondary" onClick={onEdit}>Edit</button>
+          <button className="btn btn-danger" onClick={handleDeleteClick}>Delete</button>
         </div>
       </div>
 
