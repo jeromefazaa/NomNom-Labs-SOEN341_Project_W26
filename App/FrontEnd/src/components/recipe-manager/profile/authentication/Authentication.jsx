@@ -1,56 +1,48 @@
 import { useState } from "react";
-import "./Authentication.css";
 import LoginForm from "./login-form/LoginForm";
 import SignUpForm from "./signup-form/SignUpForm";
 
 function Authentication({ onAuthSuccess }) {
-  const [dialog, setDialog] = useState(null);
+  const [view, setView] = useState("menu"); // "menu" | "login" | "signup"
 
-  function handleLoginClick() {
-    setDialog("login");
-  }
-
-  function handleSignupClick() {
-    setDialog("signup");
-  }
-
-  function closeDialog() {
-    setDialog(null);
+  function showMenu() {
+    setView("menu");
   }
 
   return (
-    <div>
-      <button type="button" onClick={handleLoginClick}>
-        Login
-      </button>
+    <div className="auth">
+      {view === "menu" && (
+        <div className="auth-actions">
+          <button type="button" className="btn btn-secondary" onClick={() => setView("login")}>
+            Login
+          </button>
 
-      <button type="button" onClick={handleSignupClick}>
+      <button type="button" className="btn btn-primary" onClick={() => setView("signup")}>
         Sign Up
       </button>
+    </div>
+      )}
 
-      {dialog && (
-        <div className="auth-modal-overlay" onClick={closeDialog}>
-          <div className="auth-modal" onClick={(e) => e.stopPropagation()}>
-            <button className="auth-modal-close" onClick={closeDialog}>
-              ×
-            </button>
+      {view !== "menu" && (
+        <div className="auth-form-area">
+          <button type="button" className="auth-back" onClick={showMenu}>
+            ← Back
+          </button>
 
-            {dialog === "login" ? (
+            {view === "login" ? (
               <LoginForm
-                onSuccess={() => {
-                  closeDialog();       // close small modal
+                onSuccess={() => {       // close small modal
                   if (onAuthSuccess) onAuthSuccess(); // close Profile dialog
                 }}
               />
             ) : (
               <SignUpForm
                 onSuccess={() => {
-                  setDialog("login");  // show login after signup
+                  setView("login");  // show login after signup
                 }}
               />
             )}
           </div>
-        </div>
       )}
     </div>
   );

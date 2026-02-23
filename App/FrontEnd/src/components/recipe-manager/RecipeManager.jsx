@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import './RecipeManager.css'
 import Profile from './profile/Profile.jsx'
 import MainPage from './main-page/MainPage.jsx'
 import SaveButton from './save/SaveButton.jsx'
@@ -19,8 +18,8 @@ function RecipeManager() {
 
   return (
     <div>
-      <IconButton onClick={handleProfileClick} color="primary">
-        <AccountCircleIcon />
+      <IconButton onClick={handleProfileClick} color="primary" className="profile-icon">
+      <AccountCircleIcon />
       </IconButton>
       <MainPage></MainPage>
       <SaveButton></SaveButton>

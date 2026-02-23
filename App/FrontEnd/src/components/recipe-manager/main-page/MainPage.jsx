@@ -53,11 +53,16 @@ function MainPage() {
 
   return (
     <div className="main-page">
-      <div className="recipes-header">
-        <h2 className="recipes-heading">My Recipes</h2>
-        <button className="addRecipe" onClick={addRecipeClick}>Add Recipe</button>
-      </div>
+      <div className="dashboard-panel">
+      <div className="dashboard-header">
+        <h2 className="dashboard-title">My Recipes</h2>
 
+      <div className="dashboard-actions">
+        <button className="btn btn-primary addRecipe" onClick={addRecipeClick}>
+          Add Recipe
+        </button>
+      </div>
+    </div>
       <div className="recipes-grid">
         {recipes.map((recipe, index) => (
           <RecipeCard
@@ -67,6 +72,7 @@ function MainPage() {
             onDelete={() => handleDeleteRecipe(index)}
           />
         ))}
+      </div>
       </div>
 
       <RecipeForm

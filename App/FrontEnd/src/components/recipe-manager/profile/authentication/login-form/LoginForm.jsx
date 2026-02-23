@@ -48,23 +48,29 @@ function LoginForm({ onSuccess }) {
   }
 
   return (
-    <div>
-      <h1> Login Form </h1>
+    <div className="auth-form">
+    <h1 className="auth-title">Login Form</h1>
 
-      <label>
+    <div className="form-group">
+      <label className="form-label">
         Email:
-        <input type="email" value={email} onChange={handleEmail} />
+        <input className="input" type="email" value={email} onChange={handleEmail}/>
       </label>
+    </div>
 
-      <label>
+    <div className="form-group">
+      <label className="form-label">
         Password:
-        <input type="password" value={password} onChange={handlePassword} />
+        <input className="input" type="password" value={password} onChange={handlePassword}/>
       </label>
+    </div>
 
-      <button type="button" onClick={handleSubmit}>
+    <div className="form-actions">
+      <button type="button" className="btn btn-primary" onClick={handleSubmit}>
         Login
       </button>
     </div>
+  </div>
   );
 }
 export default LoginForm;
