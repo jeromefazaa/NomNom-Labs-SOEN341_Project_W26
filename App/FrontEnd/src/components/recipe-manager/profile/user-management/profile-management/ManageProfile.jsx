@@ -5,7 +5,7 @@ import { saveCurrentUser } from '../../../../../redux/slices/currentUserSlice';
 import { Dialog, DialogTitle, DialogContent } from '@mui/material'
 
 
-function ManageProfile() {
+function ManageProfile({ open, onClose }) {
     const dispatch = useDispatch();
     const email = useSelector(state => state.currentUser.email);
     const [password, setPassword] = useState(useSelector(state => state.currentUser.password));
@@ -51,82 +51,82 @@ function ManageProfile() {
         dispatch(saveCurrentUser(data))
 
     }
-    
-    
 
-    return(
+
+
+    return (
         <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
             <DialogTitle>Profile</DialogTitle>
             <DialogContent>
-            <form>
-            <label>Email:
-                <input
-                    type="email"
-                    name="Email"
-                    disabled={true}
-                />
-            </label>
+                <form>
+                    <label>Email:
+                        <input
+                            type="email"
+                            name="Email"
+                            disabled={true}
+                        />
+                    </label>
 
-            <label>Password:
-                <input
-                    type="password"
-                    name="Password"
-                    onChange={handlePassword}
-                    disabled={!isEditing}
-                />
-            </label>
+                    <label>Password:
+                        <input
+                            type="password"
+                            name="Password"
+                            onChange={handlePassword}
+                            disabled={!isEditing}
+                        />
+                    </label>
 
-            <label>First Name:
-                <input
-                    type="text"
-                    name="firstName"
-                    onChange={handleFirstName}
-                    disabled={!isEditing}
-                />
-            </label>
+                    <label>First Name:
+                        <input
+                            type="text"
+                            name="firstName"
+                            onChange={handleFirstName}
+                            disabled={!isEditing}
+                        />
+                    </label>
 
-            <label>Last Name:
-                <input
-                    type="text"
-                    name="lastName"
-                    onChange={handleLastName}
-                    disabled={!isEditing}
-                />
-            </label>
+                    <label>Last Name:
+                        <input
+                            type="text"
+                            name="lastName"
+                            onChange={handleLastName}
+                            disabled={!isEditing}
+                        />
+                    </label>
 
-            <label>Diet preferences:
-                <input
-                    type="text"
-                    name="dietPreferences"
-                    onChange={handleDietPreferences}
-                    disabled={!isEditing}
-                />
-            </label>
+                    <label>Diet preferences:
+                        <input
+                            type="text"
+                            name="dietPreferences"
+                            onChange={handleDietPreferences}
+                            disabled={!isEditing}
+                        />
+                    </label>
 
-            <label>Allergies:
-                <input
-                    type="text"
-                    name="allergies"
-                    onChange={handleAllergies}
-                    disabled={!isEditing}
-                />
-            </label>
+                    <label>Allergies:
+                        <input
+                            type="text"
+                            name="allergies"
+                            onChange={handleAllergies}
+                            disabled={!isEditing}
+                        />
+                    </label>
 
 
-            {/* When clicking button, Edit -> Save -> Edit 
+                    {/* When clicking button, Edit -> Save -> Edit 
                 When clicking Save, missing saving and fetching information
             */}
-            <button
-                type="button"
-                onClick={isEditing ? handleSubmit : handleEditing}
-            >
-                {isEditing ? "Save" : "Edit"}
-            </button>
-            </form>
+                    <button
+                        type="button"
+                        onClick={isEditing ? handleSubmit : handleEditing}
+                    >
+                        {isEditing ? "Save" : "Edit"}
+                    </button>
+                </form>
             </DialogContent>
-            </Dialog>
+        </Dialog>
 
-        
+
     )
 }
 
