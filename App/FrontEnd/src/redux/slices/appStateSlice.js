@@ -16,9 +16,10 @@ export const loginUser = createAsyncThunk(
       const response = await fetch(`http://localhost:3000/profile/${userId}`);
       const data = await response.json();
       const user = data.user;
-      const recipes = data.recipes
+      const recipes = data.userRecipes
       thunkAPI.dispatch(setCurrentUser(user));
-      if (isArray(recipes)) {
+      console.log(`received recipes:${recipes}`)
+      if (Array.isArray(recipes)) {
         thunkAPI.dispatch(setRecipes(recipes))
       }
       else {

@@ -55,7 +55,7 @@ router.get('/:email', (req, res) => {
         if (!userData[id]) {
             return res.status(404).json({ error: 'User not found' });
         }
-
+        console.log(``)
         res.status(200).json({user: userData[id], userRecipes: userRecipes? userRecipes: []});
 
     } catch (error) {

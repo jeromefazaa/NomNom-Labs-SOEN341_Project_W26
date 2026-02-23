@@ -6,8 +6,10 @@ const router = express.Router();
 
 // create new recipe
 router.post("/:userId", (req, res) => {
-    const id = `${userId.toLowerCase()}_${title.toLowerCase()}`;
-    const recipes = db.read('recipes');
+    console.log(`receied request`)
+    let recipes = db.read('recipes');
+    const userId = req.params.userId; 
+    const recipeData = req.body.recipeData
     const newUserRecipes = req.body.recipes;
     const userRecipes = Object.keys(recipes).filter(id => id.startsWith(userId));
     userRecipes.forEach(recipe => delete recipes[recipe])

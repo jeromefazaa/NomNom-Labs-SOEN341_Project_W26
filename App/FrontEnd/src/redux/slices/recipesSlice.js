@@ -21,21 +21,27 @@ const initialState = {
 // Async thunk - add your logic here
 export const saveRecipes = createAsyncThunk(
     'recipes/saveRecipes',
-    async (userId, thunkAPI) => {
+    async (_, thunkAPI) => {
         try {
-            data = {};
-            state = thunkAPI.getState();
-            state.recipes.recipesArray.array.forEach(element => {
-                element.userId = userId;
-                data[`${userId}_${element.title}`] = element;
+            console.log(`received click`)
+            const data = {};
+            const state = thunkAPI.getState();
+            const userId = state.currentUser.email;
+            state.recipes.recipesArray.forEach(element => {
+                data[`${userId}_${element.title}`] = {
+                    ...element,
+                    userId: userId
+                };
             });
+            console.log(`making request to save ${data} `)
             const response = await fetch(`http://localhost:3000/recipes/${userId}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(data),
+                body: JSON.stringify({ recipeData: data }),
             });
+            console.log(`request succesfull`)
             if (response.status === 200) {
                 return
             }
