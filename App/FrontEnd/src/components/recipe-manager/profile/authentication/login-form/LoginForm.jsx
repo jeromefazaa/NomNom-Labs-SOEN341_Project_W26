@@ -1,12 +1,23 @@
 import "./LoginForm.css";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../../../../redux/slices/appStateSlice";
 
 function LoginForm({ onSuccess }) {
   const dispatch = useDispatch();
+  const isLoading = useSelector((state) => state.appState.isLoading);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+
+  useEffect(() => {
+    if (hasSubmitted && !isLoading) {
+      if (onSuccess) {
+        onSuccess(); // closes popup
+      }
+      setHasSubmitted(false);
+    }
+  }, [isLoading, hasSubmitted, onSuccess]);
 
   function handleEmail(e) {
     setEmail(e.target.value);
@@ -18,6 +29,7 @@ function LoginForm({ onSuccess }) {
 
   async function handleSubmit(e) {
     e?.preventDefault();
+    setHasSubmitted(true);
 
     const data = {
       email: email,
@@ -35,42 +47,54 @@ function LoginForm({ onSuccess }) {
     const userId = returnedData.email;
     if (response.status === 200) {
       dispatch(loginUser(userId));
-      if (onSuccess) {
-        onSuccess(); // closes popup
-      }
-
       return;
     } else if (response.status === 400) {
       alert("Invalid email or password.");
+      setHasSubmitted(false);
     } else {
       alert("Server error. Please try again.");
+      setHasSubmitted(false);
     }
   }
 
   return (
     <div className="auth-form">
-    <h1 className="auth-title">Login Form</h1>
+      <h1 className="auth-title">Login Form</h1>
 
-    <div className="form-group">
-      <label className="form-label">
-        Email:
-        <input className="input" type="email" value={email} onChange={handleEmail}/>
-      </label>
-    </div>
+      <div className="form-group">
+        <label className="form-label">
+          Email:
+          <input
+            className="input"
+            type="email"
+            value={email}
+            onChange={handleEmail}
+          />
+        </label>
+      </div>
 
-    <div className="form-group">
-      <label className="form-label">
-        Password:
-        <input className="input" type="password" value={password} onChange={handlePassword}/>
-      </label>
-    </div>
+      <div className="form-group">
+        <label className="form-label">
+          Password:
+          <input
+            className="input"
+            type="password"
+            value={password}
+            onChange={handlePassword}
+          />
+        </label>
+      </div>
 
-    <div className="form-actions">
-      <button type="button" className="btn btn-primary" onClick={handleSubmit}>
-        Login
-      </button>
+      <div className="form-actions">
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={handleSubmit}
+        >
+          Login
+        </button>
+      </div>
     </div>
-  </div>
   );
 }
 export default LoginForm;
