@@ -16,7 +16,7 @@ jobs:
       - name: Install Dependencies
         run: |
           npm install
-          cd backend && npm install
+          cd App/backend && npm install
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
