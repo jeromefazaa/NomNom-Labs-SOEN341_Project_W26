@@ -2,8 +2,8 @@ import { useSelector } from "react-redux";
 import "../styles/LoadingBar.css";
 
 function LoadingBar() {
-  const appIsLoading = useSelector((state) => state.appState?.isLoading );
-  const recipesIsLoading = useSelector( (state) => state.recipes?.isLoading);
+  const appIsLoading = useSelector((state) => state.appState?.isLoading);
+  const recipesIsLoading = useSelector((state) => state.recipes?.isLoading);
 
   const userIsLoading = useSelector((state) => state.currentUser?.isLoading);
 
@@ -13,7 +13,7 @@ function LoadingBar() {
       {showLoadingBar && (
         <div className="loading-bar-container">
           <div className="loading-bar"></div>
-          <h1  style={{color: 'black'}} >Hi I am a loading bar</h1>
+          <h1 style={{ color: "black" }}>Hi I am a loading bar</h1>
         </div>
       )}
     </>
