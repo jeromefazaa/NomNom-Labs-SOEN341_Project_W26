@@ -23,9 +23,9 @@ function UserManagement({ onLogout, isLoggedIn }) {
     }
 
     function handleLogout(e) {
+        console.log(`logout button clicked`)
         e?.preventDefault();
-        dispatch(setCurrentUser({}));
-        dispatch(setRecipes({
+        dispatch(setCurrentUser({
             email: '',
             password: '',
             firstName: '',
@@ -34,34 +34,31 @@ function UserManagement({ onLogout, isLoggedIn }) {
             dietaryPreferences: [],
             isLoading: false,
             hasErrors: false,
-        }))
-        dispatch(logout({
-            recipesArray: [],
-            hasErrors: false,
-            isLoading: false,
-            unsaved: 0
         }));
+        dispatch(setRecipes([]))
+        dispatch(logout());
 
         if (onLogout) {
+            console.log(`closing popup`)
             onLogout(); //closes popup
         }
     }
 
     return (
         <div className="auth">
-    <div className="user-actions">
-      <button type="button" className="btn btn-secondary" onClick={handleLogout}>
-        Logout
-      </button>
+            <div className="user-actions">
+                <button type="button" className="btn btn-secondary" onClick={handleLogout}>
+                    Logout
+                </button>
 
-      <button type="button" className="btn btn-primary" onClick={handleMyProfileClick}>
-        My Profile
-      </button>
+                <button type="button" className="btn btn-primary" onClick={handleMyProfileClick}>
+                    My Profile
+                </button>
 
-      <ManageProfile open={myProfileOpen} onClose={handleMyProfileClose}></ManageProfile>
-    </div>
-  </div>
-            
+                <ManageProfile open={myProfileOpen} onClose={handleMyProfileClose}></ManageProfile>
+            </div>
+        </div>
+
     )
 }
 

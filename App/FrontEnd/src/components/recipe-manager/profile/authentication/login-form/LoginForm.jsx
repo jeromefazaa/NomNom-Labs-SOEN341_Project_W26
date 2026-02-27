@@ -43,16 +43,21 @@ function LoginForm({ onSuccess }) {
       },
       body: JSON.stringify(data),
     });
+    console.log(`response.status ${response.status}`)
     const returnedData = await response.json();
     const userId = returnedData.email;
+
     if (response.status === 200) {
       dispatch(loginUser(userId));
+
       return;
     } else if (response.status === 400) {
-      alert("Invalid email or password.");
+      console.alert("Invalid email or password.");
+      console.log("Invalid email or password.");
       setHasSubmitted(false);
     } else {
-      alert("Server error. Please try again.");
+      console.alert("Server error. Please try again.");
+      console.log("Server error. Please try again.");
       setHasSubmitted(false);
     }
   }
