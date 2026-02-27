@@ -8,7 +8,6 @@ function LoadingBar() {
   const userIsLoading = useSelector((state) => state.currentUser?.isLoading);
 
   const showLoadingBar = appIsLoading || recipesIsLoading || userIsLoading;
-  debugger;
   return (
     <>
       {showLoadingBar && (
