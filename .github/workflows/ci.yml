@@ -23,6 +23,6 @@ jobs:
 
       - name: Execute Pipeline
         run: |
-          npm run start:Backend &
+          cd App/Backend && npm start &
           npx wait-on http://localhost:3000/register.html --timeout 60000
           npm run test:acceptance
