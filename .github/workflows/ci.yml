@@ -16,13 +16,13 @@ jobs:
       - name: Install Dependencies
         run: |
           npm install
-          cd App/backend && npm install
+          cd App/Backend && npm install
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
       - name: Execute Pipeline
         run: |
-          npm run start:backend &
+          npm run start:Backend &
           npx wait-on http://localhost:3000/register.html --timeout 60000
           npm run test:acceptance
