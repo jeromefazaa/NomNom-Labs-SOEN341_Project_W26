@@ -21,8 +21,9 @@ const createFormData = (recipe) => ({
   steps: Array.isArray(recipe?.steps) && recipe.steps.length > 0 ? recipe.steps : ['']
 });
 
-function RecipeForm({ open, onClose, onSave, initialData, isEditMode }) {
+function RecipeForm({ open, onClose, onSave, initialData, isEditMode, existingRecipeTitles = [] }) {
   const [formData, setFormData] = useState(getDefaultFormData());
+  const [titleError, setTitleError] = useState('');
 
   useEffect(() => {
     if (!open) {
@@ -43,6 +44,10 @@ function RecipeForm({ open, onClose, onSave, initialData, isEditMode }) {
       ...prevFormData,
       [name]: value
     }));
+
+    if (name === 'title' && titleError) {
+      setTitleError('');
+    }
   };
 
   const handleListChange = (fieldName, index, value) => {
@@ -84,6 +89,18 @@ function RecipeForm({ open, onClose, onSave, initialData, isEditMode }) {
       return;
     }
 
+    if (!isEditMode) {
+      const normalizedTitle = resolvedTitle.toLowerCase();
+      const recipeNameInUse = existingRecipeTitles.some(
+        (title) => typeof title === 'string' && title.trim().toLowerCase() === normalizedTitle
+      );
+
+      if (recipeNameInUse) {
+        setTitleError('Recipe name already in use. Please choose another one.');
+        return;
+      }
+    }
+
     const newRecipe = {
       ...formData,
       title: resolvedTitle,
@@ -100,6 +117,7 @@ function RecipeForm({ open, onClose, onSave, initialData, isEditMode }) {
 
   const handleClose = () => {
     setFormData(getDefaultFormData());
+    setTitleError('');
     onClose();
   };
 
@@ -115,7 +133,8 @@ function RecipeForm({ open, onClose, onSave, initialData, isEditMode }) {
             onChange={handleInputChange}
             required
             disabled={isEditMode}
-            helperText={isEditMode ? 'Title cannot be modified.' : ''}
+            error={Boolean(titleError)}
+            helperText={titleError || (isEditMode ? 'Title cannot be modified.' : '')}
             fullWidth
           />
 

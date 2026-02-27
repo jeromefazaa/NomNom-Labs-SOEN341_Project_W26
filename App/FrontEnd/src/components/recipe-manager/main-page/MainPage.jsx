@@ -165,6 +165,7 @@ function MainPage() {
         onSave={handleSaveRecipe}
         initialData={recipeBeingEdited}
         isEditMode={formMode === 'edit'}
+        existingRecipeTitles={recipes.map((recipe) => recipe.title)}
       />
     </div>
   );

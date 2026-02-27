@@ -12,5 +12,35 @@
       "Test_Step"
     ],
     "userId": "jeromefazaa123@gmail.com"
+  },
+  "matthew@test.com_Eggs": {
+    "title": "Eggs",
+    "difficulty": "Beginner",
+    "prepTime": 5,
+    "diet": "Vegetarian",
+    "cost": 2,
+    "ingredients": [
+      "eggs",
+      "butter"
+    ],
+    "steps": [
+      "crack",
+      "add to pan"
+    ],
+    "userId": "matthew@test.com"
+  },
+  "matthew@test.com_Egg": {
+    "title": "Egg",
+    "difficulty": "Beginner",
+    "prepTime": 2,
+    "diet": "Vegetarian",
+    "cost": 2,
+    "ingredients": [
+      "egg"
+    ],
+    "steps": [
+      "crack"
+    ],
+    "userId": "matthew@test.com"
   }
 }
