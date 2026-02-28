@@ -1,0 +1,32 @@
+{
+  "jeromefazaa123@gmail.com": {
+    "firstName": "jerome",
+    "lastName": "fazaa",
+    "email": "jeromefazaa123@gmail.com",
+    "password": "Jerome123"
+  },
+  "marksam@gmail.com": {
+    "firstName": "Mark",
+    "lastName": "Samuel",
+    "email": "marksam@gmail.com",
+    "password": "Mark123456"
+  },
+  "kevin@test.com": {
+    "firstName": "kevin",
+    "lastName": "test",
+    "email": "kevin@test.com",
+    "password": "Kevin12345"
+  },
+  "johnny@test.com": {
+    "firstName": "johnny",
+    "lastName": "chiem",
+    "email": "johnny@test.com",
+    "password": "Johnny123"
+  },
+  "matthew@test.com": {
+    "firstName": "Matthew",
+    "lastName": "Cadogan",
+    "email": "matthew@test.com",
+    "password": "Testing123"
+  }
+}

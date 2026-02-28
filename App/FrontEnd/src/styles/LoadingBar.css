@@ -1,0 +1,32 @@
+/* Loading Bar Animation */
+@keyframes slideLeft {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.loading-bar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #e0e0e0;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.loading-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 30%;
+  background: linear-gradient(90deg, #4caf50, #45a049);
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.8);
+  animation: slideLeft 1.5s infinite ease-in-out;
+}

@@ -1,15 +1,15 @@
-import { useState } from 'react'
-import './App.css'
-import SignUpForm from './components/signup-form/SignUpForm.jsx';
+import { useState } from "react";
+import "./App.css";
+import RecipeManager from "./components/recipe-manager/RecipeManager.jsx";
+import LoadingBar from "./components/LoadingBar.jsx";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <div>
-    <SignUpForm></SignUpForm>   
+      <LoadingBar />
+      <RecipeManager></RecipeManager>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
