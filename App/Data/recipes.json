@@ -42,5 +42,18 @@
       "Test_Step"
     ],
     "userId": "jeromefazaa123@gmail.com"
+  },
+  "marksam@gmail.com_cake": {
+    "title": "cake",
+    "difficulty": "Intermediate",
+    "prepTime": 60,
+    "diet": "Vegan",
+    "cost": 50,
+    "ingredients": [
+      "egg",
+      "milk"
+    ],
+    "steps": [],
+    "userId": "marksam@gmail.com"
   }
 }
