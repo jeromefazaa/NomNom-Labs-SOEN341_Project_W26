@@ -1,16 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
-import Entry from "./components/entry/Entry.jsx";
-import LoginForm from "./components/login-form/LoginForm.jsx";
-import SignUpForm from "./components/signup-form/SignUpForm.jsx";
-import Success from "./components/Success.jsx";
-import ErrorPage from "./components/Error.jsx";
+import App from "./App";
+import LoginForm from "./components/recipe-manager/profile/authentication/login-form/LoginForm";
+import SignUpForm from "./components/recipe-manager/profile/authentication/signup-form/SignUpForm";
 
 const router = createBrowserRouter([
-  { path: "/", element: <Entry /> },
-  { path: "/login", element: <LoginForm /> },
-  { path: "/signup", element: <SignUpForm /> },
-  { path: "/success", element: <Success /> },
-  { path: "/error", element: <ErrorPage /> },
+  { path: "/", element: <App /> },
+  { path: '/login', element: <LoginForm /> },
+  { path: '/signup', element: <SignUpForm /> }
 ]);
 
 export default router;

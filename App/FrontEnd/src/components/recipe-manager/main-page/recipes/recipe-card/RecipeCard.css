@@ -1,0 +1,120 @@
+.recipe-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 250px;
+  transition: all 0.3s ease;
+}
+
+.recipe-card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(-4px);
+}
+
+.recipe-card h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.recipeTitle {
+  margin: 0 0 0.6rem 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  color: #1f2937;
+  line-height: 1.25;
+}
+
+.recipeTitle::after {
+  content: "";
+  display: block;
+  width: 200px;
+  height: 3px;
+  margin-top: 0.35rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #4f46e5, #c7d2fe);
+}
+
+
+.recipe-card p {
+  margin: 0.5rem 0;
+  color: #666;
+}
+
+.recipeInteractions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+
+}
+
+.btnEdit {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 999px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.btnEdit:hover {
+  background-color: #0056b3;
+}
+
+.btnView {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 99px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.btnView:hover {
+  background-color: #0056b3;
+}
+
+
+.btnDelete {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 999px;
+  background-color: #ff0000;
+  color: white;
+  cursor: pointer;
+}
+
+.btnDelete:hover {
+  background-color: #cc0000;
+}
+
+.recipe-detail {
+  width: min(100%, 360px);
+}
+
+.recipeSectionHeading {
+  margin: 0.3rem 0 0.5rem 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.recipeSectionHeading::after {
+  content: "";
+  display: block;
+  width: 170px;
+  height: 3px;
+  margin-top: 0.3rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #007bff, #ffffff);
+}
+
+.recipeSectionContent {
+  margin: 0 0 0.9rem 1.2rem;
+  color: #374151;
+  padding-left: 0.4rem;
+}
+  

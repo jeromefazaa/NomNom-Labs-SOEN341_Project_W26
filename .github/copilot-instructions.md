@@ -6,7 +6,7 @@ This file captures the essential, discoverable details to make an AI coding agen
 
 1. Project overview
 
-- Frontend-only workspace: the main app lives in `FrontEnd/my-react-app` (Vite + React).
+- FrontEnd-only workspace: the main app lives in `FrontEnd/my-react-app` (Vite + React).
 - App entry: `src/main.jsx`, primary UI in `src/App.jsx` and assets in `src/assets`.
 
 2. Dev / build / lint commands (run from `FrontEnd/my-react-app`)
