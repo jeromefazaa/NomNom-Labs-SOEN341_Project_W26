@@ -95,7 +95,7 @@ function LoginForm({ onSuccess }) {
       <div className="form-actions">
         <button
           type="button"
-          className="btn btn-primary"
+          className="btn btn-primary login-action-button"
           onClick={handleSubmit}
         >
           Login

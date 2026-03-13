@@ -17,7 +17,8 @@ jobs:
         run: |
           npm install
           cd App/Backend && npm install
-          cd App/Frontend && npm install
+          pwd
+          cd ../FrontEnd && npm install
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps

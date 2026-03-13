@@ -13,11 +13,11 @@ function Authentication({ onAuthSuccess }) {
     <div className="auth">
       {view === "menu" && (
         <div className="auth-actions">
-          <button type="button" className="btn btn-secondary" onClick={() => setView("login")}>
+          <button type="button" className="btn btn-secondary login-button" onClick={() => setView("login")}>
             Login
           </button>
 
-      <button type="button" className="btn btn-primary" onClick={() => setView("signup")}>
+      <button type="button" className="btn btn-primary signup-button" onClick={() => setView("signup")}>
         Sign Up
       </button>
     </div>
