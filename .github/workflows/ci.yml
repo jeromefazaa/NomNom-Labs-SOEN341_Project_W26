@@ -15,7 +15,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          // npm install
+          npm install
           cd App/Backend && npm install
           cd App/FrontEnd && npm install
 
