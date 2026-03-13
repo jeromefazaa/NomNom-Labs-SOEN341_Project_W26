@@ -4,7 +4,7 @@ module.exports = defineConfig({
   testDir: "./.github/tests",
 
   use: {
-    baseURL: "http://localhost:3000",
+    baseURL: "http://localhost:5173",
     headless: true,
     screenshot: "only-on-failure",
     video: "retain-on-failure"
@@ -12,13 +12,13 @@ module.exports = defineConfig({
 
   webServer: [
     {
-      command: "cd App/Backend && npm start",
-      url: "http://localhost:5000",
+      command: "cd App/Backend && npm run dev",
+      url: "http://localhost:3000",
       timeout: 120000
     },
     {
-      command: "cd App && npm start",
-      url: "http://localhost:3000",
+      command: "cd App/Frontend && npm run dev",
+      url: "http://localhost:5173",
       timeout: 120000
     }
   ]
