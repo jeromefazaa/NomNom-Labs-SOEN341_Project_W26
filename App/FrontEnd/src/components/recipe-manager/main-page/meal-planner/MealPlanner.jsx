@@ -1,4 +1,4 @@
-import './MealPlanner.css';
+import "./MealPlanner.css";
 
 function MealPlanner({
   plannerDays,
@@ -6,16 +6,17 @@ function MealPlanner({
   recipes,
   mealPlan,
   onMealSelection,
-  onReset
+  onReset,
+  onSave,
 }) {
-  
   return (
     <section className="meal-planner-panel" aria-label="Weekly meal planner">
       <div className="meal-planner-header">
         <div>
           <h3 className="meal-planner-title">Weekly Meal Planner</h3>
           <p className="meal-planner-subtitle">
-            Map your recipes across the week and keep each day organized by meal.
+            Map your recipes across the week and keep each day organized by
+            meal.
           </p>
         </div>
         <button
@@ -25,9 +26,16 @@ function MealPlanner({
         >
           Reset Week
         </button>
+        <button type="button" className="save-changes" onClick={onSave}>
+          Save Changes
+        </button>
       </div>
 
-      <div className="meal-planner-grid" role="table" aria-label="Weekly meal planner grid">
+      <div
+        className="meal-planner-grid"
+        role="table"
+        aria-label="Weekly meal planner grid"
+      >
         <div className="meal-grid-corner" aria-hidden="true">
           Meal
         </div>
@@ -50,11 +58,16 @@ function MealPlanner({
                 <select
                   className="meal-grid-select"
                   value={mealPlan[day][meal]}
-                  onChange={(event) => onMealSelection(day, meal, event.target.value)}
+                  onChange={(event) =>
+                    onMealSelection(day, meal, event.target.value)
+                  }
                 >
                   <option value="">N/A</option>
                   {recipes.map((recipe, index) => (
-                    <option key={`${recipe.title}-${index}`} value={recipe.title}>
+                    <option
+                      key={`${recipe.title}-${index}`}
+                      value={recipe.title}
+                    >
                       {recipe.title}
                     </option>
                   ))}

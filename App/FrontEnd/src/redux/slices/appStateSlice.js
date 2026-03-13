@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { setCurrentUser } from "./currentUserSlice";
 import { setRecipes } from "./recipesSlice";
+import { fetchMealPlan } from "./mealPlannerSlice";
 
 const initialState = {
   isLoggedIn: false,
@@ -10,27 +11,25 @@ const initialState = {
 // This function will go fetch all the user data and set the current user and recipes in the state.
 // It will assume perfect input, becasue before this function is called, a previous request was made to actually validate the user, so this function expects an email that exists
 export const loginUser = createAsyncThunk(
-  'appState/loginUser',
+  "appState/loginUser",
   async (userId, thunkAPI) => {
     try {
       const response = await fetch(`http://localhost:3000/profile/${userId}`);
       const data = await response.json();
       const user = data.user;
-      const recipes = data.userRecipes
+      const recipes = data.userRecipes;
       thunkAPI.dispatch(setCurrentUser(user));
-      console.log(`received recipes:${recipes}`)
+      console.log(`received recipes:${recipes}`);
       if (Array.isArray(recipes)) {
-        thunkAPI.dispatch(setRecipes(recipes))
+        thunkAPI.dispatch(setRecipes(recipes));
+      } else {
+        thunkAPI.dispatch(setRecipes([]));
       }
-      else {
-        thunkAPI.dispatch(setRecipes([]))
-
-      }
+      thunkAPI.dispatch(fetchMealPlan());
     } catch (error) {
-      // Server error --> Global eror handler
+      // Server error --> Global error handler
     }
-
-  }
+  },
 );
 
 const appStateSlice = createSlice({
@@ -38,7 +37,6 @@ const appStateSlice = createSlice({
   initialState,
   reducers: {
     logout: (state) => {
-      
       state.isLoggedIn = false;
       state.hasErrors = false;
     },
@@ -53,7 +51,6 @@ const appStateSlice = createSlice({
         state.isLoading = false;
         state.isLoggedIn = true;
         state.hasErrors = false;
-
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.isLoading = false;
