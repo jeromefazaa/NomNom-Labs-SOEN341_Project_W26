@@ -3,13 +3,13 @@ name: MealMajor CI
 on: [push, pull_request]
 
 jobs:
-  build-and-test:
+  playwright-tests:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
 
@@ -18,11 +18,8 @@ jobs:
           npm install
           cd App/Backend && npm install
 
-      - name: Install Playwright Browsers
+      - name: Install Playwright
         run: npx playwright install --with-deps
 
-      - name: Execute Pipeline
-        run: |
-          cd App/Backend && npm start &
-          npx wait-on http://localhost:3000/ --timeout 120000
-          npm run test:acceptance
+      - name: Run Playwright Tests
+        run: npm run test:acceptance
