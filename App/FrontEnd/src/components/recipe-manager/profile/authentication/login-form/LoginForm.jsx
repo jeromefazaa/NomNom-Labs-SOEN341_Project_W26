@@ -70,6 +70,7 @@ function LoginForm({ onSuccess }) {
         <label className="form-label">
           Email:
           <input
+            data-testid="email"
             className="input"
             type="email"
             value={email}
@@ -82,6 +83,7 @@ function LoginForm({ onSuccess }) {
         <label className="form-label">
           Password:
           <input
+            data-testid="password"
             className="input"
             type="password"
             value={password}
