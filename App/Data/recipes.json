@@ -55,5 +55,31 @@
     ],
     "steps": [],
     "userId": "marksam@gmail.com"
+  },
+  "johnny@test.com_eggs": {
+    "title": "eggs",
+    "difficulty": "Beginner",
+    "prepTime": 5,
+    "diet": "None",
+    "cost": 0,
+    "ingredients": [
+      "eggs"
+    ],
+    "steps": [],
+    "userId": "johnny@test.com"
+  },
+  "johnny@test.com_fried rice": {
+    "title": "fried rice",
+    "difficulty": "Beginner",
+    "prepTime": 30,
+    "diet": "None",
+    "cost": 0,
+    "ingredients": [
+      "rice",
+      "egg",
+      "meat"
+    ],
+    "steps": [],
+    "userId": "johnny@test.com"
   }
 }

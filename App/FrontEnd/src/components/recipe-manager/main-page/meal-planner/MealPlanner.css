@@ -29,6 +29,10 @@
   font-size: 0.94rem;
 }
 
+.meal-plan-calculate{
+  flex-shrink: 0;
+}
+
 .meal-plan-reset {
   flex-shrink: 0;
 }

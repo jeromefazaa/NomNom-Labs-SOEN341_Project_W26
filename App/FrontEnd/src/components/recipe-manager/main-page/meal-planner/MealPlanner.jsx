@@ -7,6 +7,7 @@ function MealPlanner({
   mealPlan,
   onMealSelection,
   onReset
+  //calculate calories function
 }) {
   
   return (
@@ -18,6 +19,12 @@ function MealPlanner({
             Map your recipes across the week and keep each day organized by meal.
           </p>
         </div>
+        <button
+          type="button"
+          className="clear-filters meal-plan-calculate"
+        >
+          Calculate Calories
+        </button>
         <button
           type="button"
           className="clear-filters meal-plan-reset"
