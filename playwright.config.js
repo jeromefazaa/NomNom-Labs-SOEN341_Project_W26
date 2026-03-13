@@ -7,19 +7,19 @@ module.exports = defineConfig({
     baseURL: "http://localhost:5173",
     headless: true,
     screenshot: "only-on-failure",
-    video: "retain-on-failure"
+    video: "retain-on-failure",
   },
 
   webServer: [
     {
       command: "cd App/Backend && npm run dev",
       url: "http://localhost:3000",
-      timeout: 120000
+      timeout: 120000,
     },
     {
       command: "cd App/Frontend && npm run dev",
       url: "http://localhost:5173",
-      timeout: 120000
-    }
-  ]
+      timeout: 120000,
+    },
+  ],
 });
