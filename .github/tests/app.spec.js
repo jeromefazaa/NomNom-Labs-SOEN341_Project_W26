@@ -4,11 +4,10 @@ test("MealMajor Journey: Login", async ({ page }) => {
 
   await page.goto("/auth/login");
 
-  await page.waitForSelector('[data-testid="email"]');
+  await page.fill('[data-testid="email"]', "marksam@gmail.com");
+  await page.fill('[data-testid="password"]', "Mark123456");
 
-  await page.getByLabel("Email").fill("marksam@gmail.com");
-  await page.getByLabel("Password").fill("Mark123456");
-  await page.getByRole("button", { name: "Login" }).click();
+  await page.click(".btn.btn-primary");
 
   await expect(page).toHaveURL(/.*login/);
 });

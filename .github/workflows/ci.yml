@@ -3,7 +3,7 @@ name: MealMajor CI
 on: [push, pull_request]
 
 jobs:
-  playwright-tests:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,7 +18,7 @@ jobs:
           npm install
           cd App/Backend && npm install
 
-      - name: Install Playwright
+      - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
       - name: Run Playwright Tests
