@@ -1,13 +1,46 @@
 const { test, expect } = require("@playwright/test");
 
-test("MealMajor Journey: Login", async ({ page }) => {
+test.describe("MealMajor Journey", () => {
+  test("signs up with the test account and logs in", async ({ page }) => {
+    let signUpDialogMessage = null;
 
-  await page.goto("/auth/login");
+    page.on("dialog", async (dialog) => {
+      signUpDialogMessage = dialog.message();
+      await dialog.accept();
+    });
 
-  await page.fill('[data-testid="email"]', "marksam@gmail.com");
-  await page.fill('[data-testid="password"]', "Mark123456");
+    await page.goto("/");
+    await page.click(".profile-icon");
+    await page.click(".singup-button");
+    await page.getByLabel("First Name:").fill("Automatic");
+    await page.getByLabel("Last Name:").fill("Test");
+    await page.getByLabel("Email:").fill("automaticTest@gmail.com");
+    await page.getByLabel("Password:").fill("Test123456");
+    await page.click(".btn.btn-primary");
 
-  await page.click(".btn.btn-primary");
+    if (signUpDialogMessage === "User already exists.") {
+      await page.getByRole("button", { name: "Login" }).click();
+    } else {
+      await expect(page.getByText("Login Form")).toBeVisible();
+    }
 
-  await expect(page).toHaveURL(/.*login/);
+    await page.fill('[data-testid="email"]', "automaticTest@gmail.com");
+    await page.fill('[data-testid="password"]', "Test123456");
+    await page.locator(".auth-form .btn.btn-primary").click();
+
+    await page.click(".profile-icon");
+    await expect(page.getByRole("button", { name: "Logout" })).toBeVisible();
+  });
+
+  test("logs in successfully", async ({ page }) => {
+    await page.goto("/");
+    await page.click(".profile-icon");
+    await page.click(".login-button");
+    await page.fill('[data-testid="email"]', "marksam@gmail.com");
+    await page.fill('[data-testid="password"]', "Mark123456");
+    await page.click(".btn.btn-primary");
+
+    await page.click(".profile-icon");
+    await expect(page.getByRole("button", { name: "Logout" })).toBeVisible();
+  });
 });
