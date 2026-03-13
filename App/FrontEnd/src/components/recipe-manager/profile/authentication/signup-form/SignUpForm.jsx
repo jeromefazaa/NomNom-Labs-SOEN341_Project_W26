@@ -96,7 +96,7 @@ function SignUpForm({ onSuccess }) {
     <p id="error-message" className="form-error"></p>
 
     <div className="form-actions">
-      <button type="button" className="btn btn-primary" onClick={handleSubmit}>
+      <button type="button" className="btn btn-primary signup-action-button" onClick={handleSubmit}>
         Sign Up
       </button>
     </div>

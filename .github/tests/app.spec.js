@@ -16,7 +16,7 @@ test.describe("MealMajor Journey", () => {
     await page.getByLabel("Last Name:").fill("Test");
     await page.getByLabel("Email:").fill("automaticTest@gmail.com");
     await page.getByLabel("Password:").fill("Test123456");
-    await page.click(".btn.btn-primary");
+    await page.click(".signup-action-button");
 
     if (signUpDialogMessage === "User already exists.") {
       await page.getByRole("button", { name: "Login" }).click();
@@ -26,7 +26,7 @@ test.describe("MealMajor Journey", () => {
 
     await page.fill('[data-testid="email"]', "automaticTest@gmail.com");
     await page.fill('[data-testid="password"]', "Test123456");
-    await page.locator(".auth-form .btn.btn-primary").click();
+    await page.locator(".auth-form .login-action-button").click();
 
     await page.click(".profile-icon");
     await expect(page.getByRole("button", { name: "Logout" })).toBeVisible();
@@ -38,7 +38,7 @@ test.describe("MealMajor Journey", () => {
     await page.click(".login-button");
     await page.fill('[data-testid="email"]', "marksam@gmail.com");
     await page.fill('[data-testid="password"]', "Mark123456");
-    await page.click(".btn.btn-primary");
+    await page.click(".login-action-button");
 
     await page.click(".profile-icon");
     await expect(page.getByRole("button", { name: "Logout" })).toBeVisible();
