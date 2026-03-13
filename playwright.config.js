@@ -15,7 +15,7 @@ module.exports = defineConfig({
       timeout: 120000,
     },
     {
-      command: "cd App/Frontend && npm run dev",
+      command: "cd App/FrontEnd && npm run dev",
       url: "http://localhost:5173",
       timeout: 120000,
     },
