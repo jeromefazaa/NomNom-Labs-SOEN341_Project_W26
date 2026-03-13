@@ -28,5 +28,17 @@
     "lastName": "Cadogan",
     "email": "matthew@test.com",
     "password": "Testing123"
+  },
+  "kevin1@test.com": {
+    "firstName": "Kevin Rizkallah",
+    "lastName": "Kevin Rizkallah",
+    "email": "Kevin1@test.com",
+    "password": "Kevin123"
+  },
+  "": {
+    "firstName": "",
+    "lastName": "",
+    "email": "",
+    "password": "Kevin12345"
   }
 }
