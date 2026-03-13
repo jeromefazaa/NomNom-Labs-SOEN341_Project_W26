@@ -1,0 +1,149 @@
+.meal-planner-panel {
+  margin-bottom: 1.25rem;
+  padding: 1.1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+  background: linear-gradient(180deg, #ffffff 0%, #ffffff 100%);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+}
+
+.meal-planner-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.meal-planner-title {
+  margin: 0 0 0.3rem;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #111827;
+}
+
+.meal-planner-subtitle {
+  margin: 0;
+  max-width: 48rem;
+  color: #4b5563;
+  font-size: 0.94rem;
+}
+
+.meal-plan-reset {
+  flex-shrink: 0;
+}
+
+.meal-planner-grid {
+  display: grid;
+  grid-template-columns: minmax(100px, 120px) repeat(7, minmax(150px, 1fr));
+  gap: 0.75rem;
+  overflow-x: auto;
+}
+
+.meal-grid-corner,
+.meal-grid-day,
+.meal-grid-label,
+.meal-grid-cell {
+  min-width: 0;
+}
+
+.meal-grid-corner,
+.meal-grid-day,
+.meal-grid-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 0.75rem;
+  border-radius: 16px;
+  font-weight: 700;
+}
+
+.meal-grid-corner {
+  background: #1f2937;
+  color: #ffffff;
+}
+
+.meal-grid-day {
+  background: #e49610;
+  color: #111827;
+}
+
+.meal-grid-row {
+  display: contents;
+}
+
+.meal-grid-label {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.meal-grid-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 0.85rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.meal-grid-cell-day,
+.meal-grid-cell-meal {
+  display: none;
+}
+
+.meal-grid-select {
+  width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 0.55rem 0.65rem;
+  font-size: 0.92rem;
+  color: #111827;
+  background: #ffffff;
+}
+
+.meal-grid-select:focus {
+  outline: 2px solid #f59e0b;
+  outline-offset: 1px;
+}
+
+@media (max-width: 900px) {
+  .meal-planner-header {
+    flex-direction: column;
+  }
+
+  .meal-planner-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .meal-grid-corner,
+  .meal-grid-day {
+    display: none;
+  }
+
+  .meal-grid-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .meal-grid-label {
+    justify-content: flex-start;
+    padding: 0.75rem 0.85rem;
+  }
+
+  .meal-grid-cell-day,
+  .meal-grid-cell-meal {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #6b7280;
+  }
+
+  .meal-grid-cell-meal {
+    color: #b45309;
+  }
+}

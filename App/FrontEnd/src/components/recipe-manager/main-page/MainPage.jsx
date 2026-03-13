@@ -1,14 +1,30 @@
 import { useState } from 'react';
 import RecipeCard from './recipes/recipe-card/RecipeCard.jsx';
 import RecipeForm from './recipes/recipe-form/RecipeForm.jsx';
+import MealPlanner from './meal-planner/MealPlanner.jsx';
 import { useSelector, useDispatch } from 'react-redux';
 import './MainPage.css';
 import { addRecipe, deleteRecipe, editRecipe } from '../../../redux/slices/recipesSlice.js';
+
+const plannerDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+const plannerMeals = ['Breakfast', 'Lunch', 'Dinner', 'Snack'];
+
+const createEmptyMealPlan = () => plannerDays.reduce((plan, day) => {
+  plan[day] = plannerMeals.reduce((meals, meal) => {
+    meals[meal] = '';
+    return meals;
+    
+  }, {});
+
+  return plan;
+}, {});
 
 function MainPage() {
   const recipes = useSelector(state => state.recipes.recipesArray) ?? [];
   const dispatch = useDispatch();
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const [isMealPlannerOpen, setIsMealPlannerOpen] = useState(false);
+  const [mealPlan, setMealPlan] = useState(() => createEmptyMealPlan());
 
   // indicates whether the form is creating or updating a recipe
   const [formMode, setFormMode] = useState('add');
@@ -39,6 +55,21 @@ function MainPage() {
     return searchMatch && timeMatch && difficultyMatch && dietMatch && costMatch;
   });
 
+  const mealPlanClick = () => {
+    setIsMealPlannerOpen((isOpen) => !isOpen);
+  };
+
+  const handleMealSelection = (day, meal, selectedRecipeTitle) => {
+    setMealPlan((currentPlan) => ({...currentPlan, [day]: {
+        ...currentPlan[day],
+        [meal]: selectedRecipeTitle
+      }
+    }));
+  };
+
+  const clearMealPlan = () => {
+    setMealPlan(createEmptyMealPlan());
+  };
 
   // opens the form in add mode
   const addRecipeClick = () => {
@@ -46,6 +77,7 @@ function MainPage() {
     setEditingRecipeIndex(null);
     setIsFormOpen(true);
   };
+
 
   const handleFormClose = () => {
     setIsFormOpen(false);
@@ -85,7 +117,22 @@ function MainPage() {
           <button className="addRecipe" onClick={addRecipeClick}>
             Add Recipe
           </button>
+          <button className="mealPlan" onClick={mealPlanClick} >
+            {isMealPlannerOpen ? 'Hide Meal Planner' : 'Meal Planner'}
+          </button>
         </div>
+
+        {isMealPlannerOpen && (
+          <MealPlanner
+            plannerDays={plannerDays}
+            plannerMeals={plannerMeals}
+            recipes={recipes}
+            mealPlan={mealPlan}
+            onMealSelection={handleMealSelection}
+            onReset={clearMealPlan}
+          />
+        )}
+
           <div className="search-row">
             <input
               type="text"

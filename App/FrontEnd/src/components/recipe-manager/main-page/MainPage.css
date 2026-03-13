@@ -33,7 +33,7 @@
 
 .addRecipe:hover {
   transform: translateY(-1px);
-  box-shadow: 0 12px 24px rgba(239, 68, 68, 0.3);
+  box-shadow: 0 12px 24px rgba(42, 97, 199, 0.3);
   filter: saturate(1.08);
 }
 
@@ -131,4 +131,34 @@
   outline: 2px solid #93c5fd;
   outline-offset: 1px;
 }
+
+
+.mealPlan {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.55rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: #e5b546;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
+  transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s ease;
+}
+
+.mealPlan:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(239, 68, 68, 0.3);
+  filter: saturate(1.08);
+}
+
+.mealPlan:active {
+  transform: translateY(0);
+}
+
+.mealPlan:focus-visible {
+  outline: 3px solid #fdba74;
+  outline-offset: 2px;
+}
+
 
