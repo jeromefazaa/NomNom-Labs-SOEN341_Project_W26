@@ -6,10 +6,10 @@ This file captures the essential, discoverable details to make an AI coding agen
 
 1. Project overview
 
-- Frontend-only workspace: the main app lives in `Frontend/my-react-app` (Vite + React).
+- FrontEnd-only workspace: the main app lives in `FrontEnd/my-react-app` (Vite + React).
 - App entry: `src/main.jsx`, primary UI in `src/App.jsx` and assets in `src/assets`.
 
-2. Dev / build / lint commands (run from `Frontend/my-react-app`)
+2. Dev / build / lint commands (run from `FrontEnd/my-react-app`)
 
 - Start dev server (HMR): `npm run dev` (runs `vite`).
 - Build production bundle: `npm run build` (runs `vite build`).
@@ -37,7 +37,7 @@ This file captures the essential, discoverable details to make an AI coding agen
 
 6. Typical small-change workflow (recommended)
 
-- Run locally: `cd Frontend/my-react-app && npm install && npm run dev`.
+- Run locally: `cd FrontEnd/my-react-app && npm install && npm run dev`.
 - For lint fixes: run `npm run lint` and apply minimal changes to satisfy existing ESLint rules.
 - For builds: `npm run build` then `npm run.preview` to smoke-test the production bundle.
 
@@ -51,7 +51,7 @@ This file captures the essential, discoverable details to make an AI coding agen
 
 9. PR / commit style hints
 
-- Keep changes scoped to `Frontend/my-react-app` for UI work.
+- Keep changes scoped to `FrontEnd/my-react-app` for UI work.
 - Preserve the existing import and component style (functional components, default exports).
 
 If any section is unclear or you'd like the agent to cover additional files (e.g., backend services, CI workflows), tell me which paths to inspect and I'll iterate.
