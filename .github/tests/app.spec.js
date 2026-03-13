@@ -11,7 +11,7 @@ test.describe("MealMajor Journey", () => {
 
     await page.goto("/");
     await page.click(".profile-icon");
-    await page.click(".singup-button");
+    await page.click(".signup-button");
     await page.getByLabel("First Name:").fill("Automatic");
     await page.getByLabel("Last Name:").fill("Test");
     await page.getByLabel("Email:").fill("automaticTest@gmail.com");
