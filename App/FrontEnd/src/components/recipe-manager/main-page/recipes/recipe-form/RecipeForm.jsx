@@ -1,15 +1,38 @@
 import { useEffect, useState } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField, MenuItem } from '@mui/material';
 
+const getDefaultIngredient = () => ({
+  name: '',
+  grams: ''
+});
+
 const getDefaultFormData = () => ({
   title: '',
   difficulty: 'Beginner',
   prepTime: '',
   diet: 'None',
   cost: '',
-  ingredients: [''],
+  ingredients: [getDefaultIngredient()],
   steps: ['']
 });
+
+const normalizeIngredient = (ingredient) => {
+  if (typeof ingredient === 'string') {
+    return {
+      name: ingredient,
+      grams: ''
+    };
+  }
+
+  if (ingredient && typeof ingredient === 'object') {
+    return {
+      name: ingredient.name ?? '',
+      grams: ingredient.grams?.toString() ?? ''
+    };
+  }
+
+  return getDefaultIngredient();
+};
 
 const createFormData = (recipe) => ({
   title: recipe?.title ?? '',
@@ -17,7 +40,9 @@ const createFormData = (recipe) => ({
   prepTime: recipe?.prepTime?.toString() ?? '',
   diet: recipe?.diet ?? 'None',
   cost: recipe?.cost?.toString() ?? '',
-  ingredients: Array.isArray(recipe?.ingredients) && recipe.ingredients.length > 0 ? recipe.ingredients : [''],
+  ingredients: Array.isArray(recipe?.ingredients) && recipe.ingredients.length > 0
+    ? recipe.ingredients.map(normalizeIngredient)
+    : [getDefaultIngredient()],
   steps: Array.isArray(recipe?.steps) && recipe.steps.length > 0 ? recipe.steps : ['']
 });
 
@@ -59,10 +84,24 @@ function RecipeForm({ open, onClose, onSave, initialData, isEditMode, existingRe
     }));
   };
 
+  const handleIngredientChange = (index, field, value) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      ingredients: prevFormData.ingredients.map((ingredient, ingredientIndex) =>
+        ingredientIndex === index
+          ? {
+              ...ingredient,
+              [field]: value
+            }
+          : ingredient
+      )
+    }));
+  };
+
   const handleAddListItem = (fieldName) => {
     setFormData((prevFormData) => ({
       ...prevFormData,
-      [fieldName]: [...prevFormData[fieldName], '']
+      [fieldName]: [...prevFormData[fieldName], fieldName === 'ingredients' ? getDefaultIngredient() : '']
     }));
   };
 
@@ -106,7 +145,12 @@ function RecipeForm({ open, onClose, onSave, initialData, isEditMode, existingRe
       title: resolvedTitle,
       prepTime: Number(formData.prepTime) || 0,
       cost: Number(formData.cost) || 0,
-      ingredients: formData.ingredients.map((ingredient) => ingredient.trim()).filter(Boolean),
+      ingredients: formData.ingredients
+        .map((ingredient) => ({
+          name: ingredient.name.trim(),
+          grams: Number(ingredient.grams) || 0
+        }))
+        .filter((ingredient) => ingredient.name),
       steps: formData.steps.map((step) => step.trim()).filter(Boolean)
     };
 
@@ -194,9 +238,18 @@ function RecipeForm({ open, onClose, onSave, initialData, isEditMode, existingRe
               <div className="recipe-list-row" key={`ingredient-${index}`}>
                 <TextField
                   label={`Ingredient ${index + 1}`}
-                  value={ingredient}
-                  onChange={(event) => handleListChange('ingredients', index, event.target.value)}
+                  value={ingredient.name}
+                  onChange={(event) => handleIngredientChange(index, 'name', event.target.value)}
                   fullWidth
+                />
+                <TextField
+                  label="Quantity (g)"
+                  type="number"
+                  value={ingredient.grams}
+                  onChange={(event) => handleIngredientChange(index, 'grams', event.target.value)}
+                  onWheel={(e) => e.target.blur()}
+                  inputProps={{ min: 0, step: 1 }}
+                  sx={{ width: 120 }}
                 />
                 <Button
                   type="button"
