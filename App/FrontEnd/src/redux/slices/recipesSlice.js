@@ -18,7 +18,7 @@ const initialState = {
   unsaved: 0,
 };
 
-// Async thunk - add your logic here
+// Async thunk 
 export const saveRecipes = createAsyncThunk(
   "recipes/saveRecipes",
   async (_, thunkAPI) => {
@@ -45,7 +45,7 @@ export const saveRecipes = createAsyncThunk(
             body: JSON.stringify({ recipeData: data }),
           },
         );
-      },2000);
+      }, 2000);
       console.log(`request succesfull`);
       if (response.status === 200) {
         return;
