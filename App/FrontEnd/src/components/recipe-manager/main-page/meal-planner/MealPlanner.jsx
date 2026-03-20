@@ -1,5 +1,6 @@
 import "./MealPlanner.css";
 import { getUsedRecipesForWeek, normalizeRecipeTitle } from "./mealPlannerUtils.js";
+import { useSelector } from 'react-redux';
 
 function MealPlanner({
   plannerDays,
@@ -10,6 +11,7 @@ function MealPlanner({
   onReset,
   onSave,
 }) {
+  const userId = useSelector(state => state.currentUser.email);
   const isRecipeUsedElsewhere = (day, meal, recipeTitle) => {
     const usedRecipes = getUsedRecipesForWeek(
       mealPlan,
@@ -20,6 +22,11 @@ function MealPlanner({
 
     return usedRecipes.has(normalizeRecipeTitle(recipeTitle));
   };
+
+  const calculateMacros = async () => {
+    console.log(`making reuqest`);
+    const response = await fetch(`http://localhost:3000/meal-planner/${userId}/macros`);
+  }
 
   return (
     <section className="meal-planner-panel" aria-label="Weekly meal planner">
@@ -38,6 +45,7 @@ function MealPlanner({
         <button
           type="button"
           className="clear-filters meal-plan-calculate"
+          onClick={calculateMacros}
         >
           Calculate Calories
         </button>

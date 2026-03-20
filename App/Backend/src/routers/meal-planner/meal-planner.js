@@ -1,5 +1,7 @@
 const express = require("express");
 const db = require("../../database");
+const Anthropic = require("@anthropic-ai/sdk");
+
 
 const router = express.Router();
 const plannerDays = [
@@ -13,6 +15,12 @@ const plannerDays = [
 ];
 const plannerMeals = ["Breakfast", "Lunch", "Dinner", "Snack"];
 
+
+const anthropic = new Anthropic({
+    apiKey: process.env.ANTHROPIC_API_KEY,
+
+});
+
 const createEmptyMealPlan = () =>
   plannerDays.reduce((plan, day) => {
     plan[day] = plannerMeals.reduce((meals, meal) => {
@@ -24,6 +32,31 @@ const createEmptyMealPlan = () =>
 
 const normalizeRecipeTitle = (title) =>
   typeof title === "string" ? title.trim().toLowerCase() : "";
+
+const getRecipeLookupForUser = (recipes = {}, userId) => {
+  return Object.values(recipes).reduce((lookup, recipe) => {
+    if (recipe?.userId !== userId || !recipe?.title) {
+      return lookup;
+    }
+
+    lookup[normalizeRecipeTitle(recipe.title)] = recipe;
+    return lookup;
+  }, {});
+};
+
+const buildWeeklyRecipePayload = (mealPlan = {}, recipeLookup = {}) => {
+  return plannerDays.reduce((weeklyPlan, day) => {
+    weeklyPlan[day] = plannerMeals.reduce((dailyPlan, meal) => {
+      const recipeTitle = mealPlan?.[day]?.[meal] || "";
+      const normalizedTitle = normalizeRecipeTitle(recipeTitle);
+
+      dailyPlan[meal] = normalizedTitle ? recipeLookup[normalizedTitle] || null : null;
+      return dailyPlan;
+    }, {});
+
+    return weeklyPlan;
+  }, {});
+};
 
 const findDuplicateRecipesInWeek = (mealPlan = {}) => {
   const usedRecipes = new Map();
@@ -84,6 +117,62 @@ router.post("/:userId", (req, res) => {
   }
   return res.status(500).json({ error: "Failed to save meal plan" });
 });
+
+// Calculate calories the entire week
+router.get('/:userId/macros', async (req, res, next) => {
+  console.log(`request received`)
+  let mealPlans = db.read("meal-plans");
+  let recipes = db.read('recipes');
+  const userId = req.params.userId;
+  const userMealPlan = mealPlans[userId];
+  if (!userMealPlan) {
+    return res.status(200).json({ msg: 'User does not have a meal plan' });
+  }
+
+  const recipeLookup = getRecipeLookupForUser(recipes, userId);
+  const weeklyRecipePayload = buildWeeklyRecipePayload(userMealPlan, recipeLookup);
+
+  console.log(`user meal plans: ${Object.keys(userMealPlan)}`);
+  console.log(`weekly payload: ${JSON.stringify(weeklyRecipePayload, null, 2)}`);
+
+  try {
+    const input = [
+      "You are a nutrition expert.",
+      "For each weekday, calculate total Calories, Protein, Carbs, and Fats.",
+      "Ignore empty meals where the value is null.",
+      "Return a clear day-by-day summary.",
+      "Give the same format on every repsonse, return an object nothing else: {Monday:{Calories: x, Protein: x,.....},Tuesday:{...},...",
+      "Weekly meal plan with full recipe objects:",
+      JSON.stringify(weeklyRecipePayload, null, 2),
+    ].join("\n");
+
+    const msg = await anthropic.messages.create({
+      model: "claude-opus-4-1-20250805",
+      max_tokens: 1000,
+      messages: [
+        {
+          role: "user",
+          content: input,
+        },
+      ],
+    });
+
+    const outputText = msg.content
+      .filter((block) => block.type === "text")
+      .map((block) => block.text)
+      .join("\n");
+    console.log(`output text: ${outputText}`)
+    return res.status(200).json({
+      weeklyRecipePayload,
+      output_text: outputText,
+    });
+  } catch (error) {
+    return next(error);
+  }
+
+})
+
+
 
 module.exports = router;
 module.exports.createEmptyMealPlan = createEmptyMealPlan;
