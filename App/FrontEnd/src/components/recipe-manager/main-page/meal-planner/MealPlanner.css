@@ -29,6 +29,13 @@
   font-size: 0.94rem;
 }
 
+.meal-planner-hint {
+  margin: 0.45rem 0 0;
+  color: #b45309;
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
 .meal-plan-calculate{
   flex-shrink: 0;
 }

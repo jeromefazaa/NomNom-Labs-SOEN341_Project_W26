@@ -30,6 +30,10 @@ function MealPlanner({
             Map your recipes across the week and keep each day organized by
             meal.
           </p>
+          <p className="meal-planner-hint">
+            A recipe can only be used once per week. Already-used recipes are
+            disabled.
+          </p>
         </div>
         <button
           type="button"

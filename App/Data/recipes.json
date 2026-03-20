@@ -1,3 +1,83 @@
 {
-  
+  "matthew@test.com_steak": {
+    "title": "steak",
+    "difficulty": "Advanced",
+    "prepTime": 60,
+    "diet": "None",
+    "cost": 85,
+    "ingredients": [
+      {
+        "name": "steak",
+        "grams": 140
+      },
+      {
+        "name": "butter",
+        "grams": 10
+      },
+      {
+        "name": "salt and pepper",
+        "grams": 2
+      }
+    ],
+    "steps": [
+      "heat pan",
+      "cook each side of steak for 4 minutes",
+      "rest for 10 minutes",
+      "serve"
+    ],
+    "userId": "matthew@test.com"
+  },
+  "matthew@test.com_egg": {
+    "title": "egg",
+    "difficulty": "Beginner",
+    "prepTime": 10,
+    "diet": "Vegetarian",
+    "cost": 4,
+    "ingredients": [
+      {
+        "name": "egg",
+        "grams": 50
+      },
+      {
+        "name": "salt",
+        "grams": 1
+      }
+    ],
+    "steps": [
+      "crack egg",
+      "put into medium high heat pan",
+      "salt and serve"
+    ],
+    "userId": "matthew@test.com"
+  },
+  "matthew@test.com_sanwhich": {
+    "title": "sanwhich",
+    "difficulty": "Beginner",
+    "prepTime": 15,
+    "diet": "Gluten-Free",
+    "cost": 8,
+    "ingredients": [
+      {
+        "name": "gluten free bread",
+        "grams": 50
+      },
+      {
+        "name": "tuna",
+        "grams": 150
+      },
+      {
+        "name": "mayo",
+        "grams": 15
+      },
+      {
+        "name": "lettuce",
+        "grams": 30
+      }
+    ],
+    "steps": [
+      "prep sandwich"
+    ],
+    "isEdited": true,
+    "userId": "matthew@test.com"
+  }
 }
