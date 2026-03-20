@@ -239,12 +239,14 @@ function RecipeForm({ open, onClose, onSave, initialData, isEditMode, existingRe
                 <TextField
                   label={`Ingredient ${index + 1}`}
                   value={ingredient.name}
+                  required
                   onChange={(event) => handleIngredientChange(index, 'name', event.target.value)}
                   fullWidth
                 />
                 <TextField
                   label="Quantity (g)"
                   type="number"
+                  required
                   value={ingredient.grams}
                   onChange={(event) => handleIngredientChange(index, 'grams', event.target.value)}
                   onWheel={(e) => e.target.blur()}
