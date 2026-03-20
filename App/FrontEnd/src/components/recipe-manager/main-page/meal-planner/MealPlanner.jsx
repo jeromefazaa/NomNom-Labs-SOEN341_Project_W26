@@ -59,7 +59,7 @@ function MealPlanner({
           Reset Week
         </button>
         <button type="button" className="action-btn meal-plan-save" onClick={handleSave}>
-          Save Changes
+          Save Meal Plan
         </button>
       </div>
 
