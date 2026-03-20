@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { Snackbar, Alert } from "@mui/material";
 import "./MealPlanner.css";
 import { getUsedRecipesForWeek, normalizeRecipeTitle } from "./mealPlannerUtils.js";
 
@@ -10,6 +12,13 @@ function MealPlanner({
   onReset,
   onSave,
 }) {
+  const [savedToast, setSavedToast] = useState(false);
+
+  const handleSave = () => {
+    onSave();
+    setSavedToast(true);
+  };
+
   const isRecipeUsedElsewhere = (day, meal, recipeTitle) => {
     const usedRecipes = getUsedRecipesForWeek(
       mealPlan,
@@ -22,6 +31,7 @@ function MealPlanner({
   };
 
   return (
+    <>
     <section className="meal-planner-panel" aria-label="Weekly meal planner">
       <div className="meal-planner-header">
         <div>
@@ -37,18 +47,18 @@ function MealPlanner({
         </div>
         <button
           type="button"
-          className="clear-filters meal-plan-calculate"
+          className="action-btn meal-plan-calculate"
         >
           Calculate Calories
         </button>
         <button
           type="button"
-          className="clear-filters meal-plan-reset"
+          className="action-btn meal-plan-reset"
           onClick={onReset}
         >
           Reset Week
         </button>
-        <button type="button" className="save-changes" onClick={onSave}>
+        <button type="button" className="action-btn meal-plan-save" onClick={handleSave}>
           Save Changes
         </button>
       </div>
@@ -100,8 +110,36 @@ function MealPlanner({
             ))}
           </div>
         ))}
+
+        <div className="meal-grid-row">
+          <div className="meal-grid-label meal-grid-macros-label" role="rowheader">
+            Macros
+          </div>
+          {plannerDays.map((day) => (
+            <div key={day} className="meal-grid-cell meal-grid-macros-cell">
+              <span className="meal-grid-cell-day">{day}</span>
+              <span className="macro-line">Protein: —g</span>
+              <span className="macro-line">Carbs: —g</span>
+              <span className="macro-line">Fat: —g</span>
+              <span className="macro-line"> — <b>calories</b></span>
+
+            </div>
+          ))}
+        </div>
       </div>
     </section>
+
+    <Snackbar
+      open={savedToast}
+      autoHideDuration={3000}
+      onClose={() => setSavedToast(false)}
+      anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+    >
+      <Alert severity="success" onClose={() => setSavedToast(false)}>
+        Meal plan saved successfully!
+      </Alert>
+    </Snackbar>
+    </>
   );
 }
 
