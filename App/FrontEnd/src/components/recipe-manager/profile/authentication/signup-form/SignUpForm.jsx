@@ -143,7 +143,7 @@ function SignUpForm({ onSuccess }) {
       <div className="form-actions">
         <button
           type="button"
-          className="btn btn-primary"
+          className="btn btn-primary signup-action-button"
           onClick={handleSubmit}
         >
           Sign Up

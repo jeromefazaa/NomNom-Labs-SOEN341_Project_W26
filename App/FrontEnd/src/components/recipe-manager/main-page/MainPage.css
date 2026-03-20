@@ -2,6 +2,20 @@
   padding: 0.75rem 0;
 }
 
+.save-toast {
+  position: fixed;
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 1000;
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  background: #166534;
+  color: #ffffff;
+  font-size: 0.92rem;
+  font-weight: 700;
+  box-shadow: 0 12px 24px rgba(22, 101, 52, 0.24);
+}
+
 .recipes-header {
   display: flex;
   align-items: center;
@@ -99,7 +113,7 @@
   outline-offset: 1px;
 }
 
-.clear-filters {
+.action-btn {
   border: 0;
   border-radius: 8px;
   padding: 0.45rem 0.75rem;
@@ -110,7 +124,7 @@
   cursor: pointer;
 }
 
-.clear-filters:hover {
+.action-btn:hover {
   background: #d1d5db;
 }
 

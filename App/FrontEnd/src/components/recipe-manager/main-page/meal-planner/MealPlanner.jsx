@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { Snackbar, Alert } from "@mui/material";
 import "./MealPlanner.css";
 import { getUsedRecipesForWeek, normalizeRecipeTitle } from "./mealPlannerUtils.js";
 import { useSelector } from 'react-redux';
@@ -12,6 +14,13 @@ function MealPlanner({
   onSave,
 }) {
   const userId = useSelector(state => state.currentUser.email);
+  const [savedToast, setSavedToast] = useState(false);
+
+  const handleSave = () => {
+    onSave();
+    setSavedToast(true);
+  };
+
   const isRecipeUsedElsewhere = (day, meal, recipeTitle) => {
     const usedRecipes = getUsedRecipesForWeek(
       mealPlan,
@@ -29,6 +38,7 @@ function MealPlanner({
   }
 
   return (
+    <>
     <section className="meal-planner-panel" aria-label="Weekly meal planner">
       <div className="meal-planner-header">
         <div>
@@ -44,20 +54,20 @@ function MealPlanner({
         </div>
         <button
           type="button"
-          className="clear-filters meal-plan-calculate"
           onClick={calculateMacros}
+          className="action-btn meal-plan-calculate"
         >
           Calculate Calories
         </button>
         <button
           type="button"
-          className="clear-filters meal-plan-reset"
+          className="action-btn meal-plan-reset"
           onClick={onReset}
         >
           Reset Week
         </button>
-        <button type="button" className="save-changes" onClick={onSave}>
-          Save Changes
+        <button type="button" className="action-btn meal-plan-save" onClick={handleSave}>
+          Save Meal Plan
         </button>
       </div>
 
@@ -97,8 +107,12 @@ function MealPlanner({
                     <option
                       key={`${recipe.title}-${index}`}
                       value={recipe.title}
-                      // Small UI change: once a recipe is used elsewhere in the week, keep it unavailable in other cells.
                       disabled={isRecipeUsedElsewhere(day, meal, recipe.title)}
+                      className={
+                        isRecipeUsedElsewhere(day, meal, recipe.title)
+                          ? "option-disabled"
+                          : "option-available"
+                      }
                     >
                       {recipe.title}
                     </option>
@@ -108,8 +122,36 @@ function MealPlanner({
             ))}
           </div>
         ))}
+
+        <div className="meal-grid-row">
+          <div className="meal-grid-label meal-grid-macros-label" role="rowheader">
+            Macros
+          </div>
+          {plannerDays.map((day) => (
+            <div key={day} className="meal-grid-cell meal-grid-macros-cell">
+              <span className="meal-grid-cell-day">{day}</span>
+              <span className="macro-line">Protein: —g</span>
+              <span className="macro-line">Carbs: —g</span>
+              <span className="macro-line">Fat: —g</span>
+              <span className="macro-line"> — <b>calories</b></span>
+
+            </div>
+          ))}
+        </div>
       </div>
     </section>
+
+    <Snackbar
+      open={savedToast}
+      autoHideDuration={3000}
+      onClose={() => setSavedToast(false)}
+      anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+    >
+      <Alert severity="success" onClose={() => setSavedToast(false)}>
+        Meal plan saved successfully!
+      </Alert>
+    </Snackbar>
+    </>
   );
 }
 

@@ -42,6 +42,7 @@ function MainPage() {
   const dispatch = useDispatch();
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isMealPlannerOpen, setIsMealPlannerOpen] = useState(false);
+  const [showMealPlanSavedNotice, setShowMealPlanSavedNotice] = useState(false);
 
   // indicates whether the form is creating or updating a recipe
   const [formMode, setFormMode] = useState("add");
@@ -100,8 +101,17 @@ function MainPage() {
     dispatch(resetMealPlan());
   };
 
-  const saveMealPlanChanges = () => {
-    dispatch(saveMealPlan());
+  const saveMealPlanChanges = async () => {
+    try {
+      await dispatch(saveMealPlan()).unwrap();
+      // Small UI change: keep the success popup local to the meal planner save flow.
+      setShowMealPlanSavedNotice(true);
+      window.setTimeout(() => {
+        setShowMealPlanSavedNotice(false);
+      }, 2500);
+    } catch (error) {
+      setShowMealPlanSavedNotice(false);
+    }
   };
 
   // opens the form in add mode
@@ -145,6 +155,12 @@ function MainPage() {
 
   return (
     <div className="main-page">
+      {showMealPlanSavedNotice && (
+        <div className="save-toast" role="status" aria-live="polite">
+          Save successful
+        </div>
+      )}
+
       <div className="dashboard-panel">
         <div className="recipes-header">
           <h2 className="recipes-heading">My Recipes</h2>
@@ -229,7 +245,7 @@ function MainPage() {
 
           <button
             type="button"
-            className="clear-filters"
+            className="action-btn"
             onClick={() => {
               setTimeFilter("All");
               setDifficultyFilter("All");
