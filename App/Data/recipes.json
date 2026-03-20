@@ -168,5 +168,27 @@
       "boil water and add rice (1 cup of rice to 2 cups of water)"
     ],
     "userId": "matthew@test.com"
+  },
+  "matthew@test.com_Waffles": {
+    "title": "Waffles",
+    "difficulty": "Beginner",
+    "prepTime": 5,
+    "diet": "Vegetarian",
+    "cost": 6,
+    "ingredients": [
+      {
+        "name": "Eggo Waffles",
+        "grams": 300
+      },
+      {
+        "name": "Syrup",
+        "grams": 75
+      }
+    ],
+    "steps": [
+      "Toast waffles in toaster for 4 minutes",
+      "Add syrup and enjoy"
+    ],
+    "userId": "matthew@test.com"
   }
 }
