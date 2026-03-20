@@ -1,4 +1,5 @@
 import "./MealPlanner.css";
+import { getUsedRecipesForWeek, normalizeRecipeTitle } from "./mealPlannerUtils.js";
 
 function MealPlanner({
   plannerDays,
@@ -9,6 +10,17 @@ function MealPlanner({
   onReset,
   onSave,
 }) {
+  const isRecipeUsedElsewhere = (day, meal, recipeTitle) => {
+    const usedRecipes = getUsedRecipesForWeek(
+      mealPlan,
+      plannerDays,
+      plannerMeals,
+      { day, meal },
+    );
+
+    return usedRecipes.has(normalizeRecipeTitle(recipeTitle));
+  };
+
   return (
     <section className="meal-planner-panel" aria-label="Weekly meal planner">
       <div className="meal-planner-header">
@@ -73,6 +85,8 @@ function MealPlanner({
                     <option
                       key={`${recipe.title}-${index}`}
                       value={recipe.title}
+                      // Small UI change: once a recipe is used elsewhere in the week, keep it unavailable in other cells.
+                      disabled={isRecipeUsedElsewhere(day, meal, recipe.title)}
                     >
                       {recipe.title}
                     </option>
