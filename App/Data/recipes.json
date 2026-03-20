@@ -79,5 +79,67 @@
     ],
     "isEdited": true,
     "userId": "matthew@test.com"
+  },
+  "matthew@test.com_Chicken": {
+    "title": "Chicken",
+    "difficulty": "Intermediate",
+    "prepTime": 0,
+    "diet": "None",
+    "cost": 15,
+    "ingredients": [
+      {
+        "name": "chicken",
+        "grams": 220
+      }
+    ],
+    "steps": [
+      "cook"
+    ],
+    "userId": "matthew@test.com"
+  },
+  "matthew@test.com_Salad": {
+    "title": "Salad",
+    "difficulty": "Beginner",
+    "prepTime": 7,
+    "diet": "Vegetarian",
+    "cost": 10,
+    "ingredients": [
+      {
+        "name": "lettuce",
+        "grams": 150
+      },
+      {
+        "name": "dressing",
+        "grams": 30
+      }
+    ],
+    "steps": [
+      "clean lettuce",
+      "chop lettuce",
+      "add to bowl with dressing and mix"
+    ],
+    "userId": "matthew@test.com"
+  },
+  "matthew@test.com_Cereal": {
+    "title": "Cereal",
+    "difficulty": "Beginner",
+    "prepTime": 2,
+    "diet": "Vegetarian",
+    "cost": 3,
+    "ingredients": [
+      {
+        "name": "cereal",
+        "grams": 250
+      },
+      {
+        "name": "milk",
+        "grams": 150
+      }
+    ],
+    "steps": [
+      "add cereal to bowl",
+      "pour milk to cover cereal"
+    ],
+    "userId": "matthew@test.com"
   }
 }

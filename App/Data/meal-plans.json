@@ -51,9 +51,9 @@
       "Snack": ""
     },
     "Tuesday": {
-      "Breakfast": "",
-      "Lunch": "",
-      "Dinner": "",
+      "Breakfast": "Cereal",
+      "Lunch": "Salad",
+      "Dinner": "Chicken",
       "Snack": ""
     },
     "Wednesday": {
