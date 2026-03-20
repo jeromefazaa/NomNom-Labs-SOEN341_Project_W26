@@ -245,7 +245,7 @@ function MainPage() {
 
           <button
             type="button"
-            className="clear-filters"
+            className="action-btn"
             onClick={() => {
               setTimeFilter("All");
               setDifficultyFilter("All");

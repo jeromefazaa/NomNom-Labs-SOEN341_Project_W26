@@ -44,6 +44,10 @@
   flex-shrink: 0;
 }
 
+.meal-plan-save {
+  flex-shrink: 0;
+}
+
 .meal-planner-grid {
   display: grid;
   grid-template-columns: minmax(100px, 120px) repeat(7, minmax(150px, 1fr));
@@ -116,6 +120,23 @@
 .meal-grid-select:focus {
   outline: 2px solid #f59e0b;
   outline-offset: 1px;
+}
+
+.meal-grid-macros-label {
+  background: #1f2937;
+  color: #ffffff;
+}
+
+.meal-grid-macros-cell {
+  background: #f9fafb;
+  border-color: #d1d5db;
+  font-size: 0.85rem;
+  color: #374151;
+}
+
+.macro-line {
+  display: block;
+  line-height: 1.5;
 }
 
 @media (max-width: 900px) {

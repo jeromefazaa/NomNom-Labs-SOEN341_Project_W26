@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { use } from "react";
 
 const singleRecipe = {
   title: "",
@@ -34,23 +33,25 @@ export const saveRecipes = createAsyncThunk(
         };
       });
       console.log(`making request to save ${data} `);
-      setTimeout(async () => {
-        const response = await fetch(
-          `http://localhost:3000/recipes/${userId}`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ recipeData: data }),
+      // Small save-flow fix: return the real request result so the button can show success only after a true save.
+      const response = await fetch(
+        `http://localhost:3000/recipes/${userId}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
           },
-        );
-      }, 2000);
+          body: JSON.stringify({ recipeData: data }),
+        },
+      );
       console.log(`request succesfull`);
       if (response.status === 200) {
-        return;
+        return await response.json();
       } else {
-        return thunkAPI.rejectWithValue(error.message);
+        const errorData = await response.json().catch(() => null);
+        return thunkAPI.rejectWithValue(
+          errorData?.error || "Failed to save recipes",
+        );
       }
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
