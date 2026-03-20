@@ -43,4 +43,78 @@ test.describe("MealMajor Journey", () => {
     await page.click(".profile-icon");
     await expect(page.getByRole("button", { name: "Logout" })).toBeVisible();
   });
+
+  test("creates a new recipe", async ({ page }) => {
+    // Login first
+    await page.goto("/");
+    await page.click(".profile-icon");
+    await page.click(".login-button");
+    await page.fill('[data-testid="email"]', "marksam@gmail.com");
+    await page.fill('[data-testid="password"]', "Mark123456");
+    await page.click(".login-action-button");
+
+    // Click Add Recipe
+    await page.click(".addRecipe");
+
+    // Fill the form
+    await page.getByLabel("Recipe Title").fill("Test Recipe");
+    await page.getByLabel("Difficulty").selectOption("Beginner");
+    await page.getByLabel("Preparation Time (minutes)").fill("30");
+    await page.getByLabel("Diet").selectOption("None");
+    await page.getByLabel("Cost ($)").fill("10");
+
+    // Ingredients
+    await page.getByLabel("Ingredient 1").fill("Flour");
+    await page.getByLabel("Quantity (g)").fill("100");
+
+    // Steps
+    await page.getByLabel("Step 1").fill("Mix ingredients");
+
+    // Save
+    await page.getByRole("button", { name: "Save Recipe" }).click();
+
+    // Verify the recipe appears
+    await expect(page.getByText("Test Recipe")).toBeVisible();
+  });
+
+  test("edits an existing recipe", async ({ page }) => {
+    // Login first
+    await page.goto("/");
+    await page.click(".profile-icon");
+    await page.click(".login-button");
+    await page.fill('[data-testid="email"]', "marksam@gmail.com");
+    await page.fill('[data-testid="password"]', "Mark123456");
+    await page.click(".login-action-button");
+
+    // Assume "Test Recipe" exists from previous test, click Edit
+    await page.getByRole("button", { name: "Edit" }).first().click();
+
+    // Modify prep time
+    await page.getByLabel("Preparation Time (minutes)").fill("45");
+
+    // Save Changes
+    await page.getByRole("button", { name: "Save Changes" }).click();
+
+    // Verify the recipe still appears (since title didn't change)
+    await expect(page.getByText("Test Recipe")).toBeVisible();
+  });
+
+  test("deletes a recipe", async ({ page }) => {
+    // Login first
+    await page.goto("/");
+    await page.click(".profile-icon");
+    await page.click(".login-button");
+    await page.fill('[data-testid="email"]', "marksam@gmail.com");
+    await page.fill('[data-testid="password"]', "Mark123456");
+    await page.click(".login-action-button");
+
+    // Click Delete on the first recipe
+    await page.getByRole("button", { name: "Delete" }).first().click();
+
+    // Confirm delete
+    await page.getByRole("button", { name: "Yes" }).click();
+
+    // Verify the recipe is removed
+    await expect(page.getByText("Test Recipe")).not.toBeVisible();
+  });
 });
