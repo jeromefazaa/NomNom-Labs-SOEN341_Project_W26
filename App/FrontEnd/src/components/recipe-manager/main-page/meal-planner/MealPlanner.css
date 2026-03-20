@@ -179,3 +179,12 @@
     color: #b45309;
   }
 }
+
+.option-available {
+  color: #e49610;
+  font-weight: 600;
+}
+
+.option-disabled {
+  color: #9ca3af;
+}

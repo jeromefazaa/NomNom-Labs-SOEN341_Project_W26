@@ -99,8 +99,12 @@ function MealPlanner({
                     <option
                       key={`${recipe.title}-${index}`}
                       value={recipe.title}
-                      // Small UI change: once a recipe is used elsewhere in the week, keep it unavailable in other cells.
                       disabled={isRecipeUsedElsewhere(day, meal, recipe.title)}
+                      className={
+                        isRecipeUsedElsewhere(day, meal, recipe.title)
+                          ? "option-disabled"
+                          : "option-available"
+                      }
                     >
                       {recipe.title}
                     </option>
