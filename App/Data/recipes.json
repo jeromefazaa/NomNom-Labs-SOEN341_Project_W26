@@ -190,5 +190,40 @@
       "Add syrup and enjoy"
     ],
     "userId": "matthew@test.com"
+  },
+  "jeromefazaa123@gmail.com_Eggs": {
+    "title": "Eggs",
+    "difficulty": "Beginner",
+    "prepTime": 0,
+    "diet": "None",
+    "cost": 0,
+    "ingredients": [
+      {
+        "name": "eggs",
+        "grams": 100
+      }
+    ],
+    "steps": [],
+    "userId": "jeromefazaa123@gmail.com"
+  },
+  "jeromefazaa123@gmail.com_Chicken": {
+    "title": "Chicken",
+    "difficulty": "Beginner",
+    "prepTime": 0,
+    "diet": "None",
+    "cost": 0,
+    "ingredients": [
+      {
+        "name": "Chicken",
+        "grams": 350
+      },
+      {
+        "name": "Brocooli",
+        "grams": 100
+      }
+    ],
+    "steps": [],
+    "isEdited": true,
+    "userId": "jeromefazaa123@gmail.com"
   }
 }

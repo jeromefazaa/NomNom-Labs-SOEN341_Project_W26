@@ -58,6 +58,14 @@ const buildWeeklyRecipePayload = (mealPlan = {}, recipeLookup = {}) => {
   }, {});
 };
 
+const parseClaudeJsonBlock = (text = "") => {
+  const trimmedText = text.trim();
+  const fencedMatch = trimmedText.match(/```json\s*([\s\S]*?)\s*```/i);
+  const jsonText = fencedMatch ? fencedMatch[1] : trimmedText;
+
+  return JSON.parse(jsonText);
+};
+
 const findDuplicateRecipesInWeek = (mealPlan = {}) => {
   const usedRecipes = new Map();
   const duplicateRecipes = [];
@@ -162,8 +170,12 @@ router.get('/:userId/macros', async (req, res, next) => {
       .map((block) => block.text)
       .join("\n");
     console.log(`output text: ${outputText}`)
+
+    const macros = parseClaudeJsonBlock(outputText);
+
     return res.status(200).json({
       weeklyRecipePayload,
+      macros,
       output_text: outputText,
     });
   } catch (error) {
