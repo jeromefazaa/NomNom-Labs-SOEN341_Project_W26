@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Snackbar, Alert } from "@mui/material";
 import "./MealPlanner.css";
 import { getUsedRecipesForWeek, normalizeRecipeTitle } from "./mealPlannerUtils.js";
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchMealPlanMacros } from "../../../../redux/slices/mealPlannerSlice.js";
 
 function MealPlanner({
   plannerDays,
@@ -12,7 +14,9 @@ function MealPlanner({
   onReset,
   onSave,
 }) {
+  const dispatch = useDispatch();
   const [savedToast, setSavedToast] = useState(false);
+  const macrosByDay = useSelector((state) => state.mealPlanner.macrosByDay);
 
   const handleSave = () => {
     onSave();
@@ -28,6 +32,10 @@ function MealPlanner({
     );
 
     return usedRecipes.has(normalizeRecipeTitle(recipeTitle));
+  };
+
+  const calculateMacros = async () => {
+    await dispatch(fetchMealPlanMacros());
   };
 
   return (
@@ -47,6 +55,7 @@ function MealPlanner({
         </div>
         <button
           type="button"
+          onClick={calculateMacros}
           className="action-btn meal-plan-calculate"
         >
           Calculate Calories
@@ -122,10 +131,10 @@ function MealPlanner({
           {plannerDays.map((day) => (
             <div key={day} className="meal-grid-cell meal-grid-macros-cell">
               <span className="meal-grid-cell-day">{day}</span>
-              <span className="macro-line">Protein: —g</span>
-              <span className="macro-line">Carbs: —g</span>
-              <span className="macro-line">Fat: —g</span>
-              <span className="macro-line"> — <b>calories</b></span>
+              <span className="macro-line">Protein: {macrosByDay?.[day]?.Protein ?? 0}g</span>
+              <span className="macro-line">Carbs: {macrosByDay?.[day]?.Carbs ?? 0}g</span>
+              <span className="macro-line">Fat: {macrosByDay?.[day]?.Fats ?? 0}g</span>
+              <span className="macro-line">{macrosByDay?.[day]?.Calories ?? 0} <b>calories</b></span>
 
             </div>
           ))}

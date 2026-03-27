@@ -20,8 +20,20 @@ const createEmptyMealPlan = () =>
     return plan;
   }, {});
 
+const createEmptyMacros = () =>
+  plannerDays.reduce((totals, day) => {
+    totals[day] = {
+      Calories: 0,
+      Protein: 0,
+      Carbs: 0,
+      Fats: 0,
+    };
+    return totals;
+  }, {});
+
 const initialState = {
   mealPlan: createEmptyMealPlan(),
+  macrosByDay: createEmptyMacros(),
   isLoading: false,
   hasErrors: false,
 };
@@ -66,6 +78,23 @@ export const saveMealPlan = createAsyncThunk(
   },
 );
 
+export const fetchMealPlanMacros = createAsyncThunk(
+  "mealPlanner/fetchMealPlanMacros",
+  async (_, thunkAPI) => {
+    const userId = thunkAPI.getState().currentUser.email;
+    try {
+      const response = await fetch(
+        `http://localhost:3000/meal-planner/${userId}/macros`,
+      );
+      if (!response.ok) throw new Error("Failed to calculate macros");
+      const data = await response.json();
+      return data.macros;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  },
+);
+
 const mealPlannerSlice = createSlice({
   name: "mealPlanner",
   initialState,
@@ -76,6 +105,7 @@ const mealPlannerSlice = createSlice({
     },
     resetMealPlan: (state) => {
       state.mealPlan = createEmptyMealPlan();
+      state.macrosByDay = createEmptyMacros();
     },
     setMealPlan: (state, action) => {
       state.mealPlan = action.payload;
@@ -105,6 +135,19 @@ const mealPlannerSlice = createSlice({
         state.hasErrors = false;
       })
       .addCase(saveMealPlan.rejected, (state) => {
+        state.isLoading = false;
+        state.hasErrors = true;
+      })
+      .addCase(fetchMealPlanMacros.pending, (state) => {
+        state.isLoading = true;
+        state.hasErrors = false;
+      })
+      .addCase(fetchMealPlanMacros.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.macrosByDay = action.payload || createEmptyMacros();
+        state.hasErrors = false;
+      })
+      .addCase(fetchMealPlanMacros.rejected, (state) => {
         state.isLoading = false;
         state.hasErrors = true;
       });
