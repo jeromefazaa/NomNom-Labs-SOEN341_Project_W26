@@ -58,9 +58,16 @@ test.describe("MealMajor Journey", () => {
 
     // Fill the form
     await page.getByLabel("Recipe Title").fill("Test Recipe");
-    await page.getByLabel("Difficulty").selectOption("Beginner");
+
+    // For Material-UI TextField select, click the field to open dropdown, then select option
+    await page.getByLabel("Difficulty").click();
+    await page.getByRole("option", { name: "Beginner" }).click();
+
     await page.getByLabel("Preparation Time (minutes)").fill("30");
-    await page.getByLabel("Diet").selectOption("None");
+
+    await page.getByLabel("Diet").click();
+    await page.getByRole("option", { name: "None" }).click();
+
     await page.getByLabel("Cost ($)").fill("10");
 
     // Ingredients
@@ -86,8 +93,19 @@ test.describe("MealMajor Journey", () => {
     await page.fill('[data-testid="password"]', "Mark123456");
     await page.click(".login-action-button");
 
-    // Assume "Test Recipe" exists from previous test, click Edit
-    await page.getByRole("button", { name: "Edit" }).first().click();
+    // Wait for recipes to load and find "Test Recipe"
+    await page.waitForSelector(".recipe-card");
+    await page.getByText("Test Recipe").waitFor();
+
+    // Click Edit button on the recipe card
+    await page
+      .locator(".recipe-card")
+      .filter({ hasText: "Test Recipe" })
+      .getByRole("button", { name: "Edit" })
+      .click();
+
+    // Wait for the form to appear
+    await page.waitForSelector(".recipe-dialog");
 
     // Modify prep time
     await page.getByLabel("Preparation Time (minutes)").fill("45");
@@ -95,8 +113,9 @@ test.describe("MealMajor Journey", () => {
     // Save Changes
     await page.getByRole("button", { name: "Save Changes" }).click();
 
-    // Verify the recipe still appears (since title didn't change)
+    // Verify the recipe still appears and prep time is updated
     await expect(page.getByText("Test Recipe")).toBeVisible();
+    await expect(page.getByText("45m")).toBeVisible();
   });
 
   test("deletes a recipe", async ({ page }) => {
@@ -108,8 +127,16 @@ test.describe("MealMajor Journey", () => {
     await page.fill('[data-testid="password"]', "Mark123456");
     await page.click(".login-action-button");
 
-    // Click Delete on the first recipe
-    await page.getByRole("button", { name: "Delete" }).first().click();
+    // Wait for recipes to load
+    await page.waitForSelector(".recipe-card");
+    await page.getByText("Test Recipe").waitFor();
+
+    // Click Delete on the Test Recipe card
+    await page
+      .locator(".recipe-card")
+      .filter({ hasText: "Test Recipe" })
+      .getByRole("button", { name: "Delete" })
+      .click();
 
     // Confirm delete
     await page.getByRole("button", { name: "Yes" }).click();

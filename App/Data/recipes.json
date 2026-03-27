@@ -141,5 +141,20 @@
       "pour milk to cover cereal"
     ],
     "userId": "matthew@test.com"
+  },
+  "marksam@gmail.com_egg": {
+    "title": "egg",
+    "difficulty": "Beginner",
+    "prepTime": 0,
+    "diet": "None",
+    "cost": 10,
+    "ingredients": [
+      {
+        "name": "egg",
+        "grams": 10
+      }
+    ],
+    "steps": [],
+    "userId": "marksam@gmail.com"
   }
 }
