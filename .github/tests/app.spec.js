@@ -1,8 +1,6 @@
 const { test, expect } = require("@playwright/test");
 
 test.describe("MealMajor Journey", () => {
-  test.describe.configure({ mode: "serial" });
-
   test("signs up with the test account and logs in", async ({ page }) => {
     let signUpDialogMessage = null;
 
@@ -87,76 +85,88 @@ test.describe("MealMajor Journey", () => {
   });
 
   test("edits an existing recipe", async ({ page }) => {
-    // Navigate to the app
+    // Login first
     await page.goto("/");
+    await page.click(".profile-icon");
+    await page.click(".login-button");
+    await page.fill('[data-testid="email"]', "marksam@gmail.com");
+    await page.fill('[data-testid="password"]', "Mark123456");
+    await page.click(".login-action-button");
 
-    // Wait for the page to fully load by checking for main elements
-    await page.waitForSelector(".recipes-heading");
-    await page
-      .getByText("Add Recipe")
-      .waitFor({ state: "visible", timeout: 10000 });
+    // Create a recipe to edit
+    await page.click(".addRecipe");
+    await page.getByLabel("Recipe Title").fill("Recipe To Edit");
+    await page.getByLabel("Difficulty").click();
+    await page.getByRole("option", { name: "Beginner" }).click();
+    await page.getByLabel("Preparation Time (minutes)").fill("30");
+    await page.getByLabel("Diet").click();
+    await page.getByRole("option", { name: "None" }).click();
+    await page.getByLabel("Cost ($)").fill("15");
+    await page.getByLabel("Ingredient 1").fill("Butter");
+    await page.getByLabel("Quantity (g)").fill("50");
+    await page.getByLabel("Step 1").fill("Melt butter");
+    await page.getByRole("button", { name: "Save Recipe" }).click();
 
-    // Wait a bit for recipes to load from Redux/backend
-    await page.waitForTimeout(1000);
-
-    // Wait for any recipe card to appear, then find our specific one
-    await page
+    // Wait for the recipe card to appear
+    await page.waitForSelector(".recipe-card");
+    const recipeCard = page
       .locator(".recipe-card")
-      .first()
-      .waitFor({ state: "visible", timeout: 10000 });
-    const testRecipeCard = page
-      .locator(".recipe-card")
-      .filter({ hasText: "Test Recipe" });
-    await testRecipeCard.waitFor({ state: "visible", timeout: 10000 });
+      .filter({ hasText: "Recipe To Edit" });
+    await recipeCard.waitFor({ state: "visible", timeout: 10000 });
 
-    // Click Edit button on the recipe card
-    await testRecipeCard.getByRole("button", { name: "Edit" }).click();
-
-    // Wait for the form to appear
+    // Click Edit button
+    await recipeCard.getByRole("button", { name: "Edit" }).click();
     await page.waitForSelector(".recipe-dialog");
 
-    // Modify prep time
+    // Modify the prep time
     await page.getByLabel("Preparation Time (minutes)").clear();
     await page.getByLabel("Preparation Time (minutes)").fill("45");
 
-    // Save Changes
+    // Save changes
     await page.getByRole("button", { name: "Save Changes" }).click();
 
-    // Verify the recipe still appears and prep time is updated
-    await expect(page.getByText("Test Recipe")).toBeVisible();
+    // Verify the recipe still appears with updated prep time
+    await expect(page.getByText("Recipe To Edit")).toBeVisible();
     await expect(page.getByText("45m")).toBeVisible();
   });
 
   test("deletes a recipe", async ({ page }) => {
-    // Navigate to the app
+    // Login first
     await page.goto("/");
+    await page.click(".profile-icon");
+    await page.click(".login-button");
+    await page.fill('[data-testid="email"]', "marksam@gmail.com");
+    await page.fill('[data-testid="password"]', "Mark123456");
+    await page.click(".login-action-button");
 
-    // Wait for the page to fully load by checking for main elements
-    await page.waitForSelector(".recipes-heading");
-    await page
-      .getByText("Add Recipe")
-      .waitFor({ state: "visible", timeout: 10000 });
+    // Create a recipe to delete
+    await page.click(".addRecipe");
+    await page.getByLabel("Recipe Title").fill("Recipe To Delete");
+    await page.getByLabel("Difficulty").click();
+    await page.getByRole("option", { name: "Intermediate" }).click();
+    await page.getByLabel("Preparation Time (minutes)").fill("20");
+    await page.getByLabel("Diet").click();
+    await page.getByRole("option", { name: "Vegan" }).click();
+    await page.getByLabel("Cost ($)").fill("8");
+    await page.getByLabel("Ingredient 1").fill("Tofu");
+    await page.getByLabel("Quantity (g)").fill("200");
+    await page.getByLabel("Step 1").fill("Cut tofu");
+    await page.getByRole("button", { name: "Save Recipe" }).click();
 
-    // Wait a bit for recipes to load from Redux/backend
-    await page.waitForTimeout(1000);
-
-    // Wait for any recipe card to appear, then find our specific one
-    await page
+    // Wait for the recipe card to appear
+    await page.waitForSelector(".recipe-card");
+    const recipeCard = page
       .locator(".recipe-card")
-      .first()
-      .waitFor({ state: "visible", timeout: 10000 });
-    const testRecipeCard = page
-      .locator(".recipe-card")
-      .filter({ hasText: "Test Recipe" });
-    await testRecipeCard.waitFor({ state: "visible", timeout: 10000 });
+      .filter({ hasText: "Recipe To Delete" });
+    await recipeCard.waitFor({ state: "visible", timeout: 10000 });
 
-    // Click Delete on the Test Recipe card
-    await testRecipeCard.getByRole("button", { name: "Delete" }).click();
+    // Click Delete button
+    await recipeCard.getByRole("button", { name: "Delete" }).click();
 
-    // Confirm delete
+    // Confirm deletion in the dialog
     await page.getByRole("button", { name: "Yes" }).click();
 
     // Verify the recipe is removed
-    await expect(page.getByText("Test Recipe")).not.toBeVisible();
+    await expect(page.getByText("Recipe To Delete")).not.toBeVisible();
   });
 });
