@@ -90,7 +90,20 @@ test.describe("MealMajor Journey", () => {
     // Navigate to the app
     await page.goto("/");
 
-    // Wait for recipes to load and find "Test Recipe"
+    // Wait for the page to fully load by checking for main elements
+    await page.waitForSelector(".recipes-heading");
+    await page
+      .getByText("Add Recipe")
+      .waitFor({ state: "visible", timeout: 10000 });
+
+    // Wait a bit for recipes to load from Redux/backend
+    await page.waitForTimeout(1000);
+
+    // Wait for any recipe card to appear, then find our specific one
+    await page
+      .locator(".recipe-card")
+      .first()
+      .waitFor({ state: "visible", timeout: 10000 });
     const testRecipeCard = page
       .locator(".recipe-card")
       .filter({ hasText: "Test Recipe" });
@@ -118,7 +131,20 @@ test.describe("MealMajor Journey", () => {
     // Navigate to the app
     await page.goto("/");
 
-    // Wait for recipes to load
+    // Wait for the page to fully load by checking for main elements
+    await page.waitForSelector(".recipes-heading");
+    await page
+      .getByText("Add Recipe")
+      .waitFor({ state: "visible", timeout: 10000 });
+
+    // Wait a bit for recipes to load from Redux/backend
+    await page.waitForTimeout(1000);
+
+    // Wait for any recipe card to appear, then find our specific one
+    await page
+      .locator(".recipe-card")
+      .first()
+      .waitFor({ state: "visible", timeout: 10000 });
     const testRecipeCard = page
       .locator(".recipe-card")
       .filter({ hasText: "Test Recipe" });
