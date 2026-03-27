@@ -1,6 +1,8 @@
 const { test, expect } = require("@playwright/test");
 
 test.describe("MealMajor Journey", () => {
+  test.describe.configure({ mode: "serial" });
+
   test("signs up with the test account and logs in", async ({ page }) => {
     let signUpDialogMessage = null;
 
@@ -85,29 +87,22 @@ test.describe("MealMajor Journey", () => {
   });
 
   test("edits an existing recipe", async ({ page }) => {
-    // Login first
-    await page.goto("/");
-    await page.click(".profile-icon");
-    await page.click(".login-button");
-    await page.fill('[data-testid="email"]', "marksam@gmail.com");
-    await page.fill('[data-testid="password"]', "Mark123456");
-    await page.click(".login-action-button");
-
+    // Tests run in serial mode, so we're already logged in from previous test
     // Wait for recipes to load and find "Test Recipe"
     await page.waitForSelector(".recipe-card");
-    await page.getByText("Test Recipe").waitFor();
+    const testRecipeCard = page
+      .locator(".recipe-card")
+      .filter({ hasText: "Test Recipe" });
+    await testRecipeCard.waitFor({ state: "visible" });
 
     // Click Edit button on the recipe card
-    await page
-      .locator(".recipe-card")
-      .filter({ hasText: "Test Recipe" })
-      .getByRole("button", { name: "Edit" })
-      .click();
+    await testRecipeCard.getByRole("button", { name: "Edit" }).click();
 
     // Wait for the form to appear
     await page.waitForSelector(".recipe-dialog");
 
     // Modify prep time
+    await page.getByLabel("Preparation Time (minutes)").clear();
     await page.getByLabel("Preparation Time (minutes)").fill("45");
 
     // Save Changes
@@ -119,24 +114,16 @@ test.describe("MealMajor Journey", () => {
   });
 
   test("deletes a recipe", async ({ page }) => {
-    // Login first
-    await page.goto("/");
-    await page.click(".profile-icon");
-    await page.click(".login-button");
-    await page.fill('[data-testid="email"]', "marksam@gmail.com");
-    await page.fill('[data-testid="password"]', "Mark123456");
-    await page.click(".login-action-button");
-
+    // Tests run in serial mode, so we're already logged in from previous test
     // Wait for recipes to load
     await page.waitForSelector(".recipe-card");
-    await page.getByText("Test Recipe").waitFor();
+    const testRecipeCard = page
+      .locator(".recipe-card")
+      .filter({ hasText: "Test Recipe" });
+    await testRecipeCard.waitFor({ state: "visible" });
 
     // Click Delete on the Test Recipe card
-    await page
-      .locator(".recipe-card")
-      .filter({ hasText: "Test Recipe" })
-      .getByRole("button", { name: "Delete" })
-      .click();
+    await testRecipeCard.getByRole("button", { name: "Delete" }).click();
 
     // Confirm delete
     await page.getByRole("button", { name: "Yes" }).click();
