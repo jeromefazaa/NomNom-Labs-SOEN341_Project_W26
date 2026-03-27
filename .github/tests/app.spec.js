@@ -87,13 +87,14 @@ test.describe("MealMajor Journey", () => {
   });
 
   test("edits an existing recipe", async ({ page }) => {
-    // Tests run in serial mode, so we're already logged in from previous test
+    // Navigate to the app
+    await page.goto("/");
+
     // Wait for recipes to load and find "Test Recipe"
-    await page.waitForSelector(".recipe-card");
     const testRecipeCard = page
       .locator(".recipe-card")
       .filter({ hasText: "Test Recipe" });
-    await testRecipeCard.waitFor({ state: "visible" });
+    await testRecipeCard.waitFor({ state: "visible", timeout: 10000 });
 
     // Click Edit button on the recipe card
     await testRecipeCard.getByRole("button", { name: "Edit" }).click();
@@ -114,13 +115,14 @@ test.describe("MealMajor Journey", () => {
   });
 
   test("deletes a recipe", async ({ page }) => {
-    // Tests run in serial mode, so we're already logged in from previous test
+    // Navigate to the app
+    await page.goto("/");
+
     // Wait for recipes to load
-    await page.waitForSelector(".recipe-card");
     const testRecipeCard = page
       .locator(".recipe-card")
       .filter({ hasText: "Test Recipe" });
-    await testRecipeCard.waitFor({ state: "visible" });
+    await testRecipeCard.waitFor({ state: "visible", timeout: 10000 });
 
     // Click Delete on the Test Recipe card
     await testRecipeCard.getByRole("button", { name: "Delete" }).click();
