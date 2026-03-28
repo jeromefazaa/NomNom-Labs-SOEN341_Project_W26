@@ -337,41 +337,50 @@ test.describe("MealMajor Journey", () => {
     await expect(page.getByText("Complex Beef Stew")).toBeVisible();
 
     // Filter by Difficulty: Beginner
-    await page.locator('.filter-control').nth(1).selectOption('Beginner');
+    await page.locator(".filter-control").nth(1).selectOption("Beginner");
 
     // Verify only Quick Vegan Salad appears
     await expect(page.getByText("Quick Vegan Salad")).toBeVisible();
     await expect(page.getByText("Complex Beef Stew")).not.toBeVisible();
 
     // Clear filters
-    await page.locator('.action-btn').filter({ hasText: 'Clear Filters' }).click();
+    await page
+      .locator(".action-btn")
+      .filter({ hasText: "Clear Filters" })
+      .click();
 
     // Verify both appear again
     await expect(page.getByText("Quick Vegan Salad")).toBeVisible();
     await expect(page.getByText("Complex Beef Stew")).toBeVisible();
 
     // Filter by Prep Time: 30 min or less
-    await page.locator('.filter-control').nth(0).selectOption('30');
+    await page.locator(".filter-control").nth(0).selectOption("30");
 
     // Verify only Quick Vegan Salad appears (15 min <= 30)
     await expect(page.getByText("Quick Vegan Salad")).toBeVisible();
     await expect(page.getByText("Complex Beef Stew")).not.toBeVisible();
 
     // Clear filters
-    await page.locator('.action-btn').filter({ hasText: 'Clear Filters' }).click();
+    await page
+      .locator(".action-btn")
+      .filter({ hasText: "Clear Filters" })
+      .click();
 
     // Filter by Diet: Vegan
-    await page.locator('.filter-control').nth(2).selectOption('Vegan');
+    await page.locator(".filter-control").nth(2).selectOption("Vegan");
 
     // Verify only Quick Vegan Salad appears
     await expect(page.getByText("Quick Vegan Salad")).toBeVisible();
     await expect(page.getByText("Complex Beef Stew")).not.toBeVisible();
 
     // Clear filters
-    await page.locator('.action-btn').filter({ hasText: 'Clear Filters' }).click();
+    await page
+      .locator(".action-btn")
+      .filter({ hasText: "Clear Filters" })
+      .click();
 
     // Filter by Cost: 25$ or less
-    await page.locator('.filter-control').nth(3).selectOption('25');
+    await page.locator(".filter-control").nth(3).selectOption("25");
 
     // Verify only Quick Vegan Salad appears ($10 <= 25)
     await expect(page.getByText("Quick Vegan Salad")).toBeVisible();
