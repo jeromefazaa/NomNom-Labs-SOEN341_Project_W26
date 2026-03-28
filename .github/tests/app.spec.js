@@ -432,6 +432,12 @@ test.describe("MealMajor Journey", () => {
     await page.click(".profile-icon");
     await page.getByRole("button", { name: "Logout" }).click();
 
+    // Verify we're back to login screen (shows Login button in menu)
+    await expect(page.getByRole("button", { name: "Login" })).toBeVisible();
+
+    // Click Login to show the login form
+    await page.click(".login-button");
+
     // Verify we're back to login screen
     await expect(page.getByText("Login Form")).toBeVisible();
 
