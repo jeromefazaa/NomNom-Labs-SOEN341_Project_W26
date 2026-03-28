@@ -169,4 +169,66 @@ test.describe("MealMajor Journey", () => {
     // Verify the recipe is removed
     await expect(page.getByText("Recipe To Delete")).not.toBeVisible();
   });
+
+  test("adds a recipe and assigns it to Monday Breakfast in meal planner", async ({
+    page,
+  }) => {
+    // Login first
+    await page.goto("/");
+    await page.click(".profile-icon");
+    await page.click(".login-button");
+    await page.fill('[data-testid="email"]', "marksam@gmail.com");
+    await page.fill('[data-testid="password"]', "Mark123456");
+    await page.click(".login-action-button");
+
+    // Click Add Recipe
+    await page.click(".addRecipe");
+
+    // Fill the form
+    await page.getByLabel("Recipe Title").fill("Meal Planner Test Recipe");
+
+    // Select Difficulty
+    await page.getByLabel("Difficulty").click();
+    await page.getByRole("option", { name: "Beginner" }).click();
+
+    await page.getByLabel("Preparation Time (minutes)").fill("30");
+
+    await page.getByLabel("Diet").click();
+    await page.getByRole("option", { name: "None" }).click();
+
+    await page.getByLabel("Cost ($)").fill("10");
+
+    // Ingredients
+    await page.getByLabel("Ingredient 1").fill("Flour");
+    await page.getByLabel("Quantity (g)").fill("100");
+
+    // Steps
+    await page.getByLabel("Step 1").fill("Mix ingredients");
+
+    // Save
+    await page.getByRole("button", { name: "Save Recipe" }).click();
+
+    // Verify the recipe appears
+    await expect(page.getByText("Meal Planner Test Recipe")).toBeVisible();
+
+    // Click Meal Planner button
+    await page.click(".mealPlan");
+
+    // Wait for meal planner to open
+    await page.waitForSelector(".meal-planner-panel");
+
+    // Select the dropdown for Monday Breakfast
+    // The select is inside a label with class meal-grid-cell, for Monday and Breakfast
+    const mondayBreakfastSelect = page
+      .locator(".meal-grid-cell")
+      .filter({ hasText: "MondayBreakfast" })
+      .locator("select");
+    await mondayBreakfastSelect.selectOption("Meal Planner Test Recipe");
+
+    // Click Save Meal Plan
+    await page.click(".meal-plan-save");
+
+    // Verify the success message appears
+    await expect(page.getByText("Save successful")).toBeVisible();
+  });
 });
