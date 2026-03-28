@@ -428,6 +428,12 @@ test.describe("MealMajor Journey", () => {
     // Verify the recipe appears
     await expect(page.getByText("Persistent Recipe Test")).toBeVisible();
 
+    // Click the global Save Changes button to persist to recipes.json
+    await page.click(".save-wrapper button");
+    await expect(page.getByText("Save successful")).toBeVisible({
+      timeout: 10000,
+    });
+
     // Logout
     await page.click(".profile-icon");
     await page.getByRole("button", { name: "Logout" }).click();
