@@ -86,5 +86,49 @@
       "Dinner": "",
       "Snack": ""
     }
+  },
+  "marksam@gmail.com": {
+    "Monday": {
+      "Breakfast": "egg",
+      "Lunch": "",
+      "Dinner": "",
+      "Snack": ""
+    },
+    "Tuesday": {
+      "Breakfast": "",
+      "Lunch": "",
+      "Dinner": "",
+      "Snack": ""
+    },
+    "Wednesday": {
+      "Breakfast": "",
+      "Lunch": "",
+      "Dinner": "",
+      "Snack": ""
+    },
+    "Thursday": {
+      "Breakfast": "",
+      "Lunch": "",
+      "Dinner": "",
+      "Snack": ""
+    },
+    "Friday": {
+      "Breakfast": "",
+      "Lunch": "",
+      "Dinner": "",
+      "Snack": ""
+    },
+    "Saturday": {
+      "Breakfast": "",
+      "Lunch": "",
+      "Dinner": "",
+      "Snack": ""
+    },
+    "Sunday": {
+      "Breakfast": "",
+      "Lunch": "",
+      "Dinner": "",
+      "Snack": ""
+    }
   }
 }
