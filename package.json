@@ -1,0 +1,26 @@
+{
+  "name": "soen-341-lab",
+  "version": "1.0.0",
+  "description": "- Team name: NomNomLabs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:backend": "cd backend && node index.js",
+    "test:acceptance": "playwright test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeromefazaa/soen-341-lab.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jeromefazaa/soen-341-lab/issues"
+  },
+  "homepage": "https://github.com/jeromefazaa/soen-341-lab#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "wait-on": "^9.0.4"
+  }
+}

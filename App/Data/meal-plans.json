@@ -1,0 +1,90 @@
+{
+  "jeromefazaa123@gmail.com": {
+    "Monday": {
+      "Breakfast": "Eggs",
+      "Lunch": "Chicken",
+      "Dinner": "",
+      "Snack": ""
+    },
+    "Tuesday": {
+      "Breakfast": "",
+      "Lunch": "",
+      "Dinner": "",
+      "Snack": ""
+    },
+    "Wednesday": {
+      "Breakfast": "",
+      "Lunch": "",
+      "Dinner": "",
+      "Snack": ""
+    },
+    "Thursday": {
+      "Breakfast": "",
+      "Lunch": "",
+      "Dinner": "",
+      "Snack": ""
+    },
+    "Friday": {
+      "Breakfast": "",
+      "Lunch": "",
+      "Dinner": "",
+      "Snack": ""
+    },
+    "Saturday": {
+      "Breakfast": "",
+      "Lunch": "",
+      "Dinner": "",
+      "Snack": ""
+    },
+    "Sunday": {
+      "Breakfast": "",
+      "Lunch": "",
+      "Dinner": "",
+      "Snack": ""
+    }
+  },
+  "matthew@test.com": {
+    "Monday": {
+      "Breakfast": "egg",
+      "Lunch": "sanwhich",
+      "Dinner": "steak",
+      "Snack": ""
+    },
+    "Tuesday": {
+      "Breakfast": "Cereal",
+      "Lunch": "Salad",
+      "Dinner": "Chicken",
+      "Snack": ""
+    },
+    "Wednesday": {
+      "Breakfast": "",
+      "Lunch": "",
+      "Dinner": "",
+      "Snack": ""
+    },
+    "Thursday": {
+      "Breakfast": "",
+      "Lunch": "",
+      "Dinner": "",
+      "Snack": ""
+    },
+    "Friday": {
+      "Breakfast": "",
+      "Lunch": "",
+      "Dinner": "",
+      "Snack": ""
+    },
+    "Saturday": {
+      "Breakfast": "",
+      "Lunch": "",
+      "Dinner": "",
+      "Snack": ""
+    },
+    "Sunday": {
+      "Breakfast": "",
+      "Lunch": "",
+      "Dinner": "",
+      "Snack": ""
+    }
+  }
+}

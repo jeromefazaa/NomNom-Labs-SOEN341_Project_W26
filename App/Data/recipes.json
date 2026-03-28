@@ -1,0 +1,244 @@
+{
+  "matthew@test.com_steak": {
+    "title": "steak",
+    "difficulty": "Advanced",
+    "prepTime": 60,
+    "diet": "None",
+    "cost": 85,
+    "ingredients": [
+      {
+        "name": "steak",
+        "grams": 140
+      },
+      {
+        "name": "butter",
+        "grams": 10
+      },
+      {
+        "name": "salt and pepper",
+        "grams": 2
+      }
+    ],
+    "steps": [
+      "heat pan",
+      "cook each side of steak for 4 minutes",
+      "rest for 10 minutes",
+      "serve"
+    ],
+    "userId": "matthew@test.com"
+  },
+  "matthew@test.com_egg": {
+    "title": "egg",
+    "difficulty": "Beginner",
+    "prepTime": 10,
+    "diet": "Vegetarian",
+    "cost": 4,
+    "ingredients": [
+      {
+        "name": "egg",
+        "grams": 50
+      },
+      {
+        "name": "salt",
+        "grams": 1
+      }
+    ],
+    "steps": [
+      "crack egg",
+      "put into medium high heat pan",
+      "salt and serve"
+    ],
+    "userId": "matthew@test.com"
+  },
+  "matthew@test.com_sanwhich": {
+    "title": "sanwhich",
+    "difficulty": "Beginner",
+    "prepTime": 15,
+    "diet": "Gluten-Free",
+    "cost": 8,
+    "ingredients": [
+      {
+        "name": "gluten free bread",
+        "grams": 50
+      },
+      {
+        "name": "tuna",
+        "grams": 150
+      },
+      {
+        "name": "mayo",
+        "grams": 15
+      },
+      {
+        "name": "lettuce",
+        "grams": 30
+      }
+    ],
+    "steps": [
+      "prep sandwich"
+    ],
+    "isEdited": true,
+    "userId": "matthew@test.com"
+  },
+  "matthew@test.com_Chicken": {
+    "title": "Chicken",
+    "difficulty": "Intermediate",
+    "prepTime": 0,
+    "diet": "None",
+    "cost": 15,
+    "ingredients": [
+      {
+        "name": "chicken",
+        "grams": 220
+      }
+    ],
+    "steps": [
+      "cook"
+    ],
+    "userId": "matthew@test.com"
+  },
+  "matthew@test.com_Salad": {
+    "title": "Salad",
+    "difficulty": "Beginner",
+    "prepTime": 7,
+    "diet": "Vegetarian",
+    "cost": 10,
+    "ingredients": [
+      {
+        "name": "lettuce",
+        "grams": 150
+      },
+      {
+        "name": "dressing",
+        "grams": 30
+      }
+    ],
+    "steps": [
+      "clean lettuce",
+      "chop lettuce",
+      "add to bowl with dressing and mix"
+    ],
+    "userId": "matthew@test.com"
+  },
+  "matthew@test.com_Cereal": {
+    "title": "Cereal",
+    "difficulty": "Beginner",
+    "prepTime": 2,
+    "diet": "Vegetarian",
+    "cost": 3,
+    "ingredients": [
+      {
+        "name": "cereal",
+        "grams": 250
+      },
+      {
+        "name": "milk",
+        "grams": 150
+      }
+    ],
+    "steps": [
+      "add cereal to bowl",
+      "pour milk to cover cereal"
+    ],
+    "userId": "matthew@test.com"
+  },
+  "matthew@test.com_Salmon and Rice": {
+    "title": "Salmon and Rice",
+    "difficulty": "Advanced",
+    "prepTime": 40,
+    "diet": "None",
+    "cost": 15,
+    "ingredients": [
+      {
+        "name": "Salmon",
+        "grams": 450
+      },
+      {
+        "name": "Rice",
+        "grams": 190
+      },
+      {
+        "name": "Salt",
+        "grams": 2
+      }
+    ],
+    "steps": [
+      "Season salmon and let sit for 5 minutes",
+      "Heat pan to medium high",
+      "boil water and add rice (1 cup of rice to 2 cups of water)"
+    ],
+    "userId": "matthew@test.com"
+  },
+  "matthew@test.com_Waffles": {
+    "title": "Waffles",
+    "difficulty": "Beginner",
+    "prepTime": 5,
+    "diet": "Vegetarian",
+    "cost": 6,
+    "ingredients": [
+      {
+        "name": "Eggo Waffles",
+        "grams": 300
+      },
+      {
+        "name": "Syrup",
+        "grams": 75
+      }
+    ],
+    "steps": [
+      "Toast waffles in toaster for 4 minutes",
+      "Add syrup and enjoy"
+    ],
+    "userId": "matthew@test.com"
+  },
+  "jeromefazaa123@gmail.com_Eggs": {
+    "title": "Eggs",
+    "difficulty": "Beginner",
+    "prepTime": 0,
+    "diet": "None",
+    "cost": 0,
+    "ingredients": [
+      {
+        "name": "eggs",
+        "grams": 100
+      }
+    ],
+    "steps": [],
+    "userId": "jeromefazaa123@gmail.com"
+  },
+  "jeromefazaa123@gmail.com_Chicken": {
+    "title": "Chicken",
+    "difficulty": "Beginner",
+    "prepTime": 0,
+    "diet": "None",
+    "cost": 0,
+    "ingredients": [
+      {
+        "name": "Chicken",
+        "grams": 350
+      },
+      {
+        "name": "Brocooli",
+        "grams": 100
+      }
+    ],
+    "steps": [],
+    "isEdited": true,
+    "userId": "jeromefazaa123@gmail.com"
+  },
+  "marksam@gmail.com_egg": {
+    "title": "egg",
+    "difficulty": "Beginner",
+    "prepTime": 0,
+    "diet": "None",
+    "cost": 10,
+    "ingredients": [
+      {
+        "name": "egg",
+        "grams": 10
+      }
+    ],
+    "steps": [],
+    "userId": "marksam@gmail.com"
+  }
+}
