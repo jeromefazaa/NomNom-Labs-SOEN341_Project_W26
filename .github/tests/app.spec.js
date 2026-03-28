@@ -386,4 +386,61 @@ test.describe("MealMajor Journey", () => {
     await expect(page.getByText("Quick Vegan Salad")).toBeVisible();
     await expect(page.getByText("Complex Beef Stew")).not.toBeVisible();
   });
+
+  test("creates a recipe and verifies it persists after logout and login", async ({
+    page,
+  }) => {
+    // Login first
+    await page.goto("/");
+    await page.click(".profile-icon");
+    await page.click(".login-button");
+    await page.fill('[data-testid="email"]', "marksam@gmail.com");
+    await page.fill('[data-testid="password"]', "Mark123456");
+    await page.click(".login-action-button");
+
+    // Click Add Recipe
+    await page.click(".addRecipe");
+
+    // Fill the form
+    await page.getByLabel("Recipe Title").fill("Persistent Recipe Test");
+
+    // Select Difficulty
+    await page.getByLabel("Difficulty").click();
+    await page.getByRole("option", { name: "Beginner" }).click();
+
+    await page.getByLabel("Preparation Time (minutes)").fill("30");
+
+    await page.getByLabel("Diet").click();
+    await page.getByRole("option", { name: "None" }).click();
+
+    await page.getByLabel("Cost ($)").fill("10");
+
+    // Ingredients
+    await page.getByLabel("Ingredient 1").fill("Flour");
+    await page.getByLabel("Quantity (g)").fill("100");
+
+    // Steps
+    await page.getByLabel("Step 1").fill("Mix ingredients");
+
+    // Save
+    await page.getByRole("button", { name: "Save Recipe" }).click();
+
+    // Verify the recipe appears
+    await expect(page.getByText("Persistent Recipe Test")).toBeVisible();
+
+    // Logout
+    await page.click(".profile-icon");
+    await page.click(".logout-button");
+
+    // Verify we're back to login screen
+    await expect(page.getByText("Login Form")).toBeVisible();
+
+    // Login again
+    await page.fill('[data-testid="email"]', "marksam@gmail.com");
+    await page.fill('[data-testid="password"]', "Mark123456");
+    await page.click(".login-action-button");
+
+    // Verify the recipe is still there after login
+    await expect(page.getByText("Persistent Recipe Test")).toBeVisible();
+  });
 });
