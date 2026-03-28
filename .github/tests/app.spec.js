@@ -231,4 +231,150 @@ test.describe("MealMajor Journey", () => {
     // Verify the success message appears
     await expect(page.getByText("Save successful")).toBeVisible();
   });
+
+  test("searches for recipes using the search bar", async ({ page }) => {
+    // Login first
+    await page.goto("/");
+    await page.click(".profile-icon");
+    await page.click(".login-button");
+    await page.fill('[data-testid="email"]', "marksam@gmail.com");
+    await page.fill('[data-testid="password"]', "Mark123456");
+    await page.click(".login-action-button");
+
+    // Create first recipe
+    await page.click(".addRecipe");
+    await page.getByLabel("Recipe Title").fill("Chicken Curry");
+    await page.getByLabel("Difficulty").click();
+    await page.getByRole("option", { name: "Intermediate" }).click();
+    await page.getByLabel("Preparation Time (minutes)").fill("45");
+    await page.getByLabel("Diet").click();
+    await page.getByRole("option", { name: "None" }).click();
+    await page.getByLabel("Cost ($)").fill("20");
+    await page.getByLabel("Ingredient 1").fill("Chicken");
+    await page.getByLabel("Quantity (g)").fill("500");
+    await page.getByLabel("Step 1").fill("Cook chicken");
+    await page.getByRole("button", { name: "Save Recipe" }).click();
+
+    // Create second recipe
+    await page.click(".addRecipe");
+    await page.getByLabel("Recipe Title").fill("Vegan Salad");
+    await page.getByLabel("Difficulty").click();
+    await page.getByRole("option", { name: "Beginner" }).click();
+    await page.getByLabel("Preparation Time (minutes)").fill("15");
+    await page.getByLabel("Diet").click();
+    await page.getByRole("option", { name: "Vegan" }).click();
+    await page.getByLabel("Cost ($)").fill("10");
+    await page.getByLabel("Ingredient 1").fill("Lettuce");
+    await page.getByLabel("Quantity (g)").fill("200");
+    await page.getByLabel("Step 1").fill("Chop lettuce");
+    await page.getByRole("button", { name: "Save Recipe" }).click();
+
+    // Verify both recipes appear
+    await expect(page.getByText("Chicken Curry")).toBeVisible();
+    await expect(page.getByText("Vegan Salad")).toBeVisible();
+
+    // Search for "chicken"
+    await page.fill(".search-input", "chicken");
+
+    // Verify only Chicken Curry appears
+    await expect(page.getByText("Chicken Curry")).toBeVisible();
+    await expect(page.getByText("Vegan Salad")).not.toBeVisible();
+
+    // Clear search
+    await page.fill(".search-input", "");
+
+    // Verify both appear again
+    await expect(page.getByText("Chicken Curry")).toBeVisible();
+    await expect(page.getByText("Vegan Salad")).toBeVisible();
+
+    // Search for "vegan"
+    await page.fill(".search-input", "vegan");
+
+    // Verify only Vegan Salad appears
+    await expect(page.getByText("Chicken Curry")).not.toBeVisible();
+    await expect(page.getByText("Vegan Salad")).toBeVisible();
+  });
+
+  test("filters recipes using the filter controls", async ({ page }) => {
+    // Login first
+    await page.goto("/");
+    await page.click(".profile-icon");
+    await page.click(".login-button");
+    await page.fill('[data-testid="email"]', "marksam@gmail.com");
+    await page.fill('[data-testid="password"]', "Mark123456");
+    await page.click(".login-action-button");
+
+    // Create first recipe - Beginner, 15 min, Vegan, $10
+    await page.click(".addRecipe");
+    await page.getByLabel("Recipe Title").fill("Quick Vegan Salad");
+    await page.getByLabel("Difficulty").click();
+    await page.getByRole("option", { name: "Beginner" }).click();
+    await page.getByLabel("Preparation Time (minutes)").fill("15");
+    await page.getByLabel("Diet").click();
+    await page.getByRole("option", { name: "Vegan" }).click();
+    await page.getByLabel("Cost ($)").fill("10");
+    await page.getByLabel("Ingredient 1").fill("Lettuce");
+    await page.getByLabel("Quantity (g)").fill("200");
+    await page.getByLabel("Step 1").fill("Chop lettuce");
+    await page.getByRole("button", { name: "Save Recipe" }).click();
+
+    // Create second recipe - Advanced, 90 min, None, $60
+    await page.click(".addRecipe");
+    await page.getByLabel("Recipe Title").fill("Complex Beef Stew");
+    await page.getByLabel("Difficulty").click();
+    await page.getByRole("option", { name: "Advanced" }).click();
+    await page.getByLabel("Preparation Time (minutes)").fill("90");
+    await page.getByLabel("Diet").click();
+    await page.getByRole("option", { name: "None" }).click();
+    await page.getByLabel("Cost ($)").fill("60");
+    await page.getByLabel("Ingredient 1").fill("Beef");
+    await page.getByLabel("Quantity (g)").fill("1000");
+    await page.getByLabel("Step 1").fill("Slow cook beef");
+    await page.getByRole("button", { name: "Save Recipe" }).click();
+
+    // Verify both recipes appear
+    await expect(page.getByText("Quick Vegan Salad")).toBeVisible();
+    await expect(page.getByText("Complex Beef Stew")).toBeVisible();
+
+    // Filter by Difficulty: Beginner
+    await page.selectOption(".filter-control", "Beginner");
+
+    // Verify only Quick Vegan Salad appears
+    await expect(page.getByText("Quick Vegan Salad")).toBeVisible();
+    await expect(page.getByText("Complex Beef Stew")).not.toBeVisible();
+
+    // Clear filters
+    await page.click('button:has-text("Clear Filters")');
+
+    // Verify both appear again
+    await expect(page.getByText("Quick Vegan Salad")).toBeVisible();
+    await expect(page.getByText("Complex Beef Stew")).toBeVisible();
+
+    // Filter by Prep Time: 30 min or less
+    await page.selectOption('select[class="filter-control"]', "30");
+
+    // Verify only Quick Vegan Salad appears (15 min <= 30)
+    await expect(page.getByText("Quick Vegan Salad")).toBeVisible();
+    await expect(page.getByText("Complex Beef Stew")).not.toBeVisible();
+
+    // Clear filters
+    await page.click('button:has-text("Clear Filters")');
+
+    // Filter by Diet: Vegan
+    await page.selectOption('select[class="filter-control"]', "Vegan");
+
+    // Verify only Quick Vegan Salad appears
+    await expect(page.getByText("Quick Vegan Salad")).toBeVisible();
+    await expect(page.getByText("Complex Beef Stew")).not.toBeVisible();
+
+    // Clear filters
+    await page.click('button:has-text("Clear Filters")');
+
+    // Filter by Cost: 25$ or less
+    await page.selectOption('select[class="filter-control"]', "25");
+
+    // Verify only Quick Vegan Salad appears ($10 <= 25)
+    await expect(page.getByText("Quick Vegan Salad")).toBeVisible();
+    await expect(page.getByText("Complex Beef Stew")).not.toBeVisible();
+  });
 });
