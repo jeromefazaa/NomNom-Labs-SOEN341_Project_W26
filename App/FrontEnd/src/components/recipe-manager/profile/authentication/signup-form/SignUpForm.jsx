@@ -34,56 +34,70 @@ function SignUpForm({ onSuccess }) {
   }
 
   async function handleSubmit(e) {
-    e?.preventDefault();
+  e?.preventDefault();
 
-    if (!firstName.trim() || !lastName.trim() || !email.trim() || !password.trim()) {
-      setErrorMessage("Please fill in all fields.");
-      return;
-    }
+  const trimmedFirstName = firstName.trim();
+  const trimmedLastName = lastName.trim();
+  const trimmedEmail = email.trim();
+  const trimmedPassword = password.trim();
 
-    if (!isValidEmail(email)) {
-      setErrorMessage("Please enter a valid email address.");
-      return;
-    }
-    const passwordCheck = validatePassword(password);
-    if (!passwordCheck.valid) {
-      setErrorMessage(passwordCheck.message);
-      return;
-    }
-
-    const data = {
-      firstName,
-      lastName,
-      email,
-      password
-    };
-
-    try {
-      const response = await fetch("http://localhost:3000/auth/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (response.status === 200) {
-        if (onSuccess) {
-          onSuccess();
-        }
-        return;
-
-      } else if (response.status === 400) {
-        const returnedData = await response.json();
-        setErrorMessage(returnedData.message);
-      } else {
-        setErrorMessage("Server error. Please try again.");
-      }
-
-    } catch (error) {
-      setErrorMessage("Network error. Please check your connection.");
-    }
+  if (!trimmedFirstName || !trimmedLastName || !trimmedEmail || !trimmedPassword) {
+    setErrorMessage("Please fill in all fields.");
+    return;
   }
+
+  if (!isValidEmail(trimmedEmail)) {
+    setErrorMessage("Please enter a valid email address.");
+    return;
+  }
+
+  const passwordCheck = validatePassword(trimmedPassword);
+  if (!passwordCheck.valid) {
+    setErrorMessage(passwordCheck.message);
+    return;
+  }
+
+  const data = {
+    firstName: trimmedFirstName,
+    lastName: trimmedLastName,
+    email: trimmedEmail,
+    password: trimmedPassword,
+  };
+
+  try {
+    const response = await fetch("http://localhost:3000/auth/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (response.status === 200) {
+      if (onSuccess) {
+        onSuccess();
+      }
+      return;
+    }
+
+    if (response.status === 400) {
+      let returnedData = null;
+      try {
+        returnedData = await response.json();
+      } catch {}
+
+      setErrorMessage(
+        returnedData?.message || "Unable to sign up. Please verify your information."
+      );
+      return;
+    }
+
+    setErrorMessage("Server error. Please try again.");
+
+  } catch (error) {
+    setErrorMessage("Network error. Please check your connection.");
+  }
+}
 
   return (
     <div className="auth-form">
