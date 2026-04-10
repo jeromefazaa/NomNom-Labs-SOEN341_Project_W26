@@ -45,16 +45,16 @@
   },
   "matthew@test.com": {
     "Monday": {
-      "Breakfast": "egg",
-      "Lunch": "sanwhich",
-      "Dinner": "steak",
-      "Snack": ""
+      "Breakfast": "steak",
+      "Lunch": "egg",
+      "Dinner": "sanwhich",
+      "Snack": "Chicken"
     },
     "Tuesday": {
-      "Breakfast": "Cereal",
-      "Lunch": "Salad",
-      "Dinner": "Chicken",
-      "Snack": ""
+      "Breakfast": "Salad",
+      "Lunch": "Cereal",
+      "Dinner": "Salmon and Rice",
+      "Snack": "Waffles"
     },
     "Wednesday": {
       "Breakfast": "",
