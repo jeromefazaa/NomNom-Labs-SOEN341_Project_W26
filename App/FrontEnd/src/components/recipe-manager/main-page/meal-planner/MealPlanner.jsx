@@ -4,6 +4,7 @@ import "./MealPlanner.css";
 import { getUsedRecipesForWeek, normalizeRecipeTitle } from "./mealPlannerUtils.js";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMealPlanMacros } from "../../../../redux/slices/mealPlannerSlice.js";
+import WeeklyCaloriesChart from "./WeeklyCaloriesChart.jsx";
 
 function MealPlanner({
   plannerDays,
@@ -140,6 +141,11 @@ function MealPlanner({
           ))}
         </div>
       </div>
+
+      <WeeklyCaloriesChart
+        plannerDays={plannerDays}
+        macrosByDay={macrosByDay}
+      />
     </section>
 
     <Snackbar
