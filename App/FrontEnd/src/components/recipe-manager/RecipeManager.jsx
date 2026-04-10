@@ -18,15 +18,20 @@ function RecipeManager() {
 
   return (
     <div>
-      <IconButton
-        onClick={handleProfileClick}
-        color="primary"
-        className="profile-icon"
-      >
-        <AccountCircleIcon />
-      </IconButton>
-      <MainPage></MainPage>
-      <SaveButton></SaveButton>
+      <div className="brand-header">
+        <IconButton
+          onClick={handleProfileClick}
+          color="primary"
+          className="profile-icon"
+        >
+          <AccountCircleIcon />
+        </IconButton>
+
+        <div className="meal-major-logo">Meal Major</div>
+      </div>
+
+      <MainPage />
+      <SaveButton />
       <Profile open={profileOpen} onClose={handleProfileClose} />
     </div>
   );
