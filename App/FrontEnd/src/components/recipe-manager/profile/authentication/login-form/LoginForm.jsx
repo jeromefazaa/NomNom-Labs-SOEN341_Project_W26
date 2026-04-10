@@ -36,56 +36,67 @@ function LoginForm({ onSuccess }) {
   }
 
   async function handleSubmit(e) {
-    e?.preventDefault();
-    setHasSubmitted(true);
-    setErrorMessage("");
+  e?.preventDefault();
+  setHasSubmitted(true);
+  setErrorMessage("");
 
-    if (!email.trim() || !password.trim()) {
-      setErrorMessage("Please fill in all fields.");
-      return;
-    }
+  const trimmedEmail = email.trim();
+  const trimmedPassword = password.trim();
 
-    if (!isValidEmail(email)) {
-      setErrorMessage("Please enter a valid email address.");
-      return;
-    }
-
-    setHasSubmitted(true);
-    setErrorMessage("");
-
-    const data = {
-      email: email,
-      password: password,
-    };
-
-    try {
-      const response = await fetch("http://localhost:3000/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (response.status === 200) {
-        const returnedData = await response.json();
-        const userId = returnedData.email;
-
-        dispatch(loginUser(userId));
-        if (onSuccess) { onSuccess();  }
-        return;
-      } else if (response.status === 400) {
-        setErrorMessage("Invalid email or password.");
-        setHasSubmitted(false);
-      } else {
-        setErrorMessage("Server error. Please try again.");
-        setHasSubmitted(false);
-      }
-    } catch (error) {
-      setErrorMessage("Network error. Please check your connection.");
-      setHasSubmitted(false);
-    }
+  if (!trimmedEmail || !trimmedPassword) {
+    setErrorMessage("Please fill in all fields.");
+    return;
   }
+
+  if (!isValidEmail(trimmedEmail)) {
+    setErrorMessage("Please enter a valid email address.");
+    return;
+  }
+
+  const data = {
+    email: trimmedEmail,
+    password: trimmedPassword,
+  };
+
+  try {
+    const response = await fetch("http://localhost:3000/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (response.status === 200) {
+      const returnedData = await response.json();
+      const userId = returnedData.email;
+
+      dispatch(loginUser(userId));
+      if (onSuccess) { onSuccess(); }
+      return;
+    }
+
+    if (response.status === 400) {
+      let returnedData = null;
+      try {
+        returnedData = await response.json();
+      } catch {}
+
+      setErrorMessage(
+        returnedData?.message || "Invalid email or password."
+      );
+      setHasSubmitted(false);
+      return;
+    }
+
+    setErrorMessage("Server error. Please try again.");
+    setHasSubmitted(false);
+
+  } catch (error) {
+    setErrorMessage("Network error. Please check your connection.");
+    setHasSubmitted(false);
+  }
+}
 
   return (
     <div className="auth-form">
