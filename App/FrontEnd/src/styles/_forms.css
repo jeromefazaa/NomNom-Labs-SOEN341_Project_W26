@@ -1,7 +1,4 @@
 
-/* ======================================================
-     FORMS
-====================================================== */
 
 .input {
   width: 100%;
@@ -23,7 +20,6 @@ label {
   display: block;
 }
 
-/* Auth forms layout */
 .auth-form {
   width: 100%;
   max-width: 480px;
@@ -41,7 +37,6 @@ label {
   color: #111827;
 }
 
-/* Make the input look nicer + spacing from label text */
 .form-label .input {
   margin-top: 8px;
 }
@@ -60,15 +55,11 @@ label {
   color: #b91c1c;
 }
 
-/* =========================
-   Manage Profile Form
-========================= */
 
 .profile-form {
   padding-top: 6px;
 }
 
-/* Section titles like Ingredients/Steps */
 .profile-section-title {
   font-size: 14px;
   font-weight: 600;
@@ -76,27 +67,23 @@ label {
   margin: 8px 0 10px;
 }
 
-/* Input + remove button on same row */
 .inline-row {
   display: flex;
   align-items: center;
   gap: 14px;
 }
 
-/* Make input take the space */
 .inline-row .input {
   flex: 1;
-  margin-bottom: 0; /* override .input margin-bottom */
+  margin-bottom: 0; 
 }
 
-/* Remove button like your example */
 .inline-remove {
   border-radius: 10px;
   padding: 10px 16px;
   white-space: nowrap;
 }
 
-/* Centered ADD link under row */
 .inline-add {
   display: block;
   width: 100%;
@@ -115,7 +102,6 @@ label {
   cursor: not-allowed;
 }
 
-/* Right align buttons */
 .profile-actions {
   justify-content: flex-end;
   gap: 12px;
@@ -126,9 +112,6 @@ label {
   cursor: not-allowed;
 }
 
-/* ===============================
-   Recipe Dialog Button Styling
-================================= */
 
 .recipe-dialog .MuiButton-root {
   text-transform: none;
@@ -136,7 +119,6 @@ label {
   border-radius: 10px;
 }
 
-/* Primary button */
 .recipe-dialog .mui-primary {
   background-color: #4f46e5 !important;
   color: white !important;
@@ -146,25 +128,21 @@ label {
   background-color: #4338ca !important;
 }
 
-/* Cancel button */
 .recipe-dialog .mui-cancel {
   color: #111827 !important;
 }
 
-/* Remove button */
 .recipe-dialog .mui-remove {
   border-radius: 10px !important;
   text-transform: none !important;
 }
 
-/* Add link style */
 .recipe-dialog .mui-add {
   text-transform: none !important;
   font-weight: 700;
   color: #2563eb !important;
 }
 
-/* Section title */
 .section-title {
   font-size: 18px;
   font-weight: 600;
