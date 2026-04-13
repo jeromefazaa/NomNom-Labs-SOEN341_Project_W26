@@ -1,4 +1,19 @@
 {
+  "marksam@gmail.com_egg": {
+    "title": "egg",
+    "difficulty": "Beginner",
+    "prepTime": 0,
+    "diet": "None",
+    "cost": 10,
+    "ingredients": [
+      {
+        "name": "egg",
+        "grams": 10
+      }
+    ],
+    "steps": [],
+    "userId": "marksam@gmail.com"
+  },
   "matthew@test.com_steak": {
     "title": "steak",
     "difficulty": "Advanced",
@@ -50,8 +65,8 @@
     ],
     "userId": "matthew@test.com"
   },
-  "matthew@test.com_sanwhich": {
-    "title": "sanwhich",
+  "matthew@test.com_sandwhich": {
+    "title": "sandwhich",
     "difficulty": "Beginner",
     "prepTime": 15,
     "diet": "Gluten-Free",
@@ -191,7 +206,7 @@
     ],
     "userId": "matthew@test.com"
   },
-  "jeromefazaa123@gmail.com_Eggs": {
+  "matthew@test.com_Eggs": {
     "title": "Eggs",
     "difficulty": "Beginner",
     "prepTime": 0,
@@ -204,41 +219,6 @@
       }
     ],
     "steps": [],
-    "userId": "jeromefazaa123@gmail.com"
-  },
-  "jeromefazaa123@gmail.com_Chicken": {
-    "title": "Chicken",
-    "difficulty": "Beginner",
-    "prepTime": 0,
-    "diet": "None",
-    "cost": 0,
-    "ingredients": [
-      {
-        "name": "Chicken",
-        "grams": 350
-      },
-      {
-        "name": "Brocooli",
-        "grams": 100
-      }
-    ],
-    "steps": [],
-    "isEdited": true,
-    "userId": "jeromefazaa123@gmail.com"
-  },
-  "marksam@gmail.com_egg": {
-    "title": "egg",
-    "difficulty": "Beginner",
-    "prepTime": 0,
-    "diet": "None",
-    "cost": 10,
-    "ingredients": [
-      {
-        "name": "egg",
-        "grams": 10
-      }
-    ],
-    "steps": [],
-    "userId": "marksam@gmail.com"
+    "userId": "matthew@test.com"
   }
 }
