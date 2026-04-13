@@ -1,4 +1,4 @@
-/* Profile (MUI Dialog) */
+
 .profile-dialog {
   border-radius: 14px;
   padding: 6px;
@@ -15,10 +15,9 @@
   padding: 0 20px 16px;
 }
 
-/* Authentication button row */
 .auth-actions {
   display: flex;
-  justify-content: center;   /* center horizontally */
+  justify-content: center;   
   align-items: center;
   gap: 16px;
   margin-top: 20px;
@@ -31,29 +30,24 @@
   align-items: center;
 }
 
-/* Right-align the bottom action button */
 .form-actions {
   display: flex;
   justify-content: flex-end;
   margin-top: 18px;
 }
 
-/* ===== Dashboard Layout ===== */
-
 .main-page {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 28px 10px;   /* was 40px 20px */
+  padding: 28px 10px;  
 }
 
-/* Profile icon top-left but spaced */
 .profile-icon {
   position: absolute;
   top: 20px;
   left: 30px;
 }
 
-/* Dashboard header layout */
 .dashboard-header {
   text-align: center;
   margin-bottom: 22px;
@@ -67,7 +61,6 @@
   margin-bottom: 18px;
 }
 
-/* Actions stacked under title */
 .dashboard-actions {
   display: flex;
   justify-content: center;
@@ -87,11 +80,11 @@
   top: 22px;
   left: 22px;
 
-  padding: 0;                 /* remove extra spacing */
+  padding: 0;              
 }
 
 .profile-icon svg {
-  font-size: 52px;            /* THIS controls the size */
+  font-size: 52px;           
   color: #4f46e5;
   transition: transform 0.2s ease;
 }
